@@ -2,15 +2,21 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: player
   m_Shader: {fileID: 4800000, guid: 4b496d2388081e547bcf06e5ad9e5e3f, type: 3}
-  m_ShaderKeywords: TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK TCP2_SHADOW_LIGHT_COLOR
-    TCP2_UV_NORMALS_FULL _GLOSSYREFLECTIONS_OFF _SPECULAR_SETUP
+  m_ValidKeywords:
+  - TCP2_REFLECTIONS_FRESNEL
+  - TCP2_RIM_LIGHTING_LIGHTMASK
+  - TCP2_SHADOW_LIGHT_COLOR
+  m_InvalidKeywords:
+  - TCP2_UV_NORMALS_FULL
+  - _GLOSSYREFLECTIONS_OFF
+  - _SPECULAR_SETUP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -96,6 +102,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
@@ -140,7 +147,7 @@ Material:
     - _RampOffset: 0
     - _RampScale: 1
     - _RampSmoothing: 0.1
-    - _RampThreshold: 0.75
+    - _RampThreshold: 0.62
     - _RampType: 0
     - _ReceiveShadows: 0
     - _ReceiveShadowsOff: 1
@@ -179,7 +186,7 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0, g: 1, b: 0.17310214, a: 1}
     - _Color: {r: 0.7372549, g: 0, b: 0.029470481, a: 1}
     - _EmissionColor: {r: 2.7064166, g: 2.6176815, b: 2.6176815, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
