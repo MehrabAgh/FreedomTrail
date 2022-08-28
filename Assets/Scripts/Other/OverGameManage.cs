@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using RootMotion.FinalIK;
+//using RootMotion.FinalIK;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,7 +23,7 @@ public class OverGameManage : MonoBehaviour
             GameManager.ins.DisableCar();
             FinishLevel();
             PlayerChar.GetComponent<Animator>().SetLayerWeight(2, 1);
-            PlayerChar.GetComponent<FullBodyBipedIK>().enabled = false;
+           // PlayerChar.GetComponent<FullBodyBipedIK>().enabled = false;
             PlayerChar.GetComponent<PlayerWeapon>().DisableGuns();
             GameManager.ins.UIFinish.SetActive(true);
             GameManager.ins.UIOver.SetActive(false);

@@ -15,7 +15,7 @@ public class TankTurrent : MonoBehaviour
 
     private void Start()
     {
-        target = GetComponent<EnemyCarTargetController>().player;
+       //  target = GetComponent<EnemyCarTargetController>().player;
         barrel = turrent.GetChild(0);
     }
 

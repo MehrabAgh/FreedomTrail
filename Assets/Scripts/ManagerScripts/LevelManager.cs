@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public CarController[] Cars;
+    //public CarController[] Cars;
     public EnemyManager[] c;
     public List<Transform> Levels;
     public string nameLevel;
@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
             indexDelayShoot = 2f;
             PlayerPrefs.SetFloat("IndexDelay", indexDelayShoot);
         }       
-        Cars =FindObjectsOfType<CarController>();      
+        //Cars =FindObjectsOfType<CarController>();      
         if (nameLevel == ""||name == null)
         {
             indexLevel = 1;
@@ -78,11 +78,11 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
-        foreach (CarController item in Cars)
+        /*foreach (CarController item in Cars)
         {            
             item.SpeedMAX = 10 + (indexLevel*20);
             item.MaxSpeed = item.SpeedMAX;
-        }      
+        } */     
         pivStart = levelSubmit.transform.Find("PivotStart");
         pivEnd = GameObject.Find("PivotEnd").transform;
         var dis = Vector3.Distance(GameManager.ins.Player.transform.position, pivEnd.transform.position);
@@ -116,10 +116,11 @@ public class LevelManager : MonoBehaviour
         pathRow.value = dis;
         if(dis <= 10)
         {
+/*
             foreach (EnemyCarTargetController item in GameManager.ins.Enemys)
             {
                 Destroy(item.gameObject);
-            }
+            }*/
         }
     }
 }

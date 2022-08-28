@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager ins;
     public GameObject Player;
     public bool _isEndGame , _isPause;
-    public List<CarAIControl> Cars;
-    public EnemyCarTargetController[] Enemys;
+//    public List<CarAIControl> Cars;
+//    public EnemyCarTargetController[] Enemys;
     public GameObject UIGame, UIFinish, UIOver;
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartGame();
-        Cars.Add(FindObjectOfType<CarAIControl>());        
+  //      Cars.Add(FindObjectOfType<CarAIControl>());        
     }
     public void Play()
     {       
@@ -37,19 +37,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
     public void EnableCar()
-    {
+    {/*
         foreach (var item in Cars)
         {
             item.enabled = true;
         }
-    }
+   */ }
     public void DisableCar()
     {
-        foreach (var item in Cars)
+     /*   foreach (var item in Cars)
         {
             item.enabled = false;
         }
-    }
+    */}
 
     public void StartGame()
     {
@@ -72,6 +72,6 @@ public class GameManager : MonoBehaviour
         {            
             Time.timeScale = 1;
         }
-        Enemys = FindObjectsOfType<EnemyCarTargetController>();
+//        Enemys = FindObjectsOfType<EnemyCarTargetController>();
     }
 }
