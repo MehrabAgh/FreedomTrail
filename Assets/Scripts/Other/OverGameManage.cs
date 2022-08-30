@@ -13,7 +13,7 @@ public class OverGameManage : MonoBehaviour
     private bool _nextClick ;
     private void Awake()
     {
-        PlayerChar = transform.Find("PlayerChar").gameObject;
+     //   PlayerChar = transform.Find("PlayerChar").gameObject;
 
     }
     private void OnCollisionEnter(Collision collision)
@@ -24,7 +24,7 @@ public class OverGameManage : MonoBehaviour
             FinishLevel();
             PlayerChar.GetComponent<Animator>().SetLayerWeight(2, 1);
             PlayerChar.GetComponent<FullBodyBipedIK>().enabled = false;
-            PlayerChar.GetComponent<PlayerWeapon>().DisableGuns();
+         //   PlayerChar.GetComponent<PlayerWeapon>().DisableGuns();
             GameManager.ins.UIFinish.SetActive(true);
             GameManager.ins.UIOver.SetActive(false);
             GameManager.ins.UIGame.SetActive(false);

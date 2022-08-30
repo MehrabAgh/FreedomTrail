@@ -17,7 +17,7 @@ public abstract class GunFuncManage : MonoBehaviour
 
 public class GunManager : GunFuncManage
 {
-    public PlayerMovement player;
+   // public PlayerMovement player;
     private GameObject SubAmmo;
     private float SubtimeReload;
     //

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14afd112e703bb94e8a0c62762a55596, type: 3}
+  m_Name: SMG
+  m_EditorClassIdentifier: 
+  weaponeModels: {fileID: 1707346364639954686, guid: 2deefd909f45bac44a089bf67d26492c, type: 3}
+  getWeapone: 3
+  barrel: {fileID: 0}
+  bullet: {fileID: 0}
+  delay: 0
+  nextTimetoFire: 0
+  power: 200

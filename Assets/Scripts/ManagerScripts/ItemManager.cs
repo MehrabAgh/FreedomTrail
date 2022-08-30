@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
-    public PlayerWeapon weapon;
+    //public PlayerWeapon weapon;
     public int Coin;
     private int indexGun;
     public static bool[] gunUnlock;
@@ -16,16 +16,16 @@ public class ItemManager : MonoBehaviour
     private void Start()
     {
         Coin = PlayerPrefs.GetInt("CoinStart");
-        weapon = FindObjectOfType<PlayerWeapon>();
-        GunLoaded();
+        //weapon = FindObjectOfType<PlayerWeapon>();
+       // GunLoaded();
     }
     private void Update()
     {
-        if(weapon == null)
-        {
-            weapon = FindObjectOfType<PlayerWeapon>();
-            GunLoaded();
-        }
+        //if(weapon == null)
+        //{
+        //    weapon = FindObjectOfType<PlayerWeapon>();
+        //    //GunLoaded();
+        //}
     }
     public void Buy(int price)
     {      
@@ -48,54 +48,34 @@ public class ItemManager : MonoBehaviour
         select.GetComponentInParent<ItemDetect>().GetComponent<Image>().color = Color.cyan;
     }
     #region Guns
-    public void MG_Gun()
-    {
-        GunSelected();
-        indexGun = 2;
-        weapon.changeGun(indexGun);      
-        PlayerPrefs.SetString("Gun","MG");
-    }
-    public void Rifle_Gun()
-    {
-        GunSelected();
-        indexGun = 0;
-        weapon.changeGun(indexGun);       
-        PlayerPrefs.SetString("Gun", "Rifle");
-    }
-    public void ShotGun_Gun()
-    {
-        indexGun = 1;
-        weapon.changeGun(indexGun);
-        GunSelected();
-        PlayerPrefs.SetString("Gun", "ShutGun");
-    }
-    public void SMG_Gun()
-    {
-        indexGun = 3;
-        weapon.changeGun(indexGun);
-        GunSelected();
-        PlayerPrefs.SetString("Gun", "SMG");
-    }
+
+    //public void SMG_Gun()
+    //{
+    //    indexGun = 3;
+    //    weapon.changeGun(indexGun);
+    //    GunSelected();
+    //    PlayerPrefs.SetString("Gun", "SMG");
+    //}
     #endregion
-    private void GunLoaded()
-    {
-        var gunName = PlayerPrefs.GetString("Gun");
-        switch (gunName)
-        {
-            case "MG":
-                weapon.changeGun(2);
-                break;
-            case "SMG":
-                weapon.changeGun(3);
-                break;
-            case "ShutGun":
-                weapon.changeGun(1);
-                break;
-            case "Rifle":
-                weapon.changeGun(0);
-                break;
-            default:
-                break;
-        }
-    }
+    //private void GunLoaded()
+    //{
+    //    var gunName = PlayerPrefs.GetString("Gun");
+    //    switch (gunName)
+    //    {
+    //        case "MG":
+    //            weapon.changeGun(2);
+    //            break;
+    //        case "SMG":
+    //            weapon.changeGun(3);
+    //            break;
+    //        case "ShutGun":
+    //            weapon.changeGun(1);
+    //            break;
+    //        case "Rifle":
+    //            weapon.changeGun(0);
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 }
