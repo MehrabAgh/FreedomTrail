@@ -15,7 +15,10 @@ MonoBehaviour:
   weaponeModels: {fileID: 1707346364639954686, guid: 2deefd909f45bac44a089bf67d26492c, type: 3}
   getWeapone: 3
   barrel: {fileID: 0}
-  bullet: {fileID: 0}
-  delay: 0
-  nextTimetoFire: 0
+  bullet: {fileID: 6691305724715267924, guid: 1d337eefc7946c54ba4f15b04c56961b, type: 3}
+  delay: 0.2
+  nextTimetoFire: 0.014099624
   power: 200
+  maxReload: 25
+  currentAmmo: 0
+  nameAnimate: ..

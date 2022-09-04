@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: LMG
   m_EditorClassIdentifier: 
   weaponeModels: {fileID: 2328349647326890276, guid: fcf9c6196761f6541ae85e11d3ecd2e5, type: 3}
-  getWeapone: 0
+  getWeapone: 2
   barrel: {fileID: 0}
-  bullet: {fileID: 0}
-  delay: 0
-  nextTimetoFire: 0
-  power: 200
+  bullet: {fileID: 6691305724715267924, guid: 1d337eefc7946c54ba4f15b04c56961b, type: 3}
+  delay: 0.2
+  nextTimetoFire: 0.2
+  power: 80
+  maxReload: 50
+  currentAmmo: 0
+  nameAnimate: _isMachineShoot
