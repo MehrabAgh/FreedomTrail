@@ -4,57 +4,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager ins;
-    public GameObject Player;
-    public bool _isEndGame , _isPause;
-    public List<CarAIControl> Cars;
-    public GameObject UIGame, UIFinish, UIOver;
+    public static GameManager instance;
+    public MainPlayer Player;
+    public bool _isEndGame;    
     private void Awake()
     {
-        ins = this;
+        instance = this;
         _isEndGame = true;
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = FindObjectOfType<MainPlayer>();
     }
     private void Start()
     {
-        StartGame();
-        Cars.Add(FindObjectOfType<CarAIControl>());        
-    }
-    public void Play()
-    {       
-        _isEndGame = false;
-        EnableCar();
-    }
-    public void ResetLevel()
-    {
-        LevelManager.instance.indexDelayShoot = 2.6f;  
-        LevelManager.instance.indexLevel = 1;
-        PlayerPrefs.SetInt("IndexLevel", 1);
-        LevelManager.instance.nameLevel = "Level" + LevelManager.instance.indexLevel;
-        PlayerPrefs.SetString("Level", LevelManager.instance.nameLevel);
-        SceneManager.LoadScene("SampleScene");
-    }
-    public void EnableCar()
-    {
-        foreach (var item in Cars)
-        {
-            item.enabled = true;
-        }
-    }
-    public void DisableCar()
-    {
-        foreach (var item in Cars)
-        {
-            item.enabled = false;
-        }
-    }
-
+        StartGame();    
+    }    
     public void StartGame()
     {
-        _isPause = false;
+        _isEndGame = false;
     }
     public void EndGame()
     {
-        _isPause = true;
+        _isEndGame = true;
     }   
 }

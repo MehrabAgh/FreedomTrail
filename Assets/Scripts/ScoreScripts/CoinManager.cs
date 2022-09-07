@@ -9,8 +9,8 @@ public class CoinManager : MonoBehaviour
     {
         if (gameObject.name == "Coin(Clone)" || c)
         {
-            transform.SetParent(GameManager.ins.Player.transform);
-            transform.position = Vector3.Lerp(transform.position, GameManager.ins.Player.transform.position, Time.deltaTime * 3f);
+            transform.SetParent(GameManager.instance.Player.transform);
+            transform.position = Vector3.Lerp(transform.position, GameManager.instance.Player.transform.position, Time.deltaTime * 3f);
         }
     }
 
