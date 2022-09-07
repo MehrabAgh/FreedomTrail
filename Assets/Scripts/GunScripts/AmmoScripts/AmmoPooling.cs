@@ -4,37 +4,35 @@ using UnityEngine;
 
 public class AmmoPooling : MonoBehaviour
 {
-    public static AmmoPooling instanse;
-
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
-    public int amountToPool;
-    private void Awake()
-    {
-        instanse = this;
-    }
-    private void Start()
+    public int amountToPool;    
+    public static AmmoPooling instanse;
+    public void Spawning(Transform parent , List<GameObject> po)
     {
         pooledObjects = new List<GameObject>();
+        pooledObjects = po;
         for (int i = 0; i < amountToPool; i++)
         {
-            GameObject obj = Instantiate(objectToPool);
+            GameObject obj = Instantiate(objectToPool , parent);
             obj.SetActive(false);
             pooledObjects.Add(obj);
         }
     }
-    public GameObject GetPooledObject()
+    public GameObject GetPooledObject(List<GameObject> po)
     {
-        //1
+        pooledObjects = po;
         for (int i = 0; i < pooledObjects.Count; i++)
         {
-            //2
             if (!pooledObjects[i].activeInHierarchy)
             {
                 return pooledObjects[i];
             }
         }
-        //3   
         return null;
+    }
+    private void Awake()
+    {
+        instanse = this;
     }
 }

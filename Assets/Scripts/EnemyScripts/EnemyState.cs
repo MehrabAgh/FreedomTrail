@@ -1,96 +1,78 @@
 using RootMotion.FinalIK;
 using System.Collections;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Vino.Devs
 {
-    public class PlayerState
+    public class EnemyState : MonoBehaviour
     {
-        public enum playerState
+        public enum enemystate
         {
-            IDLE,
             ATTACK,
             COVER,
             DEATH,
             RELOAD
         }
-        public static playerState myState { get; set; }
+        public static enemystate enemyState { get; set; }
 
         private mainGun mygun;
-        private Animator Anim;        
+        private Animator Anim;
+        private FullBodyBipedIK ikComponent;
         private Collider[] rigColliders;
         private Rigidbody[] rigRigidbodies;
-        private FullBodyBipedIK ikComponent;
 
-        public PlayerState(FullBodyBipedIK ikComp, mainGun gun, Animator anim, Collider[] RigColliders, Rigidbody[] RigRigidbodies)
+        public EnemyState(FullBodyBipedIK ikComp,
+            mainGun gun, Animator anim, Collider[] RigColliders,
+            Rigidbody[] RigRigidbodies)
         {
             rigColliders = RigColliders;
             rigRigidbodies = RigRigidbodies;
             mygun = gun;
             Anim = anim;
             ikComponent = ikComp;
-            RagdollEvent.OnLive(rigColliders, rigRigidbodies);
+            RagdollEvent.OnLive(RigColliders, RigRigidbodies);
         }
-
-        public void EventStates(playerState state)
+        public void EventStates(enemystate state)
         {
             switch (state)
             {
-                case playerState.IDLE:
-                    RagdollEvent.OnLive(rigColliders, rigRigidbodies);
-                    break;
-
-                case playerState.ATTACK:
+                case enemystate.ATTACK:                 
                     mygun.getGunModel().transform.SetParent(mygun.handPos.root.GetChild(0));
                     mygun.SetupTransformGun.Invoke();
                     ikComponent.enabled = true;
-                    //
-                    Anim.GetComponent<CoverCharacter>().OnDisableCovers();
-                    //
                     Anim.SetBool("isCover", false);
                     Anim.SetBool("isReload", false);
                     Anim.SetBool(mygun.getAnimationClip(), true);
                     Anim.SetLayerWeight(1, 1);
                     break;
-
-                case playerState.COVER:
+                case enemystate.COVER:
                     mygun.getGunModel().transform.SetParent(mygun.handPos);
                     mygun.getGunModel().transform.localPosition = Vector3.zero;
                     mygun.getGunModel().transform.localRotation = Quaternion.identity;
-                    //
-                    Anim.GetComponent<CoverCharacter>().OnEnableCovers();
-                    //
                     Anim.SetBool("isCover", true);
                     ikComponent.enabled = false;
                     Anim.SetLayerWeight(1, 0);
-
                     break;
-
-                case playerState.DEATH:
+                case enemystate.DEATH:
                     Anim.enabled = false;
                     ikComponent.enabled = false;
                     mygun.getGunModel().SetActive(false);
                     mygun.Ammos.Clear();
                     RagdollEvent.OnDeath(rigColliders, rigRigidbodies);
                     break;
-
-                case playerState.RELOAD:
+                case enemystate.RELOAD:
                     mygun.getGunModel().transform.SetParent(mygun.handPos);
                     mygun.getGunModel().transform.localPosition = Vector3.zero;
                     mygun.getGunModel().transform.localRotation = Quaternion.identity;
-                    //
-                    Anim.GetComponent<CoverCharacter>().OnEnableCovers();
-                    //
                     Anim.SetLayerWeight(2, 1);
                     Anim.SetBool("isCover", true);
                     Anim.SetBool("isReload", true);
                     ikComponent.enabled = false;
                     break;
-
                 default:
                     break;
             }
-        }   
+        }    
     }
 }

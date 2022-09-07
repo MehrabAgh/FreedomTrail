@@ -14,8 +14,7 @@ public class TankTurrent : MonoBehaviour
     public float turSpeed = 5;
 
     private void Start()
-    {
-        target = GetComponent<EnemyCarTargetController>().player;
+    {       
         barrel = turrent.GetChild(0);
     }
 

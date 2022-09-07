@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Vino.Devs;
 
@@ -9,30 +10,34 @@ namespace Vino.Devs
     {
         public Vector3 Position, Rotation, Scale;
     }
-
+    [Serializable]
+    public class GunResponse
+    {
+        public Transform barrel;
+        public GameObject bullet;
+        public int maxReload, currentAmmo;
+        public float delay;
+        public float nextTimetoFire;
+    }
     [CreateAssetMenu(fileName = "Gun", menuName = "GunSystems/newGun", order = 1)]
     public class WeaponScriptable : ScriptableObject
     {
         public GameObject weaponeModels;
-        public WeaponResource.weapone getWeapone;
-        public Transform barrel;
-        public GameObject bullet;
-        public float delay;
-        public float nextTimetoFire;
+        public WeaponResource.weapone getWeapone;                      
         public float power = 200;
-        public int maxReload , currentAmmo;
+    
         [System.NonSerialized]
         public float burstshotCount;
 
         public string nameAnimate;
     
-        public void DefaultShoot()
+        public void DefaultShoot(Transform barrel,  List<GameObject> ammos)
         {
-            var projectile = AmmoPooling.instanse.GetPooledObject();
-            projectile.transform.position = barrel.transform.position;
-            projectile.transform.localRotation = barrel.transform.localRotation ;
+            var projectile = AmmoPooling.instanse.GetPooledObject(ammos);
+            projectile.transform.position = barrel.transform.position;  
+            projectile.transform.rotation = barrel.transform.rotation;
             projectile.SetActive(true);           
-            projectile.GetComponent<Rigidbody>().velocity = barrel.up * power;
+            projectile.GetComponent<Rigidbody>().velocity = barrel.forward * power;
         }
 
         public void SetTransform(Vector3 pos, Vector3 rot, Vector3 scale, Transform model)

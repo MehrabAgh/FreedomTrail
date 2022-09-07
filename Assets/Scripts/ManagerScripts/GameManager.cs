@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     public bool _isEndGame , _isPause;
     public List<CarAIControl> Cars;
-    public EnemyCarTargetController[] Enemys;
     public GameObject UIGame, UIFinish, UIOver;
     private void Awake()
     {
@@ -28,8 +27,7 @@ public class GameManager : MonoBehaviour
     }
     public void ResetLevel()
     {
-        LevelManager.instance.indexDelayShoot = 2.6f;
-        LevelManager.instance.EnemyDelayEdit();
+        LevelManager.instance.indexDelayShoot = 2.6f;  
         LevelManager.instance.indexLevel = 1;
         PlayerPrefs.SetInt("IndexLevel", 1);
         LevelManager.instance.nameLevel = "Level" + LevelManager.instance.indexLevel;
@@ -58,20 +56,5 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         _isPause = true;
-    }
-    private void Update()
-    {             
-        if (_isEndGame)
-        {
-            //Gameover
-            // PlayerPrefs.SetInt("Coin", ScoreManager.instance.Coin);
-            // Time.timeScale = 0;
-            DisableCar();            
-        }
-        else
-        {            
-            Time.timeScale = 1;
-        }
-        Enemys = FindObjectsOfType<EnemyCarTargetController>();
-    }
+    }   
 }

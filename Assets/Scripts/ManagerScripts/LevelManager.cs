@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public CarController[] Cars;
-    public EnemyManager[] c;
+    public CarController[] Cars; 
     public List<Transform> Levels;
     public string nameLevel;
     public Transform levelSubmit,pivStart,pivEnd,BonusLevel, BossLevel;
@@ -88,38 +87,5 @@ public class LevelManager : MonoBehaviour
         var dis = Vector3.Distance(GameManager.ins.Player.transform.position, pivEnd.transform.position);
         pathRow.maxValue = dis;
         GameManager.ins.Player.transform.position = pivStart.transform.position;
-    }
-    public void EnemyDelayEdit()
-    {
-        if (c.Length <= EnemySpawner.ES.maxEnemy)
-        {
-            c = FindObjectsOfType<EnemyManager>();
-
-            foreach (EnemyManager item in c)
-            {
-                item.DelayStart = indexDelayShoot;
-            }
-        }
-    }   
-    private void Update()
-    {       
-        if (nameLevel != "BonusLevel" && nameLevel != "BossLevel")
-        {
-            EnemyDelayEdit();
-        }
-       
-        DistancePath();
-    }
-    public void DistancePath()
-    {
-        var dis = Vector3.Distance(GameManager.ins.Player.transform.position, pivEnd.transform.position);
-        pathRow.value = dis;
-        if(dis <= 10)
-        {
-            foreach (EnemyCarTargetController item in GameManager.ins.Enemys)
-            {
-                Destroy(item.gameObject);
-            }
-        }
-    }
+    }    
 }

@@ -14,8 +14,7 @@ namespace Vino.Devs
         }
         public void Damage(int takeHealth)
         {
-            health -= takeHealth;
-            print(health);
+            health -= takeHealth;            
         }
         public int getHealth()
         {
