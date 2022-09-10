@@ -4,40 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vino.Devs;
 
+[RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(HealthCharacter))]
 [RequireComponent(typeof(LookAtCharacter))]
-public class MainPlayer : PlayerMovement
+public class MainPlayer : CharacterMain
 {
-    private PlayerState mystate;
-    private HealthCharacter myhealth;
-    [HideInInspector]public GunResponse gunRes;
-    private Animator anim;
-    private Collider[] rigColliders;
-    private Rigidbody[] rigRigidbodies;
-    public int GunCode = 0;
-    private FullBodyBipedIK ikComponent;
-    [HideInInspector]public mainGun gun;
-    [HideInInspector]public CoverCharacter myCover;
-    private void Awake()
-    {       
-        rigColliders = GetComponentsInChildren<Collider>();
-        rigRigidbodies = GetComponentsInChildren<Rigidbody>();
-        gun = GetComponent<mainGun>();       
-        
-        anim = GetComponent<Animator>();
-        myCover = GetComponent<CoverCharacter>();
-        ikComponent = GetComponent<FullBodyBipedIK>();
-        myhealth = GetComponent<HealthCharacter>();
-        gun.CodeGun = GunCode;        
-    }    
+    private PlayerMovement mymovement;
+    private PlayerState mystate;       
+    [HideInInspector]public CoverCharacter myCover; 
     private void Start()
     {
-        gunRes = gun.GetGunResponse();
-        mystate = new PlayerState(ikComponent, gun, anim, rigColliders, rigRigidbodies);     
+        mymovement = GetComponent<PlayerMovement>();
+        myCover = GetComponent<CoverCharacter>();              
+        mystate = new PlayerState(ikComponent, gun, Anim, rigColliders, rigRigidbodies);       
+        SetIdle();
         GetComponent<Collider>().enabled = true;
-        AmmoPooling.instanse.objectToPool = gunRes.bullet;
-        AmmoPooling.instanse.Spawning(transform.parent, gun.Ammos);        
-        StartCoroutine(update(0.003f));      
+        AmmoPooling.instanse.objectToPool = gunRes.bullet;        
+        AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);        
+        StartCoroutine(update(0.001f));        
     }
 
     #region Helper
@@ -46,43 +30,91 @@ public class MainPlayer : PlayerMovement
         PlayerState.myState = PlayerState.playerState.RELOAD;
         mystate.EventStates(PlayerState.myState);
     }    
-    #endregion   
+    public void SetIdle()
+    {      
+        PlayerState.myState = PlayerState.playerState.IDLE;
+        mystate.EventStates(PlayerState.myState);
+        GetComponent<Rigidbody>().isKinematic = false;
+    }
+    public bool CheckColliderGround()
+    {
+        if (launchingProjectiles.ins.DistanceTarget() <= 0.1f)
+        { 
+            GameManager.instance._isStartGame = false;
+            launchingProjectiles.ins.ThisObject.SetParent(launchingProjectiles.ins.TargetObject.parent);
+            transform.SetSiblingIndex(0);           
+            return false;
+        }
+        else return true;
+    }
+    public float CheckDistancetoEnd()
+    {
+        return Vector3.Distance(transform.position, GameManager.instance.EndPos.position);
+    }
+    private void StartExiting()
+    {
+        GameManager.instance.HeliCopter.GetComponent<AnimAIHelicopter>()
+          .animState = AnimAIHelicopter.HeliAnimState.StartExiting;
+    }
+    #endregion
+
+    #region Start And End Cinematic Events
+    public void StartGame()
+    {
+        Anim.SetBool("StartCinematic", true);
+        SetIdle();      
+        launchingProjectiles.ins.Launch();       
+        Invoke("StartExiting", 2f);
+        //play Animation Start Cinematic
+    }
+    #endregion
+
+
     private IEnumerator update(float timer)
     {
         while (true)
         {
             yield return new WaitForSeconds(timer);
-
-            if (myhealth.getHealth() < 1)
+            CheckColliderGround();
+            if (!GameManager.instance._isStartGame && !GameManager.instance._isEndGame)
             {
-                PlayerState.myState = PlayerState.playerState.DEATH;
-                mystate.EventStates(PlayerState.myState);
-            }
-            else
-            {
-                if (Input.GetMouseButtonDown(0)) StartMove();
-
-                if (Input.GetMouseButton(0))
+                Anim.SetBool("StartCinematic", CheckColliderGround());
+                if (myhealth.getHealth() < 1)
                 {
-                    if (gun.ShootGun() > -1)
-                    {
-                        PlayerState.myState = PlayerState.playerState.ATTACK;
-                        mystate.EventStates(PlayerState.myState);
-                    }
-                    else
-                    {
-                        SetReload();
-                    }
-                    UpdateMove();
-                }
-                if (Input.GetMouseButtonUp(0))
-                {
-                    PlayerState.myState = PlayerState.playerState.COVER;
+                    PlayerState.myState = PlayerState.playerState.DEATH;
                     mystate.EventStates(PlayerState.myState);
-                    EndMove();
                 }
-            }
+                else
+                {                    
+                    if(CheckDistancetoEnd() < .8f)
+                    {
+                        GameManager.instance._isEndGame = true;
+                    }
+                    #region Move Attack
+                    if (Input.GetMouseButtonDown(0)) mymovement.StartMove();
 
+                    if (Input.GetMouseButton(0))
+                    {
+                        if (gun.ShootGun() > -1)
+                        {
+                            PlayerState.myState = PlayerState.playerState.ATTACK;
+                            mystate.EventStates(PlayerState.myState);
+                        }
+                        else
+                        {
+                            SetReload();
+                        }
+                        mymovement.UpdateMove();
+                    }
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        PlayerState.myState = PlayerState.playerState.COVER;
+                        mystate.EventStates(PlayerState.myState);
+                        mymovement.EndMove();
+                    }
+                    #endregion
+                }
+            }              
         }
     }
 }

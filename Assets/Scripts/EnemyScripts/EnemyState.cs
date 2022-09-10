@@ -38,7 +38,7 @@ namespace Vino.Devs
             switch (state)
             {
                 case enemystate.ATTACK:                 
-                    mygun.getGunModel().transform.SetParent(mygun.handPos.root.GetChild(0));
+                    mygun.getGunModel().transform.SetParent(mygun.handPos);
                     mygun.SetupTransformGun.Invoke();
                     ikComponent.enabled = true;
                     Anim.SetBool("isCover", false);

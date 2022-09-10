@@ -33,16 +33,26 @@ namespace Vino.Devs
             RagdollEvent.OnLive(rigColliders, rigRigidbodies);
         }
 
+
+        #region helper
+        private void ResetGunTransform() {
+            mygun.getGunModel().transform.SetParent(mygun.handPos);
+            mygun.getGunModel().transform.localPosition = Vector3.zero;
+            mygun.getGunModel().transform.localRotation = Quaternion.identity;
+        }
+
+        #endregion
         public void EventStates(playerState state)
         {
             switch (state)
             {
-                case playerState.IDLE:
-                    RagdollEvent.OnLive(rigColliders, rigRigidbodies);
+                case playerState.IDLE:                   
+                    ResetGunTransform();
+                    ikComponent.enabled = false;
                     break;
 
                 case playerState.ATTACK:
-                    mygun.getGunModel().transform.SetParent(mygun.handPos.root.GetChild(0));
+                    mygun.getGunModel().transform.SetParent(mygun.handPos);
                     mygun.SetupTransformGun.Invoke();
                     ikComponent.enabled = true;
                     //
@@ -55,9 +65,7 @@ namespace Vino.Devs
                     break;
 
                 case playerState.COVER:
-                    mygun.getGunModel().transform.SetParent(mygun.handPos);
-                    mygun.getGunModel().transform.localPosition = Vector3.zero;
-                    mygun.getGunModel().transform.localRotation = Quaternion.identity;
+                    ResetGunTransform();
                     //
                     Anim.GetComponent<CoverCharacter>().OnEnableCovers();
                     //
@@ -76,9 +84,7 @@ namespace Vino.Devs
                     break;
 
                 case playerState.RELOAD:
-                    mygun.getGunModel().transform.SetParent(mygun.handPos);
-                    mygun.getGunModel().transform.localPosition = Vector3.zero;
-                    mygun.getGunModel().transform.localRotation = Quaternion.identity;
+                    ResetGunTransform();
                     //
                     Anim.GetComponent<CoverCharacter>().OnEnableCovers();
                     //

@@ -5,43 +5,21 @@ using UnityEngine;
 
 namespace Vino.Devs
 {
-    public class MainEnemyAI : MonoBehaviour
+    public class MainEnemyAI : CharacterMain
     {
-        [HideInInspector]public mainGun gun;
-        [HideInInspector]public GunResponse gunRes;
-        public int GunCode = 0;
         private EnemyState mystate;
-        private HealthCharacter myhealth;        
-        private FullBodyBipedIK ikComponent;
-        private Animator Anim;
-        private Collider[] rigColliders;
-        private Rigidbody[] rigRigidbodies;
+        private EnemyManageSystem Ems;
 
-        private void Awake()
-        {
-            rigColliders = GetComponentsInChildren<Collider>();
-            rigRigidbodies = GetComponentsInChildren<Rigidbody>();
-            gun = GetComponent<mainGun>();
-           
-            myhealth = GetComponent<HealthCharacter>();
-            Anim = GetComponent<Animator>();
-            ikComponent = GetComponent<FullBodyBipedIK>();
-
-            gun.CodeGun = GunCode;
-        }
         private void Start()
-        {         
-            GetComponent<LookAtCharacter>().target = GameObject.FindGameObjectWithTag("Player").transform;
+        {
+            Ems = new EnemyManageSystem(this);
+            GetComponent<LookAtCharacter>().target = null;
+            //GetComponent<LookAtCharacter>().target = GameObject.FindGameObjectWithTag("Player").transform;
             mystate = new EnemyState(ikComponent, gun, Anim, rigColliders, rigRigidbodies);
-            gunRes = gun.GetGunResponse();
-
-            AmmoPooling.instanse.objectToPool = gunRes.bullet;            
-            AmmoPooling.instanse.Spawning(transform.parent, gun.Ammos);
-
-            SetAttack();
-
+            AmmoPooling.instanse.objectToPool = gunRes.bullet;
+            AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);
             GetComponent<Collider>().enabled = true;
-
+            Invoke("SetTarget", 5f);
             StartCoroutine(update(0.003f));
         }
         #region Helper
@@ -63,6 +41,10 @@ namespace Vino.Devs
         {
             EnemyState.enemyState = EnemyState.enemystate.ATTACK;
             mystate.EventStates(EnemyState.enemyState);
+        }
+        public void SetTarget()
+        {
+            GetComponent<LookAtCharacter>().target = GameManager.instance.Player.transform;
         }
         #endregion
         private IEnumerator update(float timer)

@@ -7,7 +7,7 @@ namespace Vino.Devs
 {    
     public class mainGun : MonoBehaviour
     {
-        [HideInInspector] public int CodeGun;
+        public int CodeGun;
         //
         private WeaponResource myGun;
         [SerializeField] private List<WeaponScriptable> weaponSettings;
@@ -15,7 +15,7 @@ namespace Vino.Devs
         [SerializeField] private Transform handPosition;
         [HideInInspector] public UnityEvent SetupTransformGun;
         [SerializeField] private List<ModelSizeGun> sizeGuns;
-        public List<GameObject> Ammos ;
+        [HideInInspector]public List<GameObject> Ammos ;
 
         public Transform handPos
         {
@@ -23,29 +23,20 @@ namespace Vino.Devs
             set { handPosition = value; }
         }
 
-        private void Start()
+        private void Awake()
         {
             if (myGun == null)
-            {
-                HandleSetGun(CodeGun);
+            {                
+                PlayerPrefs.SetInt("Gun", CodeGun);
                 myGun = new WeaponResource(weaponResponse , weaponSettings, handPosition, sizeGuns, Ammos);
-            }
+            }            
             SetupTransformGun.AddListener(() => myGun.WeaponSelected.SaveTransform(myGun.GetSetting, sizeGuns[myGun.Index].Position,
                 sizeGuns[myGun.Index].Rotation, sizeGuns[myGun.Index].Scale));
             ReloadGun();
         }
 
 
-        #region Helper
-        public int HandleGetGun()
-        {
-            return PlayerPrefs.GetInt("Gun");
-        }
-        private void HandleSetGun(int CodeGun)
-        {
-            PlayerPrefs.SetInt("Gun", CodeGun);
-        }
-        //
+        #region Helper     
         public int ShootGun()
         {
             return myGun.WeaponSelected.Shoot();          

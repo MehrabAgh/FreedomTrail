@@ -6,8 +6,8 @@ namespace Vino.Devs
 {
     public class LookAtCharacter : MonoBehaviour
     {
-        [SerializeField] private Transform bone;
-        [SerializeField] private Vector3 offset;
+        public Transform bone;
+        private Vector3 offset;
         public Transform target;
         private void LateUpdate()
         {

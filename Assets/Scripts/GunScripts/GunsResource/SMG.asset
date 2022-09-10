@@ -15,4 +15,4 @@ MonoBehaviour:
   weaponeModels: {fileID: 1707346364639954686, guid: 2deefd909f45bac44a089bf67d26492c, type: 3}
   getWeapone: 3
   power: 80
-  nameAnimate: ..
+  nameAnimate: _isMachineShoot

@@ -13,7 +13,7 @@ namespace Vino.Devs
     [Serializable]
     public class GunResponse
     {
-        public Transform barrel;
+        public Transform barrel , mainBarrel;
         public GameObject bullet;
         public int maxReload, currentAmmo;
         public float delay;

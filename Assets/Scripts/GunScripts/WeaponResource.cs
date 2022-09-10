@@ -18,7 +18,7 @@ namespace Vino.Devs
         public WeaponResource(List<GunResponse> gunResponses, List<WeaponScriptable> weaponSettings,
             Transform piv, List<ModelSizeGun> sizeList, List<GameObject> Ammos)
         {
-            curWeapone = (weapone)PlayerPrefs.GetInt("Gun");
+            curWeapone = (weapone)PlayerPrefs.GetInt("Gun");            
             switch (curWeapone) // 4: add state new gun to this conditional
             {
                 case weapone.rifle:
@@ -94,7 +94,7 @@ namespace Vino.Devs
                 if (gunRes.nextTimetoFire <= 0)
                 {
                     gunRes.nextTimetoFire = gunRes.delay;
-                    scriptable.DefaultShoot(gunRes.barrel,Ammos);
+                    scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
                     gunRes.currentAmmo -= 1;
                 }
                 return 1;
@@ -156,7 +156,7 @@ namespace Vino.Devs
                 if (gunRes.nextTimetoFire <= 0)
                 {
                     gunRes.nextTimetoFire = gunRes.delay;
-                    scriptable.DefaultShoot(gunRes.barrel , Ammos);
+                    scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
                     gunRes.currentAmmo -= 1;
                 }
                 return 1;
@@ -223,7 +223,7 @@ namespace Vino.Devs
                     {
                         gunRes.nextTimetoFire = 0.1f;
                     }
-                    scriptable.DefaultShoot(gunRes.barrel , Ammos);
+                    scriptable.DefaultShoot(gunRes.mainBarrel , Ammos);
                     gunRes.currentAmmo -= 1;
                     scriptable.burstshotCount++;
                 }
@@ -284,14 +284,14 @@ namespace Vino.Devs
                     gunRes.nextTimetoFire = gunRes.delay;
                     for (int i = 0; i < 8; i++)
                     {
-                        Vector3 direction = gunRes.barrel.forward;
+                        Vector3 direction = gunRes.mainBarrel.forward;
                         Vector3 spread = Vector3.zero;
-                        spread += gunRes.barrel.up * Random.Range(-1, 1);
-                        spread += gunRes.barrel.right * Random.Range(-1, 1);
+                        spread += gunRes.mainBarrel.up * Random.Range(-1, 1);
+                        spread += gunRes.mainBarrel.right * Random.Range(-1, 1);
                         direction += spread.normalized * Random.Range(0, 0.15f);
                         var projectile = AmmoPooling.instanse.GetPooledObject(Ammos);
-                        projectile.transform.position = gunRes.barrel.transform.position;
-                        projectile.transform.rotation = gunRes.barrel.transform.rotation;
+                        projectile.transform.position = gunRes.mainBarrel.transform.position;
+                        projectile.transform.rotation = gunRes.mainBarrel.transform.rotation;
                         projectile.SetActive(true);
                         projectile.GetComponent<Rigidbody>().velocity = direction * scriptable.power;
                     }

@@ -9,9 +9,9 @@ namespace Vino.Devs
         [SerializeField] private float _sensitivity;
         private Vector3 _mouseReference;
         private Vector3 _mouseOffset;
-        private Vector3 _rotation;
+        private Vector3 _rotation;    
         private bool _isRotating { get; set; }
-
+      
         public void UpdateMove()
         {
             if (_isRotating)
