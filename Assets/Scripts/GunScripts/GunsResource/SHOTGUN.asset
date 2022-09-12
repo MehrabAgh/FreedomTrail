@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14afd112e703bb94e8a0c62762a55596, type: 3}
+  m_Name: SHOTGUN
+  m_EditorClassIdentifier: 
+  weaponeModels: {fileID: 2157315895075578443, guid: 6e53fb7c88b0b7945a4b6854512bd6c5, type: 3}
+  getWeapone: 1
+  barrel: {fileID: 0}
+  bullet: {fileID: 6691305724715267924, guid: 1d337eefc7946c54ba4f15b04c56961b, type: 3}
+  delay: 1.5
+  nextTimetoFire: 1.0101408
+  power: 50
+  maxReload: 5
+  currentAmmo: 5
+  nameAnimate: _isPistolShoot

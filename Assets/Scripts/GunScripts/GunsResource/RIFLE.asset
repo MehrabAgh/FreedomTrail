@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14afd112e703bb94e8a0c62762a55596, type: 3}
+  m_Name: RIFLE
+  m_EditorClassIdentifier: 
+  weaponeModels: {fileID: 5582136554558985437, guid: 198580be9da52ad4a91e08cd3ab8c28f, type: 3}
+  getWeapone: 0
+  barrel: {fileID: 0}
+  bullet: {fileID: 6691305724715267924, guid: 1d337eefc7946c54ba4f15b04c56961b, type: 3}
+  delay: 1
+  nextTimetoFire: 0.3417878
+  power: 50
+  maxReload: 10
+  currentAmmo: 8
+  nameAnimate: _isBurstShoot

@@ -1,0 +1,395 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MainGun
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 8ee8bc5115462a347a71d50bf060343f, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CodeGun
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponSettings.Array.size
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponSettings.Array.data[0]
+    value: 
+    objectReference: {fileID: 11400000, guid: 6321b6ee28934694c881d44642591693, type: 2}
+  - target: {fileID: 0}
+    propertyPath: weaponSettings.Array.data[1]
+    value: 
+    objectReference: {fileID: 11400000, guid: bed3ad058365c7346a916210bbb2be43, type: 2}
+  - target: {fileID: 0}
+    propertyPath: weaponSettings.Array.data[2]
+    value: 
+    objectReference: {fileID: 11400000, guid: 72e8bb03d6bce934c8f9fbf671e8d4d2, type: 2}
+  - target: {fileID: 0}
+    propertyPath: weaponSettings.Array.data[3]
+    value: 
+    objectReference: {fileID: 11400000, guid: 224b808dd561a414aa0a65fdffa397a3, type: 2}
+  - target: {fileID: 0}
+    propertyPath: weaponSettings.Array.data[4]
+    value: 
+    objectReference: {fileID: 11400000, guid: 630a6cf3e50330341947cfa8519e5560, type: 2}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.size
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[0].barrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[0].mainBarrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[0].bullet
+    value: 
+    objectReference: {fileID: 3881412917815023731, guid: 9f7ece168aa241e44912bbb8464e1d6c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[0].maxReload
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[0].currentAmmo
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[0].delay
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[0].nextTimetoFire
+    value: 0.10536542
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[1].barrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[1].mainBarrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[1].bullet
+    value: 
+    objectReference: {fileID: 3881412917815023731, guid: 9f7ece168aa241e44912bbb8464e1d6c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[1].maxReload
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[1].currentAmmo
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[1].delay
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[1].nextTimetoFire
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[2].barrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[2].mainBarrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[2].bullet
+    value: 
+    objectReference: {fileID: 3881412917815023731, guid: 9f7ece168aa241e44912bbb8464e1d6c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[2].maxReload
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[2].currentAmmo
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[2].delay
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[2].nextTimetoFire
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[3].barrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[3].mainBarrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[3].bullet
+    value: 
+    objectReference: {fileID: 3881412917815023731, guid: 9f7ece168aa241e44912bbb8464e1d6c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[3].maxReload
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[3].currentAmmo
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[3].delay
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[3].nextTimetoFire
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[4].barrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[4].mainBarrel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[4].bullet
+    value: 
+    objectReference: {fileID: 3881412917815023731, guid: 9f7ece168aa241e44912bbb8464e1d6c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[4].maxReload
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[4].currentAmmo
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[4].delay
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: weaponResponse.Array.data[4].nextTimetoFire
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: handPosition
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SetupTransformGun.m_PersistentCalls.m_Calls.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.size
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Position.x
+    value: -0.04450526
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Position.y
+    value: 0.1182844
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Position.z
+    value: -0.008586705
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Rotation.x
+    value: -5.992
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Rotation.y
+    value: 256.303
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Rotation.z
+    value: 203.481
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Scale.x
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Scale.y
+    value: 12
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[0].Scale.z
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Position.x
+    value: 0.049
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Position.y
+    value: 0.216
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Position.z
+    value: -0.084
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Rotation.x
+    value: -2.049
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Rotation.y
+    value: 212.599
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Rotation.z
+    value: 213.819
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Scale.x
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Scale.y
+    value: 3.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[1].Scale.z
+    value: 3.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Position.x
+    value: -0.04
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Position.y
+    value: 0.041
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Position.z
+    value: 0.009
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Rotation.x
+    value: 55.418
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Rotation.y
+    value: 26.666
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Rotation.z
+    value: 116.273
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Scale.x
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Scale.y
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[2].Scale.z
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Position.x
+    value: -0.014
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Position.y
+    value: 0.123
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Position.z
+    value: -0.074
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Rotation.x
+    value: -39.933
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Rotation.y
+    value: -161.119
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Rotation.z
+    value: 262.318
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Scale.x
+    value: 0.52
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Scale.y
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[3].Scale.z
+    value: 0.56
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Position.x
+    value: -0.03
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Position.y
+    value: 0.177
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Position.z
+    value: -0.054
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Rotation.x
+    value: 352.18347
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Rotation.y
+    value: 215.57382
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Rotation.z
+    value: 104.25808
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Scale.x
+    value: 14.4147005
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Scale.y
+    value: 2.652185
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeGuns.Array.data[4].Scale.z
+    value: 1.1187607
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Ammos.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
