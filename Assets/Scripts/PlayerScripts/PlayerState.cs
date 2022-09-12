@@ -17,13 +17,13 @@ namespace Vino.Devs
         }
         public static playerState myState { get; set; }
 
-        private mainGun mygun;
-        private Animator Anim;        
+        private MainGun mygun;
+        private Animator Anim;
         private Collider[] rigColliders;
         private Rigidbody[] rigRigidbodies;
         private FullBodyBipedIK ikComponent;
 
-        public PlayerState(FullBodyBipedIK ikComp, mainGun gun, Animator anim, Collider[] RigColliders, Rigidbody[] RigRigidbodies)
+        public PlayerState(FullBodyBipedIK ikComp, MainGun gun, Animator anim, Collider[] RigColliders, Rigidbody[] RigRigidbodies)
         {
             rigColliders = RigColliders;
             rigRigidbodies = RigRigidbodies;
@@ -35,7 +35,8 @@ namespace Vino.Devs
 
 
         #region helper
-        private void ResetGunTransform() {
+        private void ResetGunTransform()
+        {
             mygun.getGunModel().transform.SetParent(mygun.handPos);
             mygun.getGunModel().transform.localPosition = Vector3.zero;
             mygun.getGunModel().transform.localRotation = Quaternion.identity;
@@ -46,7 +47,7 @@ namespace Vino.Devs
         {
             switch (state)
             {
-                case playerState.IDLE:                   
+                case playerState.IDLE:
                     ResetGunTransform();
                     ikComponent.enabled = false;
                     break;
@@ -97,6 +98,6 @@ namespace Vino.Devs
                 default:
                     break;
             }
-        }   
+        }
     }
 }

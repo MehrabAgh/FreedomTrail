@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Vino.Devs
 {    
-    public class mainGun : MonoBehaviour
+    public class MainGun : MonoBehaviour
     {
         public int CodeGun;
         //
@@ -23,19 +23,18 @@ namespace Vino.Devs
             set { handPosition = value; }
         }
 
-        private void Awake()
+        public void CreateGun()
         {
-            if (myGun == null)
-            {                
-                PlayerPrefs.SetInt("Gun", CodeGun);
-                myGun = new WeaponResource(weaponResponse , weaponSettings, handPosition, sizeGuns, Ammos);
-            }            
+            myGun = new WeaponResource(weaponResponse, weaponSettings, handPosition, sizeGuns, Ammos, CodeGun);
             SetupTransformGun.AddListener(() => myGun.WeaponSelected.SaveTransform(myGun.GetSetting, sizeGuns[myGun.Index].Position,
-                sizeGuns[myGun.Index].Rotation, sizeGuns[myGun.Index].Scale));
+                   sizeGuns[myGun.Index].Rotation, sizeGuns[myGun.Index].Scale));
             ReloadGun();
         }
 
-
+        private void Awake()
+        {
+            Ammos = new List<GameObject>(0);
+        }
         #region Helper     
         public int ShootGun()
         {

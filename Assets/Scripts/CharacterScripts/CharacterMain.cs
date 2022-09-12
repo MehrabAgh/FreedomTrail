@@ -7,10 +7,11 @@ namespace Vino.Devs
 {
     public class CharacterMain : MonoBehaviour
     {
-        [HideInInspector] public mainGun gun;
-        [HideInInspector]public GunResponse gunRes;
+        public MainGun gun;
+        [HideInInspector] public GunResponse gunRes;
         public Transform parentAmmo;
         [HideInInspector] public Collider[] rigColliders;
+        public Car myCar;
         [HideInInspector] public Rigidbody[] rigRigidbodies;
         [HideInInspector] public HealthCharacter myhealth;
         [HideInInspector] public FullBodyBipedIK ikComponent;
@@ -21,11 +22,11 @@ namespace Vino.Devs
         {
             rigColliders = GetComponentsInChildren<Collider>();
             rigRigidbodies = GetComponentsInChildren<Rigidbody>();
-            gun = GetComponent<mainGun>();
-            gunRes = gun.GetGunResponse();
+            gun = GetComponent<MainGun>();
             Anim = GetComponent<Animator>();
             ikComponent = GetComponent<FullBodyBipedIK>();
             myhealth = GetComponent<HealthCharacter>();
-        }
+            myCar = GetComponentInParent<Car>();
+        }   
     }
 }

@@ -10,18 +10,20 @@ using Vino.Devs;
 public class MainPlayer : CharacterMain
 {
     private PlayerMovement mymovement;
-    private PlayerState mystate;       
-    [HideInInspector]public CoverCharacter myCover; 
+    private PlayerState mystate;
+    [HideInInspector] public CoverCharacter myCover;
     private void Start()
     {
+        gun.CreateGun();
         mymovement = GetComponent<PlayerMovement>();
-        myCover = GetComponent<CoverCharacter>();              
-        mystate = new PlayerState(ikComponent, gun, Anim, rigColliders, rigRigidbodies);       
+        myCover = GetComponent<CoverCharacter>();
+        mystate = new PlayerState(ikComponent, gun, Anim, rigColliders, rigRigidbodies);
         SetIdle();
         GetComponent<Collider>().enabled = true;
-        AmmoPooling.instanse.objectToPool = gunRes.bullet;        
-        AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);        
-        StartCoroutine(update(0.001f));        
+        gunRes = gun.GetGunResponse();
+        AmmoPooling.instanse.objectToPool = gunRes.bullet;
+        AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);
+        StartCoroutine(update(0.001f));
     }
 
     #region Helper
@@ -29,20 +31,20 @@ public class MainPlayer : CharacterMain
     {
         PlayerState.myState = PlayerState.playerState.RELOAD;
         mystate.EventStates(PlayerState.myState);
-    }    
+    }
     public void SetIdle()
-    {      
+    {
         PlayerState.myState = PlayerState.playerState.IDLE;
         mystate.EventStates(PlayerState.myState);
         GetComponent<Rigidbody>().isKinematic = false;
     }
+    private void StartRunning() => myCar.StartRunning();
     public bool CheckColliderGround()
     {
-        if (launchingProjectiles.ins.DistanceTarget() <= 0.1f)
-        { 
-            GameManager.instance._isStartGame = false;
+        if (launchingProjectiles.ins.DistanceTarget() <= .5f)
+        {
             launchingProjectiles.ins.ThisObject.SetParent(launchingProjectiles.ins.TargetObject.parent);
-            transform.SetSiblingIndex(0);           
+            transform.SetSiblingIndex(0);
             return false;
         }
         else return true;
@@ -58,13 +60,16 @@ public class MainPlayer : CharacterMain
     }
     #endregion
 
-    #region Start And End Cinematic Events
+    #region Start Cinematic Events
     public void StartGame()
     {
-        Anim.SetBool("StartCinematic", true);
-        SetIdle();      
-        launchingProjectiles.ins.Launch();       
-        Invoke("StartExiting", 2f);
+        SetIdle();
+        launchingProjectiles.ins.Launch();
+        Anim.SetBool("StartCinematic", CheckColliderGround());
+        myCar = EnemyManager.Player.GetComponent<Car>();
+        if (myCar)
+            Invoke(nameof(StartRunning), 2.5f);
+        Invoke(nameof(StartExiting), 2f);
         //play Animation Start Cinematic
     }
     #endregion
@@ -75,8 +80,9 @@ public class MainPlayer : CharacterMain
         while (true)
         {
             yield return new WaitForSeconds(timer);
+
             CheckColliderGround();
-            if (!GameManager.instance._isStartGame && !GameManager.instance._isEndGame)
+            if (GameManager.instance.CheckInLoopGame())
             {
                 Anim.SetBool("StartCinematic", CheckColliderGround());
                 if (myhealth.getHealth() < 1)
@@ -85,8 +91,8 @@ public class MainPlayer : CharacterMain
                     mystate.EventStates(PlayerState.myState);
                 }
                 else
-                {                    
-                    if(CheckDistancetoEnd() < .8f)
+                {
+                    if (CheckDistancetoEnd() < 1f)
                     {
                         GameManager.instance._isEndGame = true;
                     }
@@ -114,7 +120,8 @@ public class MainPlayer : CharacterMain
                     }
                     #endregion
                 }
-            }              
+
+            }
         }
     }
 }

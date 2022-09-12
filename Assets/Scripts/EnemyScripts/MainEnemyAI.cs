@@ -9,20 +9,26 @@ namespace Vino.Devs
     {
         private EnemyState mystate;
         private EnemyManageSystem Ems;
-
+    
         private void Start()
         {
-            Ems = new EnemyManageSystem(this);
+            CreateEnemySystem();
+            gun.CreateGun();
             GetComponent<LookAtCharacter>().target = null;
-            //GetComponent<LookAtCharacter>().target = GameObject.FindGameObjectWithTag("Player").transform;
             mystate = new EnemyState(ikComponent, gun, Anim, rigColliders, rigRigidbodies);
+            GetComponent<Collider>().enabled = true;
+            Invoke(nameof(SetTarget), 5f);
+            gunRes = gun.GetGunResponse();
             AmmoPooling.instanse.objectToPool = gunRes.bullet;
             AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);
-            GetComponent<Collider>().enabled = true;
-            Invoke("SetTarget", 5f);
             StartCoroutine(update(0.003f));
         }
         #region Helper
+        private void CreateEnemySystem()
+        {
+            Ems = new EnemyManageSystem();
+            gun.CodeGun = Ems.SelectModeEnemy();
+        }
         public void SetReload()
         {
             EnemyState.enemyState = EnemyState.enemystate.RELOAD;
@@ -52,25 +58,26 @@ namespace Vino.Devs
             while (true)
             {
                 yield return new WaitForSeconds(timer);
-
-                if (myhealth.getHealth() < 1)
+                if (GameManager.instance.CheckInLoopGame())
                 {
-                    EnemyState.enemyState = EnemyState.enemystate.DEATH;
-                    mystate.EventStates(EnemyState.enemyState);
-                }
-                else
-                {
-                    if (gun.ShootGun() > -1)
+                    if (myhealth.getHealth() < 1)
                     {
-                        SetAttack();
+                        EnemyState.enemyState = EnemyState.enemystate.DEATH;
+                        mystate.EventStates(EnemyState.enemyState);
                     }
                     else
                     {
-                        SetReload();
+                        if (gun.ShootGun() > -1)
+                        {
+                            SetAttack();
+                        }
+                        else
+                        {
+                            SetReload();
+                        }
                     }
                 }
             }
-
         }
     }
 }

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14afd112e703bb94e8a0c62762a55596, type: 3}
+  m_Name: PISTOL
+  m_EditorClassIdentifier: 
+  weaponeModels: {fileID: 3136692989810527482, guid: b3a78f2809c48a542901ec9cad6401e6, type: 3}
+  getWeapone: 4
+  power: 80
+  nameAnimate: _isPistolShoot

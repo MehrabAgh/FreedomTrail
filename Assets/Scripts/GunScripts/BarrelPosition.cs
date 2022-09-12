@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vino.Devs {
+namespace Vino.Devs
+{
     public class BarrelPosition : MonoBehaviour
     {
         [SerializeField] private Transform barrelCurrent;
@@ -12,7 +13,10 @@ namespace Vino.Devs {
         }
         private void FixedUpdate()
         {
-            transform.position = barrelCurrent.position;
+            if (barrelCurrent != null)
+                transform.position = barrelCurrent.position;
+            else
+                barrelCurrent = GetComponentInParent<CharacterMain>().gunRes.barrel;
         }
     }
 }

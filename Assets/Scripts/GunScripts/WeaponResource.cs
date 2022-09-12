@@ -7,7 +7,7 @@ namespace Vino.Devs
 
     public class WeaponResource
     {
-        public enum weapone { rifle, shotgun, machinegun, minigun }; // 2 : add name new gun to state guns
+        public enum weapone { rifle, shotgun, machinegun, minigun , pistol}; // 2 : add name new gun to state guns
         // 3: add new gun setting to list in Main Gun Class
         private weapone curWeapone;
         public IGun WeaponSelected;
@@ -16,9 +16,9 @@ namespace Vino.Devs
         public GunResponse GetResponse;
 
         public WeaponResource(List<GunResponse> gunResponses, List<WeaponScriptable> weaponSettings,
-            Transform piv, List<ModelSizeGun> sizeList, List<GameObject> Ammos)
+            Transform piv, List<ModelSizeGun> sizeList, List<GameObject> Ammos , int IndexWeapone)
         {
-            curWeapone = (weapone)PlayerPrefs.GetInt("Gun");            
+            curWeapone = (weapone)IndexWeapone;
             switch (curWeapone) // 4: add state new gun to this conditional
             {
                 case weapone.rifle:
@@ -49,13 +49,20 @@ namespace Vino.Devs
                     GetResponse = smg.GetResponse();
                     WeaponSelected = smg;
                     break;
+                case weapone.pistol:
+                    Index = 4;
+                    Pistol pis = new Pistol(gunResponses[4], weaponSettings[4], piv, sizeList[4].Position, sizeList[4].Rotation, sizeList[4].Scale, Ammos);
+                    GetSetting = pis.GetSetting();
+                    GetResponse = pis.GetResponse();
+                    WeaponSelected = pis;
+                    break;
                 default:
                     break;
             }          
         }       
     }
     // 1 : add class and attribute new gun
-    public class SMG : mainGun, IGun
+    public class SMG : MainGun, IGun
     {
         private WeaponScriptable scriptable;
         private GunResponse gunRes;
@@ -113,7 +120,7 @@ namespace Vino.Devs
     }
 
 
-    public class LMG : mainGun, IGun
+    public class LMG : MainGun, IGun
     {
         private GunResponse gunRes;
         private WeaponScriptable scriptable;
@@ -174,7 +181,7 @@ namespace Vino.Devs
     }
 
 
-    public class Rifle : mainGun, IGun
+    public class Rifle : MainGun, IGun
     {
         private GunResponse gunRes;
         private WeaponScriptable scriptable;
@@ -241,7 +248,7 @@ namespace Vino.Devs
     }
 
 
-    public class Shotgun : mainGun, IGun
+    public class Shotgun : MainGun, IGun
     {
         private WeaponScriptable scriptable;
         private GunResponse gunRes;
@@ -307,6 +314,68 @@ namespace Vino.Devs
         public void SaveTransform(WeaponScriptable wr, Vector3 pos, Vector3 rot, Vector3 scale)
         {
             wr.SetTransform(pos, rot, scale, weaponModel.transform);
+        }
+    }
+
+
+    public class Pistol : MainGun, IGun
+    {
+        private WeaponScriptable scriptable;
+        private GunResponse gunRes;
+        private List<GameObject> Ammos;
+        public GameObject weaponModel { get; set ; }
+
+        public Pistol(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
+        {
+            Ammos = ammos;
+            gunRes = gn;
+            scriptable = wr;
+            weaponModel = Instantiate(wr.weaponeModels, handppivot.position, handppivot.rotation, handppivot);
+            SaveTransform(wr, pos, rot, scale);
+            gn.barrel = weaponModel.transform.GetChild(0);
+        }
+
+        public GunResponse GetResponse()
+        {
+            return gunRes;
+        }
+
+        public WeaponScriptable GetSetting()
+        {
+            return scriptable;
+        }
+
+        public IEnumerator Reload(float time)
+        {
+            if (gunRes.currentAmmo < 1)
+            {
+                gunRes.currentAmmo = gunRes.maxReload;
+            }
+            yield return new WaitForSeconds(time);
+        }
+
+        public void SaveTransform(WeaponScriptable wr, Vector3 pos, Vector3 rot, Vector3 scale)
+        {
+            wr.SetTransform(pos, rot, scale, weaponModel.transform);
+        }
+
+        public int Shoot()
+        {
+            if (gunRes.currentAmmo > 0)
+            {
+                gunRes.nextTimetoFire -= Time.deltaTime;
+                if (gunRes.nextTimetoFire <= 0)
+                {
+                    gunRes.nextTimetoFire = gunRes.delay;
+                    scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                    gunRes.currentAmmo -= 1;
+                }
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }

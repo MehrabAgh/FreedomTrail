@@ -16,14 +16,14 @@ namespace Vino.Devs
         }
         public static enemystate enemyState { get; set; }
 
-        private mainGun mygun;
+        private MainGun mygun;
         private Animator Anim;
         private FullBodyBipedIK ikComponent;
         private Collider[] rigColliders;
         private Rigidbody[] rigRigidbodies;
 
         public EnemyState(FullBodyBipedIK ikComp,
-            mainGun gun, Animator anim, Collider[] RigColliders,
+            MainGun gun, Animator anim, Collider[] RigColliders,
             Rigidbody[] RigRigidbodies)
         {
             rigColliders = RigColliders;

@@ -8,6 +8,10 @@ TagManager:
   - AmmoPlayer
   - Cover
   - Enemy
+  - crosshair
+  - Canvas
+  - EnemyTarget
+  - PlayerCar
   layers:
   - Default
   - TransparentFX
