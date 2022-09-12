@@ -14,7 +14,10 @@ namespace Vino.Devs
         private void FixedUpdate()
         {
             if (barrelCurrent != null)
+            {
                 transform.position = barrelCurrent.position;
+                transform.rotation =  barrelCurrent.rotation;
+            }
             else
                 barrelCurrent = GetComponentInParent<CharacterMain>().gunRes.barrel;
         }

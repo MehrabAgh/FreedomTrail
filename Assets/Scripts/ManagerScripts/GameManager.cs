@@ -105,11 +105,12 @@ namespace Vino.Devs
             HeliCopter.GetComponent<AnimAIHelicopter>()
                 .animState = AnimAIHelicopter.HeliAnimState.EndClimber;
             CameraManagement.instance.virtualCameras[0].SetActive(false);
-            CameraManagement.instance.virtualCameras[1].SetActive(true);
-            Player.GetComponent<LookAtCharacter>().target = HeliCopter;
+            CameraManagement.instance.virtualCameras[1].SetActive(true);           
             Player.transform.rotation = Quaternion.Euler(0, 180, 0);
             Player.Anim.SetBool("isCover", false);
             Player.Anim.SetLayerWeight(1, 0);
+            Player.Anim.SetLayerWeight(2, 0);
+            Player.enabled = false;
             //other part this event into hangUpEnd.cs & AnimAIHelicopter
         }
     }

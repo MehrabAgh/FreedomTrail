@@ -41,7 +41,10 @@ namespace Vino.Devs
             mygun.getGunModel().transform.localPosition = Vector3.zero;
             mygun.getGunModel().transform.localRotation = Quaternion.identity;
         }
-
+        public playerState GetState()
+        {
+            return myState;
+        }
         #endregion
         public void EventStates(playerState state)
         {
@@ -50,6 +53,7 @@ namespace Vino.Devs
                 case playerState.IDLE:
                     ResetGunTransform();
                     ikComponent.enabled = false;
+                    Anim.SetBool("isCover", false);
                     break;
 
                 case playerState.ATTACK:

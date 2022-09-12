@@ -36,7 +36,7 @@ public class MainPlayer : CharacterMain
     {
         PlayerState.myState = PlayerState.playerState.IDLE;
         mystate.EventStates(PlayerState.myState);
-        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Rigidbody>().isKinematic = false;        
     }
     private void StartRunning() => myCar.StartRunning();
     public bool CheckColliderGround()
@@ -64,6 +64,7 @@ public class MainPlayer : CharacterMain
     public void StartGame()
     {
         SetIdle();
+        print(mystate.GetState());
         launchingProjectiles.ins.Launch();
         Anim.SetBool("StartCinematic", CheckColliderGround());
         myCar = EnemyManager.Player.GetComponent<Car>();

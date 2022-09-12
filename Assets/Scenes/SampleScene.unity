@@ -887,68 +887,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CodeGun: 0
-  weaponSettings:
-  - {fileID: 11400000, guid: 6321b6ee28934694c881d44642591693, type: 2}
-  - {fileID: 11400000, guid: bed3ad058365c7346a916210bbb2be43, type: 2}
-  - {fileID: 11400000, guid: 72e8bb03d6bce934c8f9fbf671e8d4d2, type: 2}
-  - {fileID: 11400000, guid: 224b808dd561a414aa0a65fdffa397a3, type: 2}
-  weaponResponse:
-  - barrel: {fileID: 0}
-    mainBarrel: {fileID: 775807377}
-    bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
-    maxReload: 10
-    currentAmmo: 0
-    delay: 2
-    nextTimetoFire: 2
-  - barrel: {fileID: 0}
-    mainBarrel: {fileID: 775807377}
-    bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
-    maxReload: 5
-    currentAmmo: 0
-    delay: 1
-    nextTimetoFire: 1
-  - barrel: {fileID: 0}
-    mainBarrel: {fileID: 775807377}
-    bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
-    maxReload: 10
-    currentAmmo: 0
-    delay: 1
-    nextTimetoFire: 1
-  - barrel: {fileID: 0}
-    mainBarrel: {fileID: 775807377}
-    bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
-    maxReload: 10
-    currentAmmo: 0
-    delay: 1
-    nextTimetoFire: 1
-  handPosition: {fileID: 1939521009}
+  weaponSettings: []
+  weaponResponse: []
+  handPosition: {fileID: 0}
   SetupTransformGun:
     m_PersistentCalls:
       m_Calls: []
-  sizeGuns:
-  - Position: {x: -0.02082906, y: -0.00004194677, z: -0.016537065}
-    Rotation: {x: 0, y: -82.5, z: -2}
-    Scale: {x: 2, y: 12, z: 4}
-  - Position: {x: -0.122, y: 0.05, z: -0.172}
-    Rotation: {x: 40.857674, y: 272.77948, z: 276.88663}
-    Scale: {x: 3, y: 3.5, z: 3.5}
-  - Position: {x: -0.069, y: 0.114, z: -0.002}
-    Rotation: {x: 5.438, y: 33.379, z: 55.707}
-    Scale: {x: 1, y: 1, z: 1}
-  - Position: {x: -0.03104867, y: 0.09208196, z: -0.2392447}
-    Rotation: {x: -179.689, y: 18.00999, z: 108.03}
-    Scale: {x: 0.52, y: 0.5, z: 0.56}
-  Ammos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  sizeGuns: []
+  Ammos: []
 --- !u!114 &179905455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3411,7 +3357,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 10
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &470072903
 GameObject:
@@ -6250,6 +6196,41 @@ Transform:
   m_Father: {fileID: 658670252}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &849834386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 849834387}
+  m_Layer: 0
+  m_Name: Helpers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &849834387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849834386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4082915637393806635}
+  - {fileID: 4082915636578500698}
+  - {fileID: 4082915637200946152}
+  - {fileID: 1224234144}
+  m_Father: {fileID: 4082915635982153104}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &864491264
 GameObject:
   m_ObjectHideFlags: 0
@@ -6784,7 +6765,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957876171}
-  m_LocalRotation: {x: 1e-45, y: 0.9150872, z: -0.403256, w: 1e-45}
+  m_LocalRotation: {x: -0, y: 0.9150872, z: -0.403256, w: 1e-45}
   m_LocalPosition: {x: 0, y: 18.27, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8675,8 +8656,8 @@ Transform:
   m_LocalScale: {x: 1, y: 0.5, z: 0.075}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 9
+  m_Father: {fileID: 849834387}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1224234145
 BoxCollider:
@@ -10409,7 +10390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6badf239be049434182c4ee1e8f7c376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bone: {fileID: 1452631879}
+  bone: {fileID: 520619893}
   target: {fileID: 3664097706715910897}
 --- !u!114 &1452631881
 MonoBehaviour:
@@ -10488,17 +10469,7 @@ MonoBehaviour:
   - Position: {x: -0.03104867, y: 0.09208196, z: -0.2392447}
     Rotation: {x: -179.689, y: 18.00999, z: 108.03}
     Scale: {x: 0.52, y: 0.5, z: 0.56}
-  Ammos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Ammos: []
 --- !u!114 &1452631883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13028,68 +12999,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CodeGun: 0
-  weaponSettings:
-  - {fileID: 11400000, guid: 6321b6ee28934694c881d44642591693, type: 2}
-  - {fileID: 11400000, guid: bed3ad058365c7346a916210bbb2be43, type: 2}
-  - {fileID: 11400000, guid: 72e8bb03d6bce934c8f9fbf671e8d4d2, type: 2}
-  - {fileID: 11400000, guid: 224b808dd561a414aa0a65fdffa397a3, type: 2}
-  weaponResponse:
-  - barrel: {fileID: 0}
-    mainBarrel: {fileID: 1873686710}
-    bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
-    maxReload: 10
-    currentAmmo: 0
-    delay: 2
-    nextTimetoFire: 2
-  - barrel: {fileID: 0}
-    mainBarrel: {fileID: 1873686710}
-    bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
-    maxReload: 5
-    currentAmmo: 0
-    delay: 1
-    nextTimetoFire: 1
-  - barrel: {fileID: 0}
-    mainBarrel: {fileID: 1873686710}
-    bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
-    maxReload: 10
-    currentAmmo: 0
-    delay: 1
-    nextTimetoFire: 1
-  - barrel: {fileID: 0}
-    mainBarrel: {fileID: 1873686710}
-    bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
-    maxReload: 10
-    currentAmmo: 0
-    delay: 1
-    nextTimetoFire: 1
-  handPosition: {fileID: 225454711}
+  weaponSettings: []
+  weaponResponse: []
+  handPosition: {fileID: 0}
   SetupTransformGun:
     m_PersistentCalls:
       m_Calls: []
-  sizeGuns:
-  - Position: {x: -0.02082906, y: -0.00004194677, z: -0.016537065}
-    Rotation: {x: 0, y: -82.5, z: -2}
-    Scale: {x: 2, y: 12, z: 4}
-  - Position: {x: -0.122, y: 0.05, z: -0.172}
-    Rotation: {x: 40.857674, y: 272.77948, z: 276.88663}
-    Scale: {x: 3, y: 3.5, z: 3.5}
-  - Position: {x: -0.069, y: 0.114, z: -0.002}
-    Rotation: {x: 5.438, y: 33.379, z: 55.707}
-    Scale: {x: 1, y: 1, z: 1}
-  - Position: {x: -0.03104867, y: 0.09208196, z: -0.2392447}
-    Rotation: {x: -179.689, y: 18.00999, z: 108.03}
-    Scale: {x: 0.52, y: 0.5, z: 0.56}
-  Ammos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  sizeGuns: []
+  Ammos: []
 --- !u!114 &1679426909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13687,29 +13604,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CodeGun: 0
-  weaponSettings:
-  - {fileID: 11400000, guid: 6321b6ee28934694c881d44642591693, type: 2}
-  - {fileID: 11400000, guid: bed3ad058365c7346a916210bbb2be43, type: 2}
-  - {fileID: 11400000, guid: 72e8bb03d6bce934c8f9fbf671e8d4d2, type: 2}
-  - {fileID: 11400000, guid: 224b808dd561a414aa0a65fdffa397a3, type: 2}
+  weaponSettings: []
   weaponResponse: []
-  handPosition: {fileID: 480607315278522680}
+  handPosition: {fileID: 0}
   SetupTransformGun:
     m_PersistentCalls:
       m_Calls: []
-  sizeGuns:
-  - Position: {x: 0.0047, y: -0.0073, z: 0.0168}
-    Rotation: {x: -180, y: 180, z: -180}
-    Scale: {x: 0.06, y: 0.2, z: 0.1}
-  - Position: {x: 0.004401376, y: -0.009623774, z: 0.01653844}
-    Rotation: {x: -178.614, y: 179.896, z: 181.379}
-    Scale: {x: 0.0613574, y: 0.1, z: 0.088781}
-  - Position: {x: 0.00367, y: -0.00343, z: 0.01627}
-    Rotation: {x: -85.811, y: 120.026, z: 61.568}
-    Scale: {x: 0.045, y: 0.03, z: 0.03}
-  - Position: {x: 0.0037, y: -0.01073, z: 0.01348}
-    Rotation: {x: 90, y: 0, z: 0}
-    Scale: {x: 0.014, y: 0.014, z: 0.014}
+  sizeGuns: []
   Ammos: []
 --- !u!114 &1686351183
 MonoBehaviour:
@@ -15790,6 +15691,42 @@ CapsuleCollider:
   m_Height: 0.0036629094
   m_Direction: 1
   m_Center: {x: 0, y: 0.0018314547, z: 0}
+--- !u!1 &1881731102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1881731103}
+  m_Layer: 0
+  m_Name: Models
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1881731103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881731102}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4082915637448931118}
+  - {fileID: 4082915637613214290}
+  - {fileID: 4082915636068999406}
+  - {fileID: 4082915638047140774}
+  - {fileID: 4082915636716684536}
+  m_Father: {fileID: 4082915635982153104}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896964314
 GameObject:
   m_ObjectHideFlags: 0
@@ -33827,7 +33764,7 @@ Transform:
   - {fileID: 322728341545864093}
   - {fileID: 6840930346239309761}
   m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2022379684325342591
 GameObject:
@@ -34289,16 +34226,9 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1881731103}
   - {fileID: 1980774352267539921}
-  - {fileID: 4082915636716684536}
-  - {fileID: 4082915637448931118}
-  - {fileID: 4082915637613214290}
-  - {fileID: 4082915636068999406}
-  - {fileID: 4082915638047140774}
-  - {fileID: 4082915637393806635}
-  - {fileID: 4082915636578500698}
-  - {fileID: 4082915637200946152}
-  - {fileID: 1224234144}
+  - {fileID: 849834387}
   - {fileID: 463226259}
   m_Father: {fileID: 0}
   m_RootOrder: 16
@@ -34500,8 +34430,8 @@ Transform:
   m_LocalScale: {x: 24.26066, y: 24.260656, z: 11.3104105}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 4
+  m_Father: {fileID: 1881731103}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 360, z: 0}
 --- !u!23 &4082915636068999407
 MeshRenderer:
@@ -34654,13 +34584,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4082915636578500701}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 7
+  m_Father: {fileID: 849834387}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4082915636578500701
 GameObject:
@@ -34701,8 +34631,8 @@ Transform:
   - {fileID: 4082915636929588315}
   - {fileID: 4082915636289349780}
   - {fileID: 4082915637494080775}
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 1
+  m_Father: {fileID: 1881731103}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!23 &4082915636716684537
 MeshRenderer:
@@ -35025,7 +34955,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4082915637200946155}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -35034,8 +34964,8 @@ Transform:
   - {fileID: 1079074344}
   - {fileID: 1199336564}
   - {fileID: 1299633100}
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 8
+  m_Father: {fileID: 849834387}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4082915637200946155
 GameObject:
@@ -35107,7 +35037,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4082915637393806634}
-  m_LocalRotation: {x: 0, y: -0.9999619, z: 0, w: 0.008726652}
+  m_LocalRotation: {x: -0, y: -0.9999619, z: -0, w: 0.008726652}
   m_LocalPosition: {x: 0.25, y: 0.54, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -35115,8 +35045,8 @@ Transform:
   - {fileID: 4082915637071097105}
   - {fileID: 4082915637405487468}
   - {fileID: 4082915637289375622}
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 6
+  m_Father: {fileID: 849834387}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -179, z: 0}
 --- !u!4 &4082915637405487468
 Transform:
@@ -35161,8 +35091,8 @@ Transform:
   m_LocalScale: {x: 24.26066, y: 24.260656, z: 11.3104105}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 2
+  m_Father: {fileID: 1881731103}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 360, z: 0}
 --- !u!23 &4082915637448931120
 MeshRenderer:
@@ -35328,8 +35258,8 @@ Transform:
   m_LocalScale: {x: -24.26066, y: -24.260656, z: -11.3104105}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 3
+  m_Father: {fileID: 1881731103}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: -180}
 --- !u!23 &4082915637613214292
 MeshRenderer:
@@ -35420,8 +35350,8 @@ Transform:
   m_LocalScale: {x: -24.26066, y: -24.260656, z: -11.3104105}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4082915635982153104}
-  m_RootOrder: 5
+  m_Father: {fileID: 1881731103}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: -180}
 --- !u!23 &4082915638047140775
 MeshRenderer:
@@ -35696,7 +35626,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.08643485, y: 0.17397204, z: 0.01987392}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -35853,7 +35783,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.06898657, y: -0.028063193, z: 0.000667277}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -36226,7 +36156,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.00000054272823, y: 0.050527595, z: 0.0008828428}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -36411,7 +36341,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.00000032805838, y: 0.15177591, z: -0.00000037252903}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -36521,7 +36451,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.009757056, y: 0.2653378, z: 0.014264818}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -36643,7 +36573,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.0000004088506, y: 0.19628045, z: -0.000000062864274}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -37071,7 +37001,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.00000051409006, y: 0.19628417, z: -0.000000063329935}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -37807,7 +37737,7 @@ MonoBehaviour:
     delay: 0.5
     nextTimetoFire: 0
   - barrel: {fileID: 0}
-    mainBarrel: {fileID: 563970611}
+    mainBarrel: {fileID: 0}
     bullet: {fileID: 3881412917815023731, guid: 9f7ece168aa241e44912bbb8464e1d6c, type: 3}
     maxReload: 10
     currentAmmo: 0
@@ -38482,7 +38412,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8233431576221975646}
-  m_LocalRotation: {x: 1e-45, y: 0.9150872, z: -0.403256, w: 1e-45}
+  m_LocalRotation: {x: 0, y: 0.9150872, z: -0.403256, w: 1e-45}
   m_LocalPosition: {x: 0, y: 18.27, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38518,7 +38448,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.00000023376197, y: 0.151744, z: 0.00000020861626}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -39016,7 +38946,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.068986066, y: -0.0280633, z: 0.0011739534}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -39228,7 +39158,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.09355642, y: 0.1617282, z: 0.020101093}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:

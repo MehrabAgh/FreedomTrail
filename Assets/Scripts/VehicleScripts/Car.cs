@@ -67,6 +67,11 @@ namespace Vino.Devs
             brake = false;
         }
 
+        public bool GetBrake()
+        {
+            return brake;
+        }
+
         public void Die()
         {
             if (!isPlayer)

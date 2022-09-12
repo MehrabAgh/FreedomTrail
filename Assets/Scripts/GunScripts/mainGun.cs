@@ -15,7 +15,7 @@ namespace Vino.Devs
         [SerializeField] private Transform handPosition;
         [HideInInspector] public UnityEvent SetupTransformGun;
         [SerializeField] private List<ModelSizeGun> sizeGuns;
-        [HideInInspector]public List<GameObject> Ammos ;
+        public List<GameObject> Ammos ;
 
         public Transform handPos
         {
