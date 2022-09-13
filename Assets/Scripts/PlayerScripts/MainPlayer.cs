@@ -9,6 +9,7 @@ using Vino.Devs;
 [RequireComponent(typeof(LookAtCharacter))]
 public class MainPlayer : CharacterMain
 {
+    private bool Accessbility { get; set; }
     private PlayerMovement mymovement;
     private PlayerState mystate;
     [HideInInspector] public CoverCharacter myCover;
@@ -38,12 +39,13 @@ public class MainPlayer : CharacterMain
         mystate.EventStates(PlayerState.myState);
         GetComponent<Rigidbody>().isKinematic = false;        
     }
-    private void StartRunning() => myCar.StartRunning();
+    private void StartRunning() 
+    { myCar.StartRunning(); Accessbility = true; }
     public bool CheckColliderGround()
     {
         if (launchingProjectiles.ins.DistanceTarget() <= .5f)
         {
-            launchingProjectiles.ins.ThisObject.SetParent(launchingProjectiles.ins.TargetObject.parent);
+            launchingProjectiles.ins.ThisObject.SetParent(launchingProjectiles.ins.TargetObject.parent);           
             transform.SetSiblingIndex(0);
             return false;
         }
@@ -83,16 +85,16 @@ public class MainPlayer : CharacterMain
             yield return new WaitForSeconds(timer);
 
             CheckColliderGround();
-            if (GameManager.instance.CheckInLoopGame())
-            {
-                Anim.SetBool("StartCinematic", CheckColliderGround());
+            Anim.SetBool("StartCinematic", CheckColliderGround());
+            if (GameManager.instance.CheckInLoopGame() && Accessbility)
+            {                
                 if (myhealth.getHealth() < 1)
                 {
                     PlayerState.myState = PlayerState.playerState.DEATH;
                     mystate.EventStates(PlayerState.myState);
                 }
                 else
-                {
+                {                    
                     if (CheckDistancetoEnd() < 1f)
                     {
                         GameManager.instance._isEndGame = true;

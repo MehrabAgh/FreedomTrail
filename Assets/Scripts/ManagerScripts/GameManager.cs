@@ -50,6 +50,7 @@ namespace Vino.Devs
             _isEndGame = false;
             Player = FindObjectOfType<MainPlayer>();
             OnGameOver += EndingGame;
+            gameState = GameState.IsMenu;
         }
 
         private void Update()
@@ -78,7 +79,9 @@ namespace Vino.Devs
                         startingWork = true;
                     }
                     break;
-                case GameState.EndGame:                    
+                case GameState.EndGame:
+                    _isStartGame = false;
+                    _isEndGame = true;
                     IsGameOver = true;
                     break;
                 default:
@@ -102,6 +105,7 @@ namespace Vino.Devs
         }
         private void EndingGame()
         {
+            gameState = GameState.EndGame;
             HeliCopter.GetComponent<AnimAIHelicopter>()
                 .animState = AnimAIHelicopter.HeliAnimState.EndClimber;
             CameraManagement.instance.virtualCameras[0].SetActive(false);
