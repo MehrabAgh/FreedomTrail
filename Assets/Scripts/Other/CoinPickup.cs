@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinPickup : MonoBehaviour 
 {
 
 	[SerializeField] private int count = 1; // how many coins are in this pickup
-	private Transform visual;
+	private Transform visual; // the visual of the pickup which is different than this gameobject
 	
 	public GameObject pickupParticleEffect;
 

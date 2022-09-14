@@ -3614,7 +3614,11 @@ MonoBehaviour:
   Coin: 0
   Key: 0
   Xp: 0
-  pickupPrefabs: []
+  pickupPrefabs:
+  - {fileID: 1565172463361598228, guid: 4a4c299cbb5059e4983cd7c2cfd70a0e, type: 3}
+  - {fileID: 4398309241354433348, guid: b54d5f648631b0541a6e467e83fcb4ba, type: 3}
+  spawnRate: 2
+  posRandRadius: 7
 --- !u!114 &1541990800
 MonoBehaviour:
   m_ObjectHideFlags: 0

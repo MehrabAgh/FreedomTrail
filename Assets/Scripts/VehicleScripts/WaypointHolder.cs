@@ -32,7 +32,10 @@ namespace Vino.Devs {
 			return points[points.IndexOf(currentPoint) + 1];
 		}
 
-
+		public Transform firstPoint()
+		{
+			return points[0];
+		}
 
 		public Transform GetClosestPoint(Transform vehicle)
 		{

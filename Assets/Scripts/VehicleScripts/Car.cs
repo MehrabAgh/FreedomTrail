@@ -7,7 +7,7 @@ namespace Vino.Devs
     public class Car : MonoBehaviour
     {
 
-        public Transform target;
+	    public Transform target;
         public float speed = 5;
         [SerializeField] private float turnSpeed = 0.1f;
         [SerializeField] private float targetProximityDist = 4;
@@ -24,7 +24,8 @@ namespace Vino.Devs
         {
             GameManager.instance.OnGameOver += StopCarMovement;
             isPlayer = GetComponent<EnemyCar>() == null;
-            tireSFX = GetComponent<AudioSource>();
+	        tireSFX = GetComponent<AudioSource>();
+	        target = WaypointHolder.instance.firstPoint();
             brake = true;
         }
 
