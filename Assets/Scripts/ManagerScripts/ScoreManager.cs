@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
 				radius *= Random.Range(0,2)*2-1;
 				
 				Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Length)], 
-					playerVehicle.position + new Vector3(radius, 1, radius),
+					playerVehicle.position + new Vector3(radius, 1.5f, radius),
 					Quaternion.identity);
 				
 				/*

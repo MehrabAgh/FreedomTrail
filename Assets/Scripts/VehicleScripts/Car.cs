@@ -31,7 +31,12 @@ namespace Vino.Devs
 
         private void StopCarMovement()
         {
-            brake = true;
+	        brake = true;
+	        if(isPlayer)
+	        {
+	        	GetComponent<Animator>().enabled = true;
+	        	GetComponent<AudioSource>().enabled = true;
+	        }
             //BrakeEffects();
             //StartCoroutine(slowlyStop());
 
