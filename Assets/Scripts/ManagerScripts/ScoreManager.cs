@@ -51,7 +51,7 @@ public class ScoreManager : MonoBehaviour
 		Transform fx = Instantiate(pickupTrailEffect, Vector3.zero, Quaternion.identity).transform;
 		fx.position = coinPos;
 		Destroy(fx.gameObject, 1);
-		Vector3 coinWorldPos = Camera.main.ScreenToWorldPoint(coinUi.position + new Vector3(0,0,10));
+		Vector3 coinWorldPos = Camera.main.ScreenToWorldPoint(coinUi.position + new Vector3(0,0,50));
 		while (true)
 		{
 			fx.position = Vector3.Lerp(fx.position, coinWorldPos, 0.1f);
