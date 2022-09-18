@@ -11,6 +11,8 @@ public class ScoreManager : MonoBehaviour
     
 	// coin spawning
 	[SerializeField] private GameObject[] pickupPrefabs;
+	[SerializeField] private GameObject pickupTrailEffect;
+	public RectTransform coinUi;
 	public float spawnRate = 5; // the time between each spawning 
 	[SerializeField] private float posRandRadius = 3; 
 	
@@ -37,14 +39,24 @@ public class ScoreManager : MonoBehaviour
 				Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Length)], 
 					playerVehicle.position + new Vector3(radius, 1.5f, radius),
 					Quaternion.identity);
-				
-				/*
-				Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Length)], 
-					WaypointHolder.instance.GetClosestPoint(GameManager.instance.Player.transform).position + 
-					new Vector3(radius, 1, radius), Quaternion.identity);
-				yield return null;*/
 			}
 			else yield return null;
+		}
+	}
+	
+	public void coin2uiFx(Vector3 coinPos) => StartCoroutine(coin2ui(coinPos));
+	
+	private IEnumerator coin2ui(Vector3 coinPos)
+	{
+		Transform fx = Instantiate(pickupTrailEffect, Vector3.zero, Quaternion.identity).transform;
+		fx.position = coinPos;
+		Destroy(fx.gameObject, 1);
+		Vector3 coinWorldPos = Camera.main.ScreenToWorldPoint(coinUi.position + new Vector3(0,0,10));
+		while (true)
+		{
+			fx.position = Vector3.Lerp(fx.position, coinWorldPos, 0.1f);
+			yield return null;
+			print("still running");
 		}
 	}
 }

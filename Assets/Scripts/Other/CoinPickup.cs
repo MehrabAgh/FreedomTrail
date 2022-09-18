@@ -30,7 +30,8 @@ public class CoinPickup : MonoBehaviour
 	private void PlayPickedupEffects() 
 	{
 		Destroy(Instantiate(pickupParticleEffect, transform.position, transform.rotation), 3);
-		// spawn a particle with trail that goes to the coin ui and fire an event when it does to trigger the ui animation
+		ScoreManager.instance.coin2uiFx(transform.position);
+		// spawn a particle with trail that goes to the coin ui and fire an event when it does trigger the ui animation
 	}
 	
 	private IEnumerator PickupFloatingAnimation()
