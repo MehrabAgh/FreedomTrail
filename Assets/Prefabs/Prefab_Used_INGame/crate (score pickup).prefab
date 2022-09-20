@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a59c631465cd24db3aabd8723ac4b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 10
+  count: 3
   pickupParticleEffect: {fileID: 143964, guid: 3126be1a45b78414482af586be2a431b, type: 3}
 --- !u!1001 &2142288156668068986
 PrefabInstance:

@@ -1,4 +1,4 @@
-using RootMotion.FinalIK;
+﻿using RootMotion.FinalIK;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,7 +66,6 @@ public class MainPlayer : CharacterMain
     public void StartGame()
     {
         SetIdle();
-        print(mystate.GetState());
         launchingProjectiles.ins.Launch();
         Anim.SetBool("StartCinematic", CheckColliderGround());
         myCar = EnemyManager.Player.GetComponent<Car>();

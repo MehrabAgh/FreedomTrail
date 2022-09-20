@@ -24,13 +24,11 @@ public class CoinPickup : MonoBehaviour
 		ScoreManager.instance.Coin += count;
 		Destroy(gameObject);
 		PlayPickedupEffects();
-		
-		print(count + " coins added!");
 	}
 	private void PlayPickedupEffects() 
 	{
 		Destroy(Instantiate(pickupParticleEffect, transform.position, transform.rotation), 3);
-		ScoreManager.instance.coin2uiFx(transform.position);
+		ScoreManager.instance.coin2uiFx(transform.position, count);
 		// spawn a particle with trail that goes to the coin ui and fire an event when it does trigger the ui animation
 	}
 	

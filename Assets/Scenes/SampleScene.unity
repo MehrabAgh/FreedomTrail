@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.79506415, g: 0.8719545, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0.016876888, g: 0.09375937, b: 0.22152573, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2284,7 +2284,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062944130}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58c61ac6495996f42a6b19d365be2482, type: 3}
   m_Name: 
@@ -3691,14 +3691,13 @@ MonoBehaviour:
   Key: 0
   Xp: 0
   pickupPrefabs:
-  - {fileID: 1565172463361598228, guid: 4a4c299cbb5059e4983cd7c2cfd70a0e, type: 3}
-  - {fileID: 1565172463361598228, guid: 4a4c299cbb5059e4983cd7c2cfd70a0e, type: 3}
-  - {fileID: 1565172463361598228, guid: 4a4c299cbb5059e4983cd7c2cfd70a0e, type: 3}
+  - {fileID: 4398309241354433348, guid: b54d5f648631b0541a6e467e83fcb4ba, type: 3}
   - {fileID: 4398309241354433348, guid: b54d5f648631b0541a6e467e83fcb4ba, type: 3}
   - {fileID: 1565172463361598228, guid: 4a4c299cbb5059e4983cd7c2cfd70a0e, type: 3}
   pickupTrailEffect: {fileID: 160900, guid: 1b1f4eecb848b384f93fd0216a95f56e, type: 3}
   coinUi: {fileID: 1515812994}
-  spawnRate: 2
+  spawnRate: 5
+  spawnLimit: 50
   posRandRadius: 7
 --- !u!114 &1541990800
 MonoBehaviour:
