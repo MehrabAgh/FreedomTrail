@@ -6,19 +6,30 @@ using Vino.Devs;
 public class RoadGenerator : MonoBehaviour 
 {
 	[SerializeField] private GameObject[] RoadModularParts;
-	[SerializeField] private int spawnCount = 5;
 	private Transform lastModularPoint;
+	private int lastRandIndex;
+	[SerializeField] private int spawnCount = 5;
+	[SerializeField] private bool infiniteRoad = false;
+	private Coroutine infiniteRoadGeneration;
+	
+	public static RoadGenerator ins;
 	
 	private void Awake () 
 	{
-		SpawnRoad(spawnCount);
+		if(infiniteRoad)
+			infiniteRoadGeneration = StartCoroutine(SpawnRoadInfinite());
+		else
+			SpawnRoad(spawnCount);
+			
+		ins = this;
 	}
 	
 	private void SpawnRoad(int count)
 	{
 		for (int i = 0; i < count; i++) 
 		{
-			var randIndex = Random.Range(0, RoadModularParts.Length);
+			var rand = Random.Range(0, RoadModularParts.Length);
+			var randIndex = Mathf.Clamp(rand == lastRandIndex? rand + lastRandIndex: rand, 0, RoadModularParts.Length);
 			var curRoadPart = Instantiate(RoadModularParts[randIndex], transform);
 			if(lastModularPoint == null)
 			{
@@ -29,6 +40,7 @@ public class RoadGenerator : MonoBehaviour
 			{
 				curRoadPart.transform.position = lastModularPoint.position;
 				curRoadPart.transform.rotation = lastModularPoint.rotation;
+				Destroy(lastModularPoint.gameObject);
 				lastModularPoint = curRoadPart.transform.GetChild(0).transform;
 			}
 			var parent = WaypointHolder.instance.transform;
@@ -36,15 +48,29 @@ public class RoadGenerator : MonoBehaviour
 			{
 				curRoadPart.transform.GetChild(1).transform.parent = parent;
 			}
-			Destroy(curRoadPart.transform.GetChild(0).gameObject);
 			curRoadPart.name = "Road Part";
 		}
 	}
 	
-	// Debugging
+	private IEnumerator SpawnRoadInfinite(float delay = 7)
+	{
+		while(true)
+		{
+			SpawnRoad(spawnCount);
+			Debug.Log(lastModularPoint.position);
+			yield return new WaitForSeconds(delay);
+		}
+	}
+	
+	public void StopInfinitRoadGeneration()
+	{
+		StopCoroutine(infiniteRoadGeneration);
+	}
+	
+	#region debugging
 	private void Update () 
 	{
-		if(Input.GetButtonDown("Jump"))
+		if(Input.GetButtonDown("Jump")) // Press Space to regenerate a random road
 		{
 			clean();
 			SpawnRoad(spawnCount);
@@ -59,4 +85,5 @@ public class RoadGenerator : MonoBehaviour
 		}
 		lastModularPoint = null;
 	}
+	#endregion
 }

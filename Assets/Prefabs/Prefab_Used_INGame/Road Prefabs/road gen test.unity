@@ -285,11 +285,12 @@ MonoBehaviour:
   - {fileID: 7148894072122493892, guid: 71f9c3005c003c14c8c5b455d94566f6, type: 3}
   - {fileID: 4474968753047650907, guid: 7ae7cbe14e5a4704d88deacb71438352, type: 3}
   - {fileID: 1911920056861336060, guid: 52ad5762e5197fc4d8bcebd20676f0e5, type: 3}
+  - {fileID: 7148894072122493892, guid: 71f9c3005c003c14c8c5b455d94566f6, type: 3}
   - {fileID: 2843203815839117720, guid: adf62bbb8a4edc749a8c8e9d1d0f7898, type: 3}
   - {fileID: 4211156296390695758, guid: 2b01b5ee21e380d4195623e45294cf33, type: 3}
   - {fileID: 7148894072122493892, guid: 71f9c3005c003c14c8c5b455d94566f6, type: 3}
-  - {fileID: 7148894072122493892, guid: 71f9c3005c003c14c8c5b455d94566f6, type: 3}
   spawnCount: 6
+  infiniteRoad: 1
 --- !u!4 &1763815695
 Transform:
   m_ObjectHideFlags: 0
