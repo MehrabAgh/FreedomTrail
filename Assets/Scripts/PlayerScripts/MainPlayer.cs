@@ -12,12 +12,20 @@ public class MainPlayer : CharacterMain
     private bool Accessbility { get; set; }
     private PlayerMovement mymovement;
     private PlayerState mystate;
+    private LineRenderer Arrower;
     [HideInInspector] public CoverCharacter myCover;
+    public bool _isPro;
+    public SkinnedMeshRenderer mymodel;
     private void Start()
-    {
+    {       
+        gun.CodeGun = PlayerPrefs.GetInt("Gun");
+        if (GameManager.instance.indexLogin <= 1)
+            gun.CodeGun = 4;
         gun.CreateGun();
         mymovement = GetComponent<PlayerMovement>();
         myCover = GetComponent<CoverCharacter>();
+        Arrower = GetComponentInChildren<LineRenderer>();
+        Arrower.gameObject.SetActive(false);
         mystate = new PlayerState(ikComponent, gun, Anim, rigColliders, rigRigidbodies);
         SetIdle();
         GetComponent<Collider>().enabled = true;
@@ -37,16 +45,20 @@ public class MainPlayer : CharacterMain
     {
         PlayerState.myState = PlayerState.playerState.IDLE;
         mystate.EventStates(PlayerState.myState);
-        GetComponent<Rigidbody>().isKinematic = false;        
+        GetComponent<Rigidbody>().isKinematic = false;
     }
-    private void StartRunning() 
-    { myCar.StartRunning(); Accessbility = true; }
+    private void StartRunning()
+    {
+        myCar.StartRunning();
+        Accessbility = true;
+    }
     public bool CheckColliderGround()
     {
         if (launchingProjectiles.ins.DistanceTarget() <= .5f)
         {
-            launchingProjectiles.ins.ThisObject.SetParent(launchingProjectiles.ins.TargetObject.parent);           
+            launchingProjectiles.ins.ThisObject.SetParent(launchingProjectiles.ins.TargetObject.parent);
             transform.SetSiblingIndex(0);
+            if (!myCar) myCar = GetComponentInParent<Car>();
             return false;
         }
         else return true;
@@ -60,18 +72,28 @@ public class MainPlayer : CharacterMain
         GameManager.instance.HeliCopter.GetComponent<AnimAIHelicopter>()
           .animState = AnimAIHelicopter.HeliAnimState.StartExiting;
     }
+    private void LookatChanging()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), 0.4f);
+    }
+    public PlayerState.playerState GetState()
+    {
+        return mystate.GetState();
+    }
     #endregion
 
     #region Start Cinematic Events
     public void StartGame()
     {
         SetIdle();
-        print(mystate.GetState());
         launchingProjectiles.ins.Launch();
         Anim.SetBool("StartCinematic", CheckColliderGround());
         myCar = EnemyManager.Player.GetComponent<Car>();
         if (myCar)
+        {
+            Invoke(nameof(LookatChanging), 1.5f);
             Invoke(nameof(StartRunning), 2.5f);
+        }
         Invoke(nameof(StartExiting), 2f);
         //play Animation Start Cinematic
     }
@@ -83,18 +105,16 @@ public class MainPlayer : CharacterMain
         while (true)
         {
             yield return new WaitForSeconds(timer);
-
-            CheckColliderGround();
             Anim.SetBool("StartCinematic", CheckColliderGround());
             if (GameManager.instance.CheckInLoopGame() && Accessbility)
-            {                
+            {
                 if (myhealth.getHealth() < 1)
                 {
                     PlayerState.myState = PlayerState.playerState.DEATH;
                     mystate.EventStates(PlayerState.myState);
                 }
                 else
-                {                    
+                {
                     if (CheckDistancetoEnd() < 1f)
                     {
                         GameManager.instance._isEndGame = true;
@@ -104,21 +124,18 @@ public class MainPlayer : CharacterMain
 
                     if (Input.GetMouseButton(0))
                     {
-                        if (gun.ShootGun() > -1)
-                        {
-                            PlayerState.myState = PlayerState.playerState.ATTACK;
-                            mystate.EventStates(PlayerState.myState);
-                        }
-                        else
-                        {
-                            SetReload();
-                        }
+                        gun.ShootGun();
+                        Arrower.gameObject.SetActive(true);
+                        PlayerState.myState = PlayerState.playerState.ATTACK;
+                        mystate.EventStates(PlayerState.myState);
+                        
                         mymovement.UpdateMove();
                     }
                     if (Input.GetMouseButtonUp(0))
                     {
                         PlayerState.myState = PlayerState.playerState.COVER;
                         mystate.EventStates(PlayerState.myState);
+                        Arrower.gameObject.SetActive(false);
                         mymovement.EndMove();
                     }
                     #endregion

@@ -21,11 +21,13 @@ namespace Vino.Devs
         private FullBodyBipedIK ikComponent;
         private Collider[] rigColliders;
         private Rigidbody[] rigRigidbodies;
-
+        private Car GetCar;
+        private bool _dieWork;
         public EnemyState(FullBodyBipedIK ikComp,
             MainGun gun, Animator anim, Collider[] RigColliders,
-            Rigidbody[] RigRigidbodies)
+            Rigidbody[] RigRigidbodies , Car myCar)
         {
+            GetCar = myCar; 
             rigColliders = RigColliders;
             rigRigidbodies = RigRigidbodies;
             mygun = gun;
@@ -38,33 +40,39 @@ namespace Vino.Devs
             switch (state)
             {
                 case enemystate.ATTACK:                 
-                    mygun.getGunModel().transform.SetParent(mygun.handPos);
+                    mygun.GetGunModel().transform.SetParent(mygun.HandPos);
                     mygun.SetupTransformGun.Invoke();
                     ikComponent.enabled = true;
                     Anim.SetBool("isCover", false);
                     Anim.SetBool("isReload", false);
-                    Anim.SetBool(mygun.getAnimationClip(), true);
+                    Anim.SetBool(mygun.GetAnimationClip(), true);
                     Anim.SetLayerWeight(1, 1);
                     break;
                 case enemystate.COVER:
-                    mygun.getGunModel().transform.SetParent(mygun.handPos);
-                    mygun.getGunModel().transform.localPosition = Vector3.zero;
-                    mygun.getGunModel().transform.localRotation = Quaternion.identity;
+                    mygun.GetGunModel().transform.SetParent(mygun.HandPos);
+                    mygun.GetGunModel().transform.localPosition = Vector3.zero;
+                    mygun.GetGunModel().transform.localRotation = Quaternion.identity;
                     Anim.SetBool("isCover", true);
                     ikComponent.enabled = false;
                     Anim.SetLayerWeight(1, 0);
                     break;
                 case enemystate.DEATH:
-                    Anim.enabled = false;
-                    ikComponent.enabled = false;
-                    mygun.getGunModel().SetActive(false);
-                    mygun.Ammos.Clear();
-                    RagdollEvent.OnDeath(rigColliders, rigRigidbodies);
+                    if (!_dieWork)
+                    {
+                        ScoreManager.instance.KillCounter(1);
+                        Anim.enabled = false;
+                        ikComponent.enabled = false;
+                        mygun.GetGunModel().SetActive(false);
+                        mygun.Ammos.Clear();
+                        GetCar.Die();
+                        RagdollEvent.OnDeath(rigColliders, rigRigidbodies);
+                        _dieWork = true;
+                    }
                     break;
                 case enemystate.RELOAD:
-                    mygun.getGunModel().transform.SetParent(mygun.handPos);
-                    mygun.getGunModel().transform.localPosition = Vector3.zero;
-                    mygun.getGunModel().transform.localRotation = Quaternion.identity;
+                    mygun.GetGunModel().transform.SetParent(mygun.HandPos);
+                    mygun.GetGunModel().transform.localPosition = Vector3.zero;
+                    mygun.GetGunModel().transform.localRotation = Quaternion.identity;
                     Anim.SetLayerWeight(2, 1);
                     Anim.SetBool("isCover", true);
                     Anim.SetBool("isReload", true);

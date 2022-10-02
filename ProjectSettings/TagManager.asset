@@ -12,6 +12,9 @@ TagManager:
   - Canvas
   - EnemyTarget
   - PlayerCar
+  - AmmoCollecionEnemy
+  - ScorePickup
+  - EnemyCar
   layers:
   - Default
   - TransparentFX

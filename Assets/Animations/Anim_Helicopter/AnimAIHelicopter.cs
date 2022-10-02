@@ -17,7 +17,7 @@ namespace Vino.Devs
         public HeliAnimState animState;
         [SerializeField] private Vector3 offset;
         [SerializeField] private List<ModelAnim> modelAnims;
-        private bool aa;
+        private bool aa;        
         private void FixedUpdate()
         {
             switch (animState)
@@ -49,7 +49,8 @@ namespace Vino.Devs
                     }
                     break;
                 case HeliAnimState.EndExiting:
-                    transform.position = Vector3.Lerp(transform.position, modelAnims[3].Positions[0], Time.deltaTime * modelAnims[3].speed);
+                    
+                    transform.position = Vector3.Lerp(transform.position, GameManager.instance.EndPos.position + modelAnims[3].Positions[0], Time.deltaTime * modelAnims[3].speed);
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(modelAnims[3].Rotations[0]), Time.deltaTime * (modelAnims[3].speed + 0.5f));
                     //end Animate Camera
                     CameraManagement.instance.virtualCameras[1].GetComponent<CinemachineVirtualCamera>().Follow = null;

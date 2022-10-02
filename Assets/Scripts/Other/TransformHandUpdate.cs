@@ -5,39 +5,33 @@ using Vino.Devs;
 
 public class TransformHandUpdate : StateMachineBehaviour
 {
-    public Vector3 PositionLeft , PositionRight;    
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    public List<Vector3> PositionsLeft, PositionsRight;
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var character = animator.GetComponent<CharacterMain>();
-        if (character)
+        if (character.gameObject.CompareTag("Player"))
         {
-            character.HandLeft.localPosition = PositionLeft;
-            character.HandRight.localPosition = PositionRight;
+            var isPlayer = animator.GetComponent<MainPlayer>()._isPro;
+            if (!isPlayer)
+            {
+                character.HandLeft.localPosition = PositionsLeft[0];
+                character.HandRight.localPosition = PositionsRight[0];
+            }
+            else if (isPlayer)
+            {
+                character.HandLeft.localPosition = PositionsLeft[1];
+                character.HandRight.localPosition = PositionsRight[1];
+            }
         }
+        else
+        {
+            if (character)
+            {
+                character.HandLeft.localPosition = PositionsLeft[0];
+                character.HandRight.localPosition = PositionsRight[0];
+            }
+        }
+             
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class CoverCharacter : MonoBehaviour
 {
-    public List<GameObject> Covers;
+    public List<Collider> Covers;
 
     public void OnEnableCovers()
     {
-        foreach (GameObject item in Covers)
+        foreach (Collider item in Covers)
         {
-            item.SetActive(true);
+            item.enabled = true;
         }
     }
     public void OnDisableCovers()
     {
-        foreach (GameObject item in Covers)
+        foreach (Collider item in Covers)
         {
-            item.SetActive(false);
+            item.enabled = false;
         }
     }
 }

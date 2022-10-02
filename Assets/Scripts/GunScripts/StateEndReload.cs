@@ -12,12 +12,12 @@ public class StateEndReload : StateMachineBehaviour
         else if (animator.GetComponent<MainPlayer>())
             animator.GetComponent<MainPlayer>().SetReload();
     }
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (animator.GetComponent<MainEnemyAI>()) animator.GetComponent<MainEnemyAI>().gun.ReloadGun();
-        else if (animator.GetComponent<MainPlayer>()) animator.GetComponent<MainPlayer>().gun.ReloadGun();
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    if (animator.GetComponent<MainEnemyAI>()) animator.GetComponent<MainEnemyAI>().gun.ReloadGun();
+    //    else if (animator.GetComponent<MainPlayer>()) animator.GetComponent<MainPlayer>().gun.ReloadGun();
 
-        animator.SetBool("isReload", false);
-        animator.SetLayerWeight(layerIndex, 0);
-    }
+    //    animator.SetBool("isReload", false);
+    //    animator.SetLayerWeight(layerIndex, 0);
+    //}
 }

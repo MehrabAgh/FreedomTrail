@@ -5,6 +5,15 @@ using UnityEngine.SceneManagement;
 
 namespace Vino.Devs
 {
+    [System.Serializable]
+    public struct CharacterResource
+    {
+        public List<Mesh> Characters;
+        public List<Material> StandardMat;
+        public Transform DefaultCharacter, ProCharacter;
+        public int Index;
+    }
+
     public class GameManager : MonoBehaviour
     {
         public static GameManager instance;
@@ -12,16 +21,19 @@ namespace Vino.Devs
         public MainPlayer Player;
         public Transform HeliCopter;
         public Transform EndPos;
+        public CharacterResource CResource;
+        [HideInInspector]public int indexLogin;
         //
         public enum GameState
         {
-            IsMenu ,
-            LoopGame ,
+            IsMenu,
+            LoopGame,
             EndGame
         }
         public GameState gameState;
 
-        public bool _isEndGame , _isStartGame , _isMenu;
+        public bool _isEndGame, _isStartGame, _isMenu;
+        public bool OnRealGame;
         private bool startingWork;
         //
         public delegate void EndGame();
@@ -48,16 +60,14 @@ namespace Vino.Devs
             instance = this;
             _isStartGame = false;
             _isEndGame = false;
-            Player = FindObjectOfType<MainPlayer>();
+            CheckLoadPlayer();
             OnGameOver += EndingGame;
             gameState = GameState.IsMenu;
+            indexLogin++;
+            PlayerPrefs.SetInt("Login", indexLogin);
         }
-
-        private void Update()
-        {
-            StateAdmin();
-            if (CheckInEndingGame()) IsGameOver = true;
-        }
+        private void Start() => ChangePLayerForAll();
+        private void Update() => StateAdmin();
 
         private void StateAdmin()
         {
@@ -96,10 +106,42 @@ namespace Vino.Devs
         { return !_isMenu && _isStartGame && !_isEndGame; }
 
         public bool CheckInEndingGame()
-        { return !_isMenu && !_isStartGame && _isEndGame; }      
+        { return !_isMenu && !_isStartGame && _isEndGame; }
+        #endregion
+        #region HelperMethod
+        public float GetDistanceToEnd() { return Vector3.Distance(Player.transform.position, EndPos.position); }
+        public void ChangePLayerForAll()
+        {
+            launchingProjectiles.ins.ThisObject = Player.transform;
+            CameraManagement.instance.virtualCameras[1]
+                .GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = Player.transform;
+            CameraManagement.instance.virtualCameras[2]
+                .GetComponent<Cinemachine.CinemachineVirtualCamera>().LookAt = Player.transform;
+        }
+        private void CheckLoadPlayer()
+        {
+            var p = PlayerPrefs.GetInt("Player");
+            if (p < 1)
+            {
+                CResource.DefaultCharacter.gameObject.SetActive(true);
+                CResource.ProCharacter.gameObject.SetActive(false);
+                Player = FindObjectOfType<MainPlayer>();
+                Player.mymodel.material = CResource.StandardMat[PlayerPrefs.GetInt("PlayerIndex")];
+            }
+            else
+            {
+                CResource.ProCharacter.gameObject.SetActive(true);
+                CResource.DefaultCharacter.gameObject.SetActive(false);
+                Player = FindObjectOfType<MainPlayer>();
+                Player.mymodel.sharedMesh = CResource.Characters[PlayerPrefs.GetInt("PlayerIndex")];
+            }
+        }
         #endregion
         private void StartGame()
         {
+            CameraManagement.instance.virtualCameras[0].SetActive(true);
+            CameraManagement.instance.virtualCameras[2].SetActive(false);
+            OnRealGame = true;
             Player.Anim.Play("Flip");
             Player.StartGame();
         }
@@ -109,7 +151,7 @@ namespace Vino.Devs
             HeliCopter.GetComponent<AnimAIHelicopter>()
                 .animState = AnimAIHelicopter.HeliAnimState.EndClimber;
             CameraManagement.instance.virtualCameras[0].SetActive(false);
-            CameraManagement.instance.virtualCameras[1].SetActive(true);           
+            CameraManagement.instance.virtualCameras[1].SetActive(true);
             Player.transform.rotation = Quaternion.Euler(0, 180, 0);
             Player.Anim.SetBool("isCover", false);
             Player.Anim.SetLayerWeight(1, 0);

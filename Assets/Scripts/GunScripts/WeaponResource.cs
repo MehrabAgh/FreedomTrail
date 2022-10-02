@@ -93,22 +93,14 @@ namespace Vino.Devs
             }
             yield return new WaitForSeconds(time);
         }
-        public int Shoot()
+        public void Shoot()
         {
-            if (gunRes.currentAmmo > 0)
+            gunRes.nextTimetoFire -= Time.deltaTime;
+            if (gunRes.nextTimetoFire <= 0)
             {
-                gunRes.nextTimetoFire -= Time.deltaTime;
-                if (gunRes.nextTimetoFire <= 0)
-                {
-                    gunRes.nextTimetoFire = gunRes.delay;
-                    scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
-                    gunRes.currentAmmo -= 1;
-                }
-                return 1;
-            }
-            else
-            {
-                return -1;
+                gunRes.nextTimetoFire = gunRes.delay;
+                scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                gunRes.currentAmmo -= 1;
             }
         }
 
@@ -144,7 +136,6 @@ namespace Vino.Devs
         {
             return gunRes;
         }
-
         public IEnumerator Reload(float time)
         {
             if (gunRes.currentAmmo < 1)
@@ -154,30 +145,20 @@ namespace Vino.Devs
             yield return new WaitForSeconds(time);
 
         }
-
-        public int Shoot()
+        public void Shoot()
         {
-            if (gunRes.currentAmmo > 0)
+            gunRes.nextTimetoFire -= Time.deltaTime;
+            if (gunRes.nextTimetoFire <= 0)
             {
-                gunRes.nextTimetoFire -= Time.deltaTime;
-                if (gunRes.nextTimetoFire <= 0)
-                {
-                    gunRes.nextTimetoFire = gunRes.delay;
-                    scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
-                    gunRes.currentAmmo -= 1;
-                }
-                return 1;
-            }
-            else
-            {
-                return -1;
+                gunRes.nextTimetoFire = gunRes.delay;
+                scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                gunRes.currentAmmo -= 1;
             }
         }
-
         public void SaveTransform(WeaponScriptable wr, Vector3 pos, Vector3 rot, Vector3 scale)
         {
             wr.SetTransform(pos, rot, scale, weaponModel.transform);
-        }
+        }        
     }
 
 
@@ -214,31 +195,23 @@ namespace Vino.Devs
             }
             yield return new WaitForSeconds(time);
         }
-        public int Shoot()
+        public void Shoot()
         {
-            if (gunRes.currentAmmo > 0)
+            gunRes.nextTimetoFire -= Time.deltaTime;
+            if (gunRes.nextTimetoFire <= 0)
             {
-                gunRes.nextTimetoFire -= Time.deltaTime;
-                if (gunRes.nextTimetoFire <= 0)
+                if (scriptable.burstshotCount == 3)
                 {
-                    if (scriptable.burstshotCount == 3)
-                    {
-                        gunRes.nextTimetoFire = gunRes.delay;
-                        scriptable.burstshotCount = 0;
-                    }
-                    else
-                    {
-                        gunRes.nextTimetoFire = 0.1f;
-                    }
-                    scriptable.DefaultShoot(gunRes.mainBarrel , Ammos);
-                    gunRes.currentAmmo -= 1;
-                    scriptable.burstshotCount++;
+                    gunRes.nextTimetoFire = gunRes.delay;
+                    scriptable.burstshotCount = 0;
                 }
-                return 1;
-            }
-            else
-            {
-                return -1;
+                else
+                {
+                    gunRes.nextTimetoFire = 0.1f;
+                }
+                scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                gunRes.currentAmmo -= 1;
+                scriptable.burstshotCount++;
             }
         }
         public void SaveTransform(WeaponScriptable wr, Vector3 pos, Vector3 rot, Vector3 scale)
@@ -281,34 +254,26 @@ namespace Vino.Devs
             yield return new WaitForSeconds(time);
 
         }
-        public int Shoot()
+        public void Shoot()
         {
-            if (gunRes.currentAmmo > 0)
+            gunRes.nextTimetoFire -= Time.deltaTime;
+            if (gunRes.nextTimetoFire <= 0)
             {
-                gunRes.nextTimetoFire -= Time.deltaTime;
-                if (gunRes.nextTimetoFire <= 0)
+                gunRes.nextTimetoFire = gunRes.delay;
+                for (int i = 0; i < 8; i++)
                 {
-                    gunRes.nextTimetoFire = gunRes.delay;
-                    for (int i = 0; i < 8; i++)
-                    {
-                        Vector3 direction = gunRes.mainBarrel.forward;
-                        Vector3 spread = Vector3.zero;
-                        spread += gunRes.mainBarrel.up * Random.Range(-1, 1);
-                        spread += gunRes.mainBarrel.right * Random.Range(-1, 1);
-                        direction += spread.normalized * Random.Range(0, 0.15f);
-                        var projectile = AmmoPooling.instanse.GetPooledObject(Ammos);
-                        projectile.transform.position = gunRes.mainBarrel.transform.position;
-                        projectile.transform.rotation = gunRes.mainBarrel.transform.rotation;
-                        projectile.SetActive(true);
-                        projectile.GetComponent<Rigidbody>().velocity = direction * scriptable.power;
-                    }
-                    gunRes.currentAmmo -= 1;
+                    Vector3 direction = gunRes.mainBarrel.forward;
+                    Vector3 spread = Vector3.zero;
+                    spread += gunRes.mainBarrel.up * Random.Range(-1, 1);
+                    spread += gunRes.mainBarrel.right * Random.Range(-1, 1);
+                    direction += spread.normalized * Random.Range(0, 0.15f);
+                    var projectile = AmmoPooling.instanse.GetPooledObject(Ammos);
+                    projectile.transform.position = gunRes.mainBarrel.transform.position;
+                    projectile.transform.rotation = gunRes.mainBarrel.transform.rotation;
+                    projectile.SetActive(true);
+                    projectile.GetComponent<Rigidbody>().velocity = direction * scriptable.power;
                 }
-                return 1;
-            }
-            else
-            {
-                return -1;
+                gunRes.currentAmmo -= 1;
             }
         }
         public void SaveTransform(WeaponScriptable wr, Vector3 pos, Vector3 rot, Vector3 scale)
@@ -359,22 +324,14 @@ namespace Vino.Devs
             wr.SetTransform(pos, rot, scale, weaponModel.transform);
         }
 
-        public int Shoot()
+        public void Shoot()
         {
-            if (gunRes.currentAmmo > 0)
+            gunRes.nextTimetoFire -= Time.deltaTime;
+            if (gunRes.nextTimetoFire <= 0)
             {
-                gunRes.nextTimetoFire -= Time.deltaTime;
-                if (gunRes.nextTimetoFire <= 0)
-                {
-                    gunRes.nextTimetoFire = gunRes.delay;
-                    scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
-                    gunRes.currentAmmo -= 1;
-                }
-                return 1;
-            }
-            else
-            {
-                return -1;
+                gunRes.nextTimetoFire = gunRes.delay;
+                scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                gunRes.currentAmmo -= 1;
             }
         }
     }

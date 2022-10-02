@@ -14,7 +14,7 @@ namespace Vino.Devs
         public int lane;
         [SerializeField] private GameObject[] wheels = new GameObject[2];
         private bool brake = false;
-
+        private HealthCharacter hc;
         private bool isPlayer;
 
         [SerializeField] private GameObject explosionVFX, brakeVFX;
@@ -23,14 +23,23 @@ namespace Vino.Devs
         private void Start()
         {
             GameManager.instance.OnGameOver += StopCarMovement;
+            hc = GetComponent<HealthCharacter>();
+            if (hc == null)
+                hc = GetComponentInChildren<HealthCharacter>();
             isPlayer = GetComponent<EnemyCar>() == null;
             tireSFX = GetComponent<AudioSource>();
-            brake = true;
+            if (isPlayer)
+                brake = true;
         }
 
         private void StopCarMovement()
         {
             brake = true;
+            if (isPlayer)
+            {
+                GetComponent<Animator>().enabled = true;
+                GetComponent<AudioSource>().enabled = true;
+            }
             //BrakeEffects();
             //StartCoroutine(slowlyStop());
 
@@ -38,6 +47,8 @@ namespace Vino.Devs
 
         private void FixedUpdate()
         {
+            if (hc != null)
+                if (hc.getHealth() <= 0) GetComponentInChildren<CharacterMain>().myhealth.Damage(10);
             if (brake)
                 return;
             // my gas pedal is stuck down there, welp me :0
@@ -79,23 +90,24 @@ namespace Vino.Devs
                 EnemyCar.EnemyCount--;
                 EnemySpawner.instance.takenTargets.Remove(target);
             }
-
-            Instantiate(explosionVFX, transform.position, Quaternion.identity);
+            explosionVFX.SetActive(true);
+            explosionVFX.GetComponent<ParticleSystem>().Play();
             Destroy(gameObject, 5);
             target = transform;
-            StartCoroutine(slowlyStop());
-
-
+            if (isPlayer)
+                GameManager.instance.Player.SetIdle();
+            speed = 0;
+            hc = null;
         }
 
-        private IEnumerator slowlyStop()
-        {
-            while (true)
-            {
-                speed = Mathf.Lerp(speed, 0, 0.01f);
-                yield return null;
-            }
-        }
+        //private IEnumerator slowlyStop()
+        //{
+        //    while (true)
+        //    {
+        //        speed = Mathf.Lerp(speed, 0, 0.01f);
+        //        yield return null;
+        //    }
+        //}
 
         public void BrakeEffects()
         {

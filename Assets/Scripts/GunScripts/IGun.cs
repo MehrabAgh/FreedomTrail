@@ -5,7 +5,7 @@ using Vino.Devs;
 public interface IGun
 {   
     public GameObject weaponModel { get; set; }
-    public abstract int Shoot();
+    public abstract void Shoot();
     public abstract IEnumerator Reload(float time);
     public abstract WeaponScriptable GetSetting();
     public abstract GunResponse GetResponse();

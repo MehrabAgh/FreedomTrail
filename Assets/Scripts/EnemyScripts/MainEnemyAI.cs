@@ -15,10 +15,11 @@ namespace Vino.Devs
             CreateEnemySystem();
             gun.CreateGun();
             GetComponent<LookAtCharacter>().target = null;
-            mystate = new EnemyState(ikComponent, gun, Anim, rigColliders, rigRigidbodies);
+            mystate = new EnemyState(ikComponent, gun, Anim, rigColliders, rigRigidbodies , myCar);
             GetComponent<Collider>().enabled = true;
-            Invoke(nameof(SetTarget), 5f);
+            Invoke(nameof(SetTarget),2.5f);
             gunRes = gun.GetGunResponse();
+            parentAmmo = GameObject.FindGameObjectWithTag("AmmoCollecionEnemy").transform;
             AmmoPooling.instanse.objectToPool = gunRes.bullet;
             AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);
             StartCoroutine(update(0.003f));
@@ -44,7 +45,7 @@ namespace Vino.Devs
             Invoke("SetAttack", 1f);
         }
         public void SetAttack()
-        {
+        {            
             EnemyState.enemyState = EnemyState.enemystate.ATTACK;
             mystate.EventStates(EnemyState.enemyState);
         }
@@ -61,20 +62,14 @@ namespace Vino.Devs
                 if (GameManager.instance.CheckInLoopGame())
                 {
                     if (myhealth.getHealth() < 1)
-                    {
+                    {                        
                         EnemyState.enemyState = EnemyState.enemystate.DEATH;
                         mystate.EventStates(EnemyState.enemyState);
                     }
                     else
                     {
-                        if (gun.ShootGun() > -1)
-                        {
-                            SetAttack();
-                        }
-                        else
-                        {
-                            SetReload();
-                        }
+                        gun.ShootGun();
+                        SetAttack();                       
                     }
                 }
             }

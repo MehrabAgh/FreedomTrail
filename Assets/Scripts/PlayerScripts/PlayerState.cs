@@ -18,13 +18,13 @@ namespace Vino.Devs
         public static playerState myState { get; set; }
 
         private MainGun mygun;
-        private Animator Anim;
+        private Animator Anim;       
         private Collider[] rigColliders;
         private Rigidbody[] rigRigidbodies;
         private FullBodyBipedIK ikComponent;
-
+        private bool _dieWork;
         public PlayerState(FullBodyBipedIK ikComp, MainGun gun, Animator anim, Collider[] RigColliders, Rigidbody[] RigRigidbodies)
-        {
+        {           
             rigColliders = RigColliders;
             rigRigidbodies = RigRigidbodies;
             mygun = gun;
@@ -37,9 +37,9 @@ namespace Vino.Devs
         #region helper
         private void ResetGunTransform()
         {
-            mygun.getGunModel().transform.SetParent(mygun.handPos);
-            mygun.getGunModel().transform.localPosition = Vector3.zero;
-            mygun.getGunModel().transform.localRotation = Quaternion.identity;
+            mygun.GetGunModel().transform.SetParent(mygun.HandPos);
+            mygun.GetGunModel().transform.localPosition = Vector3.zero;
+            mygun.GetGunModel().transform.localRotation = Quaternion.identity;
         }
         public playerState GetState()
         {
@@ -57,7 +57,7 @@ namespace Vino.Devs
                     break;
 
                 case playerState.ATTACK:
-                    mygun.getGunModel().transform.SetParent(mygun.handPos);
+                    mygun.GetGunModel().transform.SetParent(mygun.HandPos);
                     mygun.SetupTransformGun.Invoke();
                     ikComponent.enabled = true;
                     //
@@ -65,7 +65,7 @@ namespace Vino.Devs
                     //
                     Anim.SetBool("isCover", false);
                     Anim.SetBool("isReload", false);
-                    Anim.SetBool(mygun.getAnimationClip(), true);
+                    Anim.SetBool(mygun.GetAnimationClip(), true);
                     Anim.SetLayerWeight(1, 1);
                     break;
 
@@ -81,11 +81,16 @@ namespace Vino.Devs
                     break;
 
                 case playerState.DEATH:
-                    Anim.enabled = false;
-                    ikComponent.enabled = false;
-                    mygun.getGunModel().SetActive(false);
-                    mygun.Ammos.Clear();
-                    RagdollEvent.OnDeath(rigColliders, rigRigidbodies);
+                    if (!_dieWork)
+                    {
+                        Anim.enabled = false;
+                        ikComponent.enabled = false;
+                        mygun.GetGunModel().SetActive(false);
+                        mygun.Ammos.Clear();
+                        GameManager.instance.Player.myCar.Die();
+                        RagdollEvent.OnDeath(rigColliders, rigRigidbodies);
+                        _dieWork = true;
+                    }
                     break;
 
                 case playerState.RELOAD:

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vino.Devs {
+namespace Vino.Devs
+{
     public class AmmoLife : MonoBehaviour
     {
         public int Damage;
@@ -12,21 +13,57 @@ namespace Vino.Devs {
         }
         private void OnEnable()
         {
-            Invoke("Destroyed", 0.5f);
+            Invoke(nameof(Destroyed), 0.3f);
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            var tag = other.gameObject.tag;
+
+            switch (tag)
             {
-                other.GetComponent<HealthCharacter>().Damage(Damage);
-            }
-            if (other.gameObject.tag == "Enemy")
-            {
-                other.GetComponent<HealthCharacter>().Damage(Damage);
-            }
-            if (other.gameObject.tag == "Cover")
-            {
-                Destroyed();
+
+                case "Player":
+                    {
+                        if (transform.parent.CompareTag("AmmoCollecionEnemy"))
+                            other.GetComponent<HealthCharacter>().Damage(Damage);
+                        break;
+                    }
+                case "PlayerCar":
+                    {
+                        if (transform.parent.CompareTag("AmmoCollecionEnemy"))
+                            other.GetComponent<HealthCharacter>().Damage(Damage);
+                        break;
+                    }
+                case "EnemyCar":
+                    {
+                        if (!transform.parent.CompareTag("AmmoCollecionEnemy"))
+                            other.GetComponent<HealthCharacter>().Damage(Damage);
+                        break;
+                    }
+                case "Enemy":
+                    {
+                        if (!transform.parent.CompareTag("AmmoCollecionEnemy"))
+                            other.GetComponent<HealthCharacter>().Damage(Damage);
+                        break;
+                    }
+                case "Cover":
+                    {
+                        if (transform.parent.CompareTag("AmmoCollecionEnemy"))
+                        {
+                            Destroyed();
+                            other.GetComponent<HealthCharacter>().Damage(Damage);
+                        }
+                        break;
+                    }
+                case "ScorePickup":
+                    {                        
+                        if (!transform.parent.CompareTag("AmmoCollecionEnemy"))
+                            other.GetComponent<CoinPickup>().GetPicked();
+                        break;
+                    }
+
+                default:
+                    break;
             }
         }
     }

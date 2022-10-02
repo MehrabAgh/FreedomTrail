@@ -10,5 +10,5 @@ public class CameraManagement : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
+    }  
 }

@@ -19,6 +19,7 @@ namespace Vino.Devs
 
         private void Start()
         {
+            EnemyCar.EnemyCount = 0;
             StartCoroutine(SpawnLoop());
             spawnPoint = GameObject.Find("enemy spawn point").transform;
             var holder = GameObject.FindGameObjectWithTag("EnemyTarget").transform;
@@ -32,12 +33,11 @@ namespace Vino.Devs
         {
             while (true)
             {
-                yield return new WaitForSeconds(spawnRate);
-                if (EnemyCar.EnemyCount < MaxEnemies ) // Hey mehrab add  & GameManager.game hanooz shoro nashode  here
+                yield return new WaitForSeconds(spawnRate);                
+                if (EnemyCar.EnemyCount < MaxEnemies  && GameManager.instance.OnRealGame)
                 {
                     Spawn();
                 }
-
                 if (GameManager.instance.IsGameOver)
                     break;
                 else yield return null;
@@ -46,13 +46,12 @@ namespace Vino.Devs
 
         private void Spawn()
         {
-
             Car enemy = Instantiate(EnemyPrefabs[0], spawnPoint.position, spawnPoint.rotation).GetComponent<Car>();
-            enemy.target = randTarget();
+            enemy.target = RandTarget();
         }
 
 
-        private Transform randTarget()
+        private Transform RandTarget()
         {
             int randIndex;
             do
@@ -62,8 +61,6 @@ namespace Vino.Devs
 
             takenTargets.Add(playerFollowTargets[randIndex]);
             return playerFollowTargets[randIndex];
-
-
         }
 
     }

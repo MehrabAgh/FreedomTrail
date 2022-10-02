@@ -32,7 +32,7 @@ namespace Vino.Devs
         public string nameAnimate;
     
         public void DefaultShoot(Transform barrel,  List<GameObject> ammos)
-        {
+        {         
             var projectile = AmmoPooling.instanse.GetPooledObject(ammos);
             projectile.transform.position = barrel.transform.position;  
             projectile.transform.rotation = barrel.transform.rotation;

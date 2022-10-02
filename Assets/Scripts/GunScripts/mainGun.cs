@@ -17,40 +17,34 @@ namespace Vino.Devs
         [SerializeField] private List<ModelSizeGun> sizeGuns;
         public List<GameObject> Ammos ;
 
-        public Transform handPos
+        public Transform HandPos
         {
             get { return handPosition; }
             set { handPosition = value; }
         }
 
         public void CreateGun()
-        {
-            myGun = new WeaponResource(weaponResponse, weaponSettings, handPosition, sizeGuns, Ammos, CodeGun);
+        {          
+            if (myGun != null)
+                Destroy(myGun.WeaponSelected.weaponModel);
+            myGun = new WeaponResource(weaponResponse, weaponSettings, handPosition, sizeGuns, Ammos, CodeGun);         
             SetupTransformGun.AddListener(() => myGun.WeaponSelected.SaveTransform(myGun.GetSetting, sizeGuns[myGun.Index].Position,
-                   sizeGuns[myGun.Index].Rotation, sizeGuns[myGun.Index].Scale));
-            ReloadGun();
+                   sizeGuns[myGun.Index].Rotation, sizeGuns[myGun.Index].Scale));            
         }
 
-        private void Awake()
-        {
-            Ammos = new List<GameObject>(0);
-        }
+        private void Awake() => Ammos = new List<GameObject>(0);
         #region Helper     
-        public int ShootGun()
-        {
-            return myGun.WeaponSelected.Shoot();          
+        public void ShootGun()
+        {            
+            myGun.WeaponSelected.Shoot();          
         }
-        public string getAnimationClip()
+        public string GetAnimationClip()
         {
             return myGun.GetSetting.nameAnimate;
         }
-        public GameObject getGunModel()
+        public GameObject GetGunModel()
         {
             return myGun.WeaponSelected.weaponModel;
-        }
-        public void ReloadGun()
-        {
-            StartCoroutine(myGun.WeaponSelected.Reload(0.5f));
         }
         public GunResponse GetGunResponse()
         {

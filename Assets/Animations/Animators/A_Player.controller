@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e36ab09a5f4af428ab6b50380beaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PositionLeft: {x: 0.063, y: -0.142, z: 0.16}
-  PositionRight: {x: 0.067, y: -0.28, z: 0.07}
+  PositionsLeft:
+  - {x: 0.063, y: -0.142, z: 0.16}
+  - {x: 0.00286, y: -0.00135, z: 0.00101}
+  PositionsRight:
+  - {x: 0.101, y: -0.226, z: 0.08}
+  - {x: 0.00285, y: -0.00366, z: -0.00108}
 --- !u!1102 &-8288615402701543774
 AnimatorState:
   serializedVersion: 6
@@ -130,7 +134,7 @@ AnimatorStateMachine:
     m_Position: {x: -90, y: 410, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4166376997069399145}
-    m_Position: {x: 150, y: 410, z: 0}
+    m_Position: {x: 160, y: 410, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -197,8 +201,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e36ab09a5f4af428ab6b50380beaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PositionLeft: {x: 0.107, y: -0.134, z: -0.093}
-  PositionRight: {x: 0.032, y: -0.221, z: -0.088}
+  PositionsLeft:
+  - {x: 0.107, y: -0.134, z: -0.093}
+  - {x: 0.00117, y: -0.00099, z: -0.00234}
+  PositionsRight:
+  - {x: 0.032, y: -0.221, z: -0.088}
+  - {x: -0.00031, y: -0.00332, z: -0.0008}
 --- !u!1102 &-2999973347858451452
 AnimatorState:
   serializedVersion: 6
@@ -347,49 +355,49 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isReload
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: _isBurstShoot
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: _isMachineShoot
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: _isPistolShoot
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: _isShotgunShoot
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: StartCinematic
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: EndCinematic
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -761,8 +769,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e36ab09a5f4af428ab6b50380beaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PositionLeft: {x: 0.043, y: -0.152, z: -0.076}
-  PositionRight: {x: 0.011, y: -0.189, z: -0.054}
+  PositionsLeft:
+  - {x: 0.043, y: -0.152, z: -0.076}
+  - {x: -0.00074, y: 0.00015, z: -0.00302}
+  PositionsRight:
+  - {x: 0.011, y: -0.189, z: -0.054}
+  - {x: -0.00101, y: -0.00281, z: -0.00086}
 --- !u!114 &6279419678666877148
 MonoBehaviour:
   m_ObjectHideFlags: 1
