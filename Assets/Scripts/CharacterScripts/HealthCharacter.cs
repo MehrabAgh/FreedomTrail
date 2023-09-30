@@ -16,9 +16,13 @@ namespace Vino.Devs
         {
             health -= takeHealth;            
         }
-        public int getHealth()
+        public int GetHealth()
         {
             return health;
+        }
+        public int GetMaxHealth()
+        {
+            return maxHealth;
         }
     }
 }

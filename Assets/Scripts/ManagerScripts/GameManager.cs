@@ -53,7 +53,7 @@ namespace Vino.Devs
                 return _isEndGame;
             }
         }
-
+        public EnemyCar[] StarterEnemyCars;
 
         private void Awake()
         {
@@ -109,7 +109,11 @@ namespace Vino.Devs
         { return !_isMenu && !_isStartGame && _isEndGame; }
         #endregion
         #region HelperMethod
-        public float GetDistanceToEnd() { return Vector3.Distance(Player.transform.position, EndPos.position); }
+        public float GetDistanceToEnd() {
+            if (Player != null)
+                return Vector3.Distance(Player.transform.position, EndPos.position);
+            else return 0;
+        }
         public void ChangePLayerForAll()
         {
             launchingProjectiles.ins.ThisObject = Player.transform;

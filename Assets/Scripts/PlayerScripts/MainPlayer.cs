@@ -17,11 +17,14 @@ public class MainPlayer : CharacterMain
     public bool _isPro;
     public SkinnedMeshRenderer mymodel;
     private void Start()
-    {       
-        gun.CodeGun = PlayerPrefs.GetInt("Gun");
+    {
         if (GameManager.instance.indexLogin <= 1)
+        {            
             gun.CodeGun = 4;
-        gun.CreateGun();
+            PlayerPrefs.SetInt("Gun", gun.CodeGun);
+        }
+        gun.CodeGun = PlayerPrefs.GetInt("Gun");
+        gun.CreateGun();       
         mymovement = GetComponent<PlayerMovement>();
         myCover = GetComponent<CoverCharacter>();
         Arrower = GetComponentInChildren<LineRenderer>();
@@ -32,7 +35,11 @@ public class MainPlayer : CharacterMain
         gunRes = gun.GetGunResponse();
         AmmoPooling.instanse.objectToPool = gunRes.bullet;
         AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);
-        StartCoroutine(update(0.001f));
+
+        gun.CreateGun();
+        gunRes = gun.GetGunResponse();    
+
+
     }
 
     #region Helper
@@ -99,49 +106,45 @@ public class MainPlayer : CharacterMain
     }
     #endregion
 
-
-    private IEnumerator update(float timer)
+    private void FixedUpdate()
     {
-        while (true)
+        Anim.SetBool("StartCinematic", CheckColliderGround());
+        if (GameManager.instance.CheckInLoopGame() && Accessbility)
         {
-            yield return new WaitForSeconds(timer);
-            Anim.SetBool("StartCinematic", CheckColliderGround());
-            if (GameManager.instance.CheckInLoopGame() && Accessbility)
+            if (myhealth.GetHealth() < 1)
             {
-                if (myhealth.getHealth() < 1)
-                {
-                    PlayerState.myState = PlayerState.playerState.DEATH;
-                    mystate.EventStates(PlayerState.myState);
-                }
-                else
-                {
-                    if (CheckDistancetoEnd() < 1f)
-                    {
-                        GameManager.instance._isEndGame = true;
-                    }
-                    #region Move Attack
-                    if (Input.GetMouseButtonDown(0)) mymovement.StartMove();
-
-                    if (Input.GetMouseButton(0))
-                    {
-                        gun.ShootGun();
-                        Arrower.gameObject.SetActive(true);
-                        PlayerState.myState = PlayerState.playerState.ATTACK;
-                        mystate.EventStates(PlayerState.myState);
-                        
-                        mymovement.UpdateMove();
-                    }
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                        PlayerState.myState = PlayerState.playerState.COVER;
-                        mystate.EventStates(PlayerState.myState);
-                        Arrower.gameObject.SetActive(false);
-                        mymovement.EndMove();
-                    }
-                    #endregion
-                }
-
+                PlayerState.myState = PlayerState.playerState.DEATH;
+                mystate.EventStates(PlayerState.myState);
             }
+            else
+            {
+                if (CheckDistancetoEnd() < 1f)
+                {
+                    GameManager.instance._isEndGame = true;
+                }
+                #region Move Attack
+                if (Input.GetMouseButtonDown(0)) mymovement.StartMove();
+
+                if (Input.GetMouseButton(0))
+                {
+                    gun.ShootGun();
+                    Arrower.gameObject.SetActive(true);
+                    PlayerState.myState = PlayerState.playerState.ATTACK;
+                    mystate.EventStates(PlayerState.myState);
+
+                    mymovement.UpdateMove();
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    PlayerState.myState = PlayerState.playerState.COVER;
+                    mystate.EventStates(PlayerState.myState);
+                    Arrower.gameObject.SetActive(false);
+                    mymovement.EndMove();
+                }
+                #endregion
+            }
+
         }
     }
+   
 }

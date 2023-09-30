@@ -51,6 +51,7 @@ namespace Vino.Devs
         }
         public void SetTarget()
         {
+            if(GameManager.instance.Player)
             GetComponent<LookAtCharacter>().target = GameManager.instance.Player.transform;
         }
         #endregion
@@ -61,7 +62,7 @@ namespace Vino.Devs
                 yield return new WaitForSeconds(timer);
                 if (GameManager.instance.CheckInLoopGame())
                 {
-                    if (myhealth.getHealth() < 1)
+                    if (myhealth.GetHealth() < 1)
                     {                        
                         EnemyState.enemyState = EnemyState.enemystate.DEATH;
                         mystate.EventStates(EnemyState.enemyState);

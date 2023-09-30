@@ -82,7 +82,7 @@ namespace Vino.Devs
 
                 case playerState.DEATH:
                     if (!_dieWork)
-                    {
+                    {                       
                         Anim.enabled = false;
                         ikComponent.enabled = false;
                         mygun.GetGunModel().SetActive(false);

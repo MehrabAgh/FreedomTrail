@@ -9,7 +9,7 @@ namespace Vino.Devs
         public static EnemySpawner instance;
         public int MaxEnemies = 3;
         public float spawnRate = 5;
-        private Transform spawnPoint;
+        [SerializeField]private List<Transform> spawnPoint;
         private List<Transform> playerFollowTargets = new List<Transform>();
         public List<Transform> takenTargets = new List<Transform>();
 
@@ -20,8 +20,7 @@ namespace Vino.Devs
         private void Start()
         {
             EnemyCar.EnemyCount = 0;
-            StartCoroutine(SpawnLoop());
-            spawnPoint = GameObject.Find("enemy spawn point").transform;
+            StartCoroutine(SpawnLoop());            
             var holder = GameObject.FindGameObjectWithTag("EnemyTarget").transform;
             for (int i = 0; i < holder.childCount; i++)
             {
@@ -46,7 +45,8 @@ namespace Vino.Devs
 
         private void Spawn()
         {
-            Car enemy = Instantiate(EnemyPrefabs[0], spawnPoint.position, spawnPoint.rotation).GetComponent<Car>();
+            Car enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], spawnPoint[Random.Range(0,spawnPoint.Count)].position
+                , spawnPoint[Random.Range(0, spawnPoint.Count)].rotation).GetComponent<Car>();
             enemy.target = RandTarget();
         }
 

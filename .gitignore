@@ -21,7 +21,7 @@
 [Aa]ssets/Packages&Modules
 # Visual Studio cache directory
 .vs/
-
+/AV_BurstDebugInformation_DoNotShip/
 # Gradle cache directory
 .gradle/
 

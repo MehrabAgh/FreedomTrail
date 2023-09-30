@@ -16,9 +16,10 @@ namespace Vino.Devs
         private bool brake = false;
         private HealthCharacter hc;
         private bool isPlayer;
-
+        private CharacterMain PlayerMain;
         [SerializeField] private GameObject explosionVFX, brakeVFX;
         private AudioSource tireSFX;
+      
 
         private void Start()
         {
@@ -47,28 +48,34 @@ namespace Vino.Devs
 
         private void FixedUpdate()
         {
-            if (hc != null)
-                if (hc.getHealth() <= 0) GetComponentInChildren<CharacterMain>().myhealth.Damage(10);
-            if (brake)
-                return;
-            // my gas pedal is stuck down there, welp me :0
-            transform.position += transform.forward * speed * Time.deltaTime;
+            if (target != null) {
+                if (hc != null && hc.GetHealth() <= 0 && PlayerMain == null)
+                {
 
-            // I can't seem to stop looking at the target @_@
-            var dir = target.position - transform.position;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
+                    PlayerMain = GetComponentInChildren<CharacterMain>();
+                    PlayerMain.myhealth.Damage(PlayerMain.myhealth.GetMaxHealth());
+                }
+                if (brake)
+                    return;
+                // my gas pedal is stuck down there, welp me :0
+                transform.position += transform.forward * speed * Time.deltaTime;
+
+                // I can't seem to stop looking at the target @_@
+                var dir = target.position - transform.position;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
 
 
-            // turn the front wheels to face the target
-            foreach (var w in wheels)
-            {
-                w.transform.rotation = Quaternion.LookRotation(dir);
-            }
+                // turn the front wheels to face the target
+                foreach (var w in wheels)
+                {
+                    w.transform.rotation = Quaternion.LookRotation(dir);
+                }
 
-            if (!GameManager.instance.IsGameOver &
-                Vector3.Distance(transform.position, target.position) <= targetProximityDist & isPlayer)
-            {
-                target = WaypointHolder.instance.nextPoint(target);
+                if (!GameManager.instance.IsGameOver &
+                    Vector3.Distance(transform.position, target.position) <= targetProximityDist & isPlayer)
+                {
+                    target = WaypointHolder.instance.nextPoint(target);
+                }
             }
         }
 
@@ -94,21 +101,11 @@ namespace Vino.Devs
             explosionVFX.GetComponent<ParticleSystem>().Play();
             Destroy(gameObject, 5);
             target = transform;
-            if (isPlayer)
-                GameManager.instance.Player.SetIdle();
+            if (isPlayer) GameManager.instance.Player.SetIdle();
             speed = 0;
             hc = null;
         }
-
-        //private IEnumerator slowlyStop()
-        //{
-        //    while (true)
-        //    {
-        //        speed = Mathf.Lerp(speed, 0, 0.01f);
-        //        yield return null;
-        //    }
-        //}
-
+      
         public void BrakeEffects()
         {
             tireSFX.Play();

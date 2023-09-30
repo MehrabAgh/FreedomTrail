@@ -2,14 +2,19 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Skybox
   m_Shader: {fileID: 4800000, guid: bdaef38c7b24d42c7a2e92ec54af46da, type: 3}
-  m_ShaderKeywords: _EMISSION _SCREENSPACE_ON _SPECULAR_COLOR _SUNDISK_HIGH_QUALITY
+  m_ValidKeywords:
+  - _SCREENSPACE_ON
+  m_InvalidKeywords:
+  - _EMISSION
+  - _SPECULAR_COLOR
+  - _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -75,6 +80,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AlphaClip: 0
     - _AtmosphereThickness: 1

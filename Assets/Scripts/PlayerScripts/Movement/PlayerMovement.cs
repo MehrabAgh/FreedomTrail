@@ -22,7 +22,7 @@ namespace Vino.Devs
                 transform.eulerAngles += _rotation;
 
                 var angle = WrapAngle(transform.eulerAngles.y);
-                angle = Mathf.Clamp(angle, -90, 90);
+               // angle = Mathf.Clamp(angle, -90, 90);
 
                 transform.eulerAngles = new Vector3(0, angle, 0);
 

@@ -15,6 +15,7 @@ TagManager:
   - AmmoCollecionEnemy
   - ScorePickup
   - EnemyCar
+  - StartingPointEnemy
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510481010a5cc6948b8d041617a1204a, type: 3}
   m_Name: Resource
   m_EditorClassIdentifier: 
-  _coin: 23
+  _coin: 0
   _key: 0
-  _xp: 3.75
+  _xp: 6.75

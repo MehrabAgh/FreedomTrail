@@ -17,7 +17,7 @@ namespace Vino.Devs
 
         private void Start()
         {
-            EnemyCar.EnemyCount++;
+            EnemyCount++;
             _car = GetComponent<Car>();
             playerSpeed = EnemyManager.Player.GetComponent<Car>().speed;
             _car.speed = playerSpeed * 1.15f;
@@ -26,9 +26,12 @@ namespace Vino.Devs
 
         private void Update()
         {
-            if (Vector3.Distance(transform.position, EnemyManager.Player.transform.position) <= closeRange)
+            if (EnemyManager.Player != null)
             {
-                StartCoroutine(UpdateSpeed());
+                if (Vector3.Distance(transform.position, EnemyManager.Player.transform.position) <= closeRange)
+                {
+                    StartCoroutine(UpdateSpeed());
+                }
             }
 
         }
@@ -42,7 +45,7 @@ namespace Vino.Devs
             else
             {
 
-                _car.speed = playerSpeed * 0.5f;
+                _car.speed = playerSpeed * 0.9f;
                 _car.BrakeEffects();
                 yield return new WaitForSeconds(0.5f);
                 close = true;
