@@ -22,7 +22,8 @@ namespace Vino.Devs
         public Transform HeliCopter;
         public Transform EndPos;
         public CharacterResource CResource;
-        [HideInInspector]public int indexLogin;
+        [HideInInspector] public int indexLogin;
+        public int MaxEnemySpawnEnd;
         //
         public enum GameState
         {
@@ -30,12 +31,18 @@ namespace Vino.Devs
             LoopGame,
             EndGame
         }
+        public enum EndState
+        {
+            TakeOff,
+            Landing
+        }
+        [HideInInspector] public EndState endState;
         public GameState gameState;
 
-        public bool _isEndGame, _isStartGame, _isMenu;
+        public bool _isEndGame, _isStartGame, _isMenu, _isEndLoopGame = false;
         public bool OnRealGame;
         private bool startingWork;
-        //
+        
         public delegate void EndGame();
         public event EndGame OnGameOver;
         public bool IsGameOver
@@ -52,47 +59,96 @@ namespace Vino.Devs
             {
                 return _isEndGame;
             }
-        }
-        public EnemyCar[] StarterEnemyCars;
+        }        
+        public List<MainEnemyAI> EnderEnemyCars;
+        public List<EnemyCar> SpawnedEnemyCars;
+        public List<Transform> PathEnds;
+        public MainEnemyAI BOSS;
+        public CoinPickup KEY;
+
 
         private void Awake()
         {
             instance = this;
             _isStartGame = false;
-            _isEndGame = false;
+            _isEndGame = false;          
+        }
+        private void Start(){
+            var levmode = LevelManager.instance.levelMode;
+
+            if (levmode == LevelManager.LevelMode.Normal)
+            {
+                var randEndState = Random.Range(0, 6);
+                endState = EndState.Landing;
+                OnGameOver += EndingGame;
+
+                //if ((randEndState % 2) == 0)
+                //    endState = EndState.TakeOff;
+                //else endState = EndState.Landing;
+
+                //if (endState == EndState.Landing)
+                //    OnGameOver += EndingGame;
+                //else
+                //{
+                //    OnGameOver += EndingGame_Part2;
+                //    EnemySpawner.instance.SpawnEnding();
+                //}
+            }
+
             CheckLoadPlayer();
-            OnGameOver += EndingGame;
             gameState = GameState.IsMenu;
             indexLogin++;
             PlayerPrefs.SetInt("Login", indexLogin);
+
+            if (LevelManager.instance.levelMode != LevelManager.LevelMode.Boss)
+                ChangePLayerForAll();             
         }
-        private void Start() => ChangePLayerForAll();
         private void Update() => StateAdmin();
 
         private void StateAdmin()
         {
+            print(Player.myhealth.GetHealth());            
             switch (gameState)
             {
                 case GameState.IsMenu:
                     _isMenu = true;
                     _isStartGame = false;
                     break;
-                case GameState.LoopGame:
-                    _isStartGame = true;
-                    _isMenu = false;
-
-                    if (!startingWork)
+                case GameState.LoopGame:                    
+                    if (LevelManager.instance.levelMode != LevelManager.LevelMode.Boss)
                     {
-                        var animHeli = HeliCopter.GetComponent<AnimAIHelicopter>();
-                        animHeli.animState = AnimAIHelicopter.HeliAnimState.StartJumper;
-                        Invoke(nameof(StartGame), 2);
-                        startingWork = true;
+                        EnderEnemyCars.RemoveAll(e => e == null);
+                        _isStartGame = true;
+                        _isMenu = false;
+
+                        if (!startingWork)
+                        {
+                            var animHeli = HeliCopter.GetComponent<AnimAIHelicopter>();
+                            animHeli.animState = AnimAIHelicopter.HeliAnimState.StartJumper;
+                            Invoke(nameof(StartGame), 2);
+                            startingWork = true;
+                        }
+                        if (EnderEnemyCars.Count is 0 && endState == EndState.TakeOff && IsGameOver)
+                        {                            
+                            gameState = GameState.EndGame;
+                            _isEndLoopGame = false;
+                        }
+                    }
+                    else
+                    {
+                        _isStartGame = true;
+                        _isMenu = false;
+
+                        StartBossGame();
                     }
                     break;
-                case GameState.EndGame:
-                    _isStartGame = false;
-                    _isEndGame = true;
-                    IsGameOver = true;
+                case GameState.EndGame:                    
+                    if (!IsGameOver)
+                    {
+                        _isStartGame = false;
+                        _isEndGame = true;
+                        IsGameOver = true;                       
+                    }                    
                     break;
                 default:
                     break;
@@ -109,18 +165,19 @@ namespace Vino.Devs
         { return !_isMenu && !_isStartGame && _isEndGame; }
         #endregion
         #region HelperMethod
-        public float GetDistanceToEnd() {
+        public float GetDistanceToEnd()
+        {
             if (Player != null)
                 return Vector3.Distance(Player.transform.position, EndPos.position);
             else return 0;
         }
         public void ChangePLayerForAll()
-        {
+        {            
             launchingProjectiles.ins.ThisObject = Player.transform;
             CameraManagement.instance.virtualCameras[1]
                 .GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = Player.transform;
             CameraManagement.instance.virtualCameras[2]
-                .GetComponent<Cinemachine.CinemachineVirtualCamera>().LookAt = Player.transform;
+                .GetComponent<Cinemachine.CinemachineVirtualCamera>().LookAt = Player.transform;                       
         }
         private void CheckLoadPlayer()
         {
@@ -147,10 +204,21 @@ namespace Vino.Devs
             CameraManagement.instance.virtualCameras[2].SetActive(false);
             OnRealGame = true;
             Player.Anim.Play("Flip");
+            ResourceSpawner.instance.enabled = true;
             Player.StartGame();
         }
-        private void EndingGame()
+
+        private void StartBossGame()
         {
+            if(KEY != null)KEY.gameObject.SetActive(true);
+            if (!BOSS.gameObject.activeSelf)
+                BOSS.gameObject.SetActive(true);           
+            if (BOSS.myhealth.GetHealth() < 1)
+                IsGameOver = true;
+            //
+        }
+        private void EndingGame()
+        {         
             gameState = GameState.EndGame;
             HeliCopter.GetComponent<AnimAIHelicopter>()
                 .animState = AnimAIHelicopter.HeliAnimState.EndClimber;
@@ -162,6 +230,24 @@ namespace Vino.Devs
             Player.Anim.SetLayerWeight(2, 0);
             Player.enabled = false;
             //other part this event into hangUpEnd.cs & AnimAIHelicopter
+        }
+        private void EndingGame_Part2()
+        {        
+            CameraManagement.instance.virtualCameras[3].SetActive(true);
+            CameraManagement.instance.virtualCameras[0].SetActive(false);
+            StartCoroutine(EnemySpawner.instance.SpawnEndLoop());
+            // instatiate new Enemies 
+            if (EnderEnemyCars.Count > 0)
+            {
+                foreach (EnemyCar item in SpawnedEnemyCars)
+                {
+                    item._car.Die();
+                }
+                Player.Anim.Play("FlipEnd");
+                Player.myCar.GetComponent<Animator>().SetBool("isAccess", false);
+                Player.enabled = false;
+                _isEndLoopGame = true;
+            }                      
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Vino.Devs
     public class EnemyCar : MonoBehaviour
     {
 
-        private Car _car;
+        public Car _car;
         [SerializeField] private float closeRange = 5;
         private float playerSpeed;
         private bool close;
@@ -25,7 +25,12 @@ namespace Vino.Devs
         }
 
         private void Update()
-        {
+        {            
+            if (GameManager.instance.IsGameOver)
+            {
+                GetComponent<Car>().enabled = false;
+                GetComponent<EnemyCar>().enabled = false;
+            }
             if (EnemyManager.Player != null)
             {
                 if (Vector3.Distance(transform.position, EnemyManager.Player.transform.position) <= closeRange)
@@ -40,7 +45,7 @@ namespace Vino.Devs
         {
             if (close)
             {
-                _car.speed = playerSpeed;
+                _car.speed = playerSpeed-2;
             }
             else
             {

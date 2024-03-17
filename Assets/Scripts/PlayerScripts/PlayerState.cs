@@ -87,8 +87,9 @@ namespace Vino.Devs
                         ikComponent.enabled = false;
                         mygun.GetGunModel().SetActive(false);
                         mygun.Ammos.Clear();
-                        GameManager.instance.Player.myCar.Die();
-                        RagdollEvent.OnDeath(rigColliders, rigRigidbodies);
+                        RagdollEvent.OnDeath(rigColliders, rigRigidbodies);                        
+                        if(LevelManager.instance.levelMode != LevelManager.LevelMode.Boss)
+                            GameManager.instance.Player.myCar.Die();                        
                         _dieWork = true;
                     }
                     break;

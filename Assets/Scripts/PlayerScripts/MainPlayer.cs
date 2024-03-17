@@ -10,12 +10,14 @@ using Vino.Devs;
 public class MainPlayer : CharacterMain
 {
     private bool Accessbility { get; set; }
-    private PlayerMovement mymovement;
+    [HideInInspector]public PlayerMovement mymovement;
     private PlayerState mystate;
     private LineRenderer Arrower;
     [HideInInspector] public CoverCharacter myCover;
     public bool _isPro;
     public SkinnedMeshRenderer mymodel;
+    RaycastHit hit;
+    public Transform pivRay;
     private void Start()
     {
         if (GameManager.instance.indexLogin <= 1)
@@ -37,8 +39,9 @@ public class MainPlayer : CharacterMain
         AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);
 
         gun.CreateGun();
-        gunRes = gun.GetGunResponse();    
+        gunRes = gun.GetGunResponse();
 
+        mymovement.Base = transform;
 
     }
 
@@ -107,17 +110,45 @@ public class MainPlayer : CharacterMain
     #endregion
 
     private void FixedUpdate()
-    {
+    {        
         Anim.SetBool("StartCinematic", CheckColliderGround());
-        if (GameManager.instance.CheckInLoopGame() && Accessbility)
+        var a = (GameManager.instance.CheckInLoopGame() && Accessbility);
+        var b = LevelManager.instance.levelMode == LevelManager.LevelMode.Boss;        
+        if (a || GameManager.instance._isEndLoopGame || GameManager.instance.CheckInLoopGame() && b)
         {
             if (myhealth.GetHealth() < 1)
             {
                 PlayerState.myState = PlayerState.playerState.DEATH;
                 mystate.EventStates(PlayerState.myState);
+                foreach (EnemyCar item in GameManager.instance.SpawnedEnemyCars)
+                {
+                    ResourceSpawner.instance.enabled = false;
+                    item.GetComponentInChildren<MainEnemyAI>().Anim.Play("Dance_" + Random.Range(1, 2));
+                    item.GetComponentInChildren<MainEnemyAI>().enabled = false;
+                    item.GetComponent<Car>().enabled = false;
+                    item.enabled = false;
+                }
             }
             else
             {
+                if(LevelManager.instance.levelMode == LevelManager.LevelMode.Boss) {
+                    if (Physics.Raycast(pivRay.position, pivRay.forward, out hit, Mathf.Infinity))
+                    {
+                        if (hit.collider.CompareTag("Enemy"))
+                        {
+                            GetComponent<LookAtCharacter>().target = hit.collider.gameObject.transform;
+                            mymovement._isRotating = false;
+                            if (hit.collider.GetComponent<MainEnemyAI>().myhealth.GetHealth() < 1)
+                            {
+                                GetComponent<LookAtCharacter>().target = null;
+                                //Destroy(hit.collider.GetComponent<MainEnemyAI>());
+                            }
+                        }
+                    }
+                  
+                }
+               
+
                 if (CheckDistancetoEnd() < 1f)
                 {
                     GameManager.instance._isEndGame = true;
@@ -140,7 +171,7 @@ public class MainPlayer : CharacterMain
                     mystate.EventStates(PlayerState.myState);
                     Arrower.gameObject.SetActive(false);
                     mymovement.EndMove();
-                }
+                }                               
                 #endregion
             }
 

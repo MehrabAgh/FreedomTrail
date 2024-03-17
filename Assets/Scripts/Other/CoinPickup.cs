@@ -22,14 +22,16 @@ public class CoinPickup : MonoBehaviour
 	}
 	public void GetPicked()
 	{
-		ScoreManager.instance.CurrCoin += count;
+		if (gameObject.name == "key") ScoreManager.instance.Key++;
+		else ScoreManager.instance.CurrCoin += count;
 		Destroy(gameObject);
 		PlayPickedupEffects();				
 	}
 	private void PlayPickedupEffects() 
 	{
 		Destroy(Instantiate(pickupParticleEffect, transform.position, transform.rotation), 3);
-		ResourceSpawner.instance.Coin2uiFx(transform.position);
+		if (gameObject.name != "key")
+            ResourceSpawner.instance.Coin2uiFx(transform.position);
 		// spawn a particle with trail that goes to the coin ui and fire an event when it does trigger the ui animation
 	}
 	

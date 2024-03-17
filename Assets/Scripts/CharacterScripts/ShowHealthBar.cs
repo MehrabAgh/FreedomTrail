@@ -12,14 +12,22 @@ public class ShowHealthBar : MonoBehaviour
     { 
         GetHealth = GetComponent<HealthCharacter>();
         healthView.maxValue = GetHealth.GetHealth();
-        StartCoroutine(update(0.09f));
+        FollowforPlayer();
     }
-    private IEnumerator update(float fps)
+    private void Update()
     {
-        while (true)
+        healthView.value = GetHealth.GetHealth();        
+    }
+    private void FollowforPlayer()
+    {        
+        if (GameManager.instance._isEndLoopGame || LevelManager.instance.levelMode == LevelManager.LevelMode.Boss)
         {
-            yield return new WaitForSeconds(fps);
-            healthView.value = GetHealth.GetHealth();
+            if (GetComponentInParent<MainPlayer>()) {
+                healthView.gameObject.transform.parent.SetParent(null);
+                healthView.gameObject.transform.parent.position = new Vector3(-0.368999988f, -0.0799999982f, -324.325012f);
+                healthView.gameObject.transform.parent.localScale = new Vector3(0.101945192f, 0.121608168f, 0.260676146f);
+                healthView.gameObject.transform.parent.eulerAngles = new Vector3(20f, 0, 2.307f);
+            }
         }
     }
 }

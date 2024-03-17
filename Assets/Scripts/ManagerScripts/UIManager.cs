@@ -48,9 +48,9 @@ namespace Vino.Devs
                 }
                 else DisableGroupBuyButton();
             }
-            StartCoroutine(update(0.001f));
+            StartCoroutine(_update(0.001f));
         }
-        IEnumerator update(float time)
+        IEnumerator _update(float time)
         {
             while (true)
             {
@@ -88,7 +88,7 @@ namespace Vino.Devs
 
         #region Custom Events for Buttons
         private void StartGameEvent() => GameManager.instance.gameState = GameManager.GameState.LoopGame;
-        private void RestartLevel() => SceneManager.LoadScene("SampleScene");
+        public void RestartLevel() => SceneManager.LoadScene("SampleScene");
         private void NextLevel()
         {
             LevelManager.instance.NextLevel();
@@ -135,8 +135,8 @@ namespace Vino.Devs
         {
             foreach (Slider item in S_XpProgress)
             {
-                item.maxValue = max;
-            }
+                item.maxValue = max;              
+            }           
         }
         private void UpdateResources()
         {

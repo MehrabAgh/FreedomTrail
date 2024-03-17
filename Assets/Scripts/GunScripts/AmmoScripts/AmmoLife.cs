@@ -13,7 +13,7 @@ namespace Vino.Devs
         }
         private void OnEnable()
         {
-            Invoke(nameof(Destroyed), 0.3f);
+            Invoke(nameof(Destroyed), 0.2f);
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -55,8 +55,13 @@ namespace Vino.Devs
                         }
                         break;
                     }
+                case "CoverEnding":
+                    {
+                        Destroyed();
+                        break;
+                    }
                 case "ScorePickup":
-                    {                        
+                    {
                         if (!transform.parent.CompareTag("AmmoCollecionEnemy"))
                             other.GetComponent<CoinPickup>().GetPicked();
                         break;

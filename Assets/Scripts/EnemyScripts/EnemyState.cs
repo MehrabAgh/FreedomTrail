@@ -12,7 +12,9 @@ namespace Vino.Devs
             ATTACK,
             COVER,
             DEATH,
-            RELOAD
+            MOVE,
+            RELOAD,
+            END
         }
         public static enemystate enemyState { get; set; }
 
@@ -23,11 +25,13 @@ namespace Vino.Devs
         private Rigidbody[] rigRigidbodies;
         private Car GetCar;
         private bool _dieWork;
-        public EnemyState(FullBodyBipedIK ikComp,
+        public float speed;
+
+        public void SetInitialize(FullBodyBipedIK ikComp,
             MainGun gun, Animator anim, Collider[] RigColliders,
-            Rigidbody[] RigRigidbodies , Car myCar)
+            Rigidbody[] RigRigidbodies, Car myCar)
         {
-            GetCar = myCar; 
+            GetCar = myCar;
             rigColliders = RigColliders;
             rigRigidbodies = RigRigidbodies;
             mygun = gun;
@@ -35,20 +39,23 @@ namespace Vino.Devs
             ikComponent = ikComp;
             RagdollEvent.OnLive(RigColliders, RigRigidbodies);
         }
+
+
         public void EventStates(enemystate state)
         {
             switch (state)
             {
-                case enemystate.ATTACK:                 
+                case enemystate.ATTACK:                    
                     mygun.GetGunModel().transform.SetParent(mygun.HandPos);
                     mygun.SetupTransformGun.Invoke();
                     ikComponent.enabled = true;
                     Anim.SetBool("isCover", false);
+                    Anim.SetBool("CinemaEndRun", true);
                     Anim.SetBool("isReload", false);
                     Anim.SetBool(mygun.GetAnimationClip(), true);
                     Anim.SetLayerWeight(1, 1);
                     break;
-                case enemystate.COVER:
+                case enemystate.COVER:                    
                     mygun.GetGunModel().transform.SetParent(mygun.HandPos);
                     mygun.GetGunModel().transform.localPosition = Vector3.zero;
                     mygun.GetGunModel().transform.localRotation = Quaternion.identity;
@@ -56,7 +63,7 @@ namespace Vino.Devs
                     ikComponent.enabled = false;
                     Anim.SetLayerWeight(1, 0);
                     break;
-                case enemystate.DEATH:
+                case enemystate.DEATH:                    
                     if (!_dieWork)
                     {
                         ScoreManager.instance.KillCounter(1);
@@ -64,12 +71,13 @@ namespace Vino.Devs
                         ikComponent.enabled = false;
                         mygun.GetGunModel().SetActive(false);
                         mygun.Ammos.Clear();
-                        GetCar.Die();
+                        if(GetCar != null)GetCar.Die();
+                        else Destroy(gameObject, 5);
                         RagdollEvent.OnDeath(rigColliders, rigRigidbodies);
                         _dieWork = true;
                     }
                     break;
-                case enemystate.RELOAD:
+                case enemystate.RELOAD:                    
                     mygun.GetGunModel().transform.SetParent(mygun.HandPos);
                     mygun.GetGunModel().transform.localPosition = Vector3.zero;
                     mygun.GetGunModel().transform.localRotation = Quaternion.identity;
@@ -77,6 +85,20 @@ namespace Vino.Devs
                     Anim.SetBool("isCover", true);
                     Anim.SetBool("isReload", true);
                     ikComponent.enabled = false;
+                    break;
+                case enemystate.MOVE:                    
+                    GetComponent<Rigidbody>().isKinematic = false;
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                    Anim.Play("Running");
+                    transform.position += Vector3.forward * Time.deltaTime * speed;                    
+                    Anim.SetBool("CinemaEndRun", false);                    
+                    break;
+                case enemystate.END:
+                    ikComponent.enabled = false;
+                    mygun.GetGunModel().SetActive(false);                    
+                    Anim.Play("Dance_" + Random.Range(1, 2));
+                    GetComponent<LookAtCharacter>().target = null;
                     break;
                 default:
                     break;

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 namespace Vino.Devs
 {    
+    [RequireComponent(typeof(WeaponResource))]
     public class MainGun : MonoBehaviour
     {
         public int CodeGun;
@@ -27,9 +28,10 @@ namespace Vino.Devs
         {          
             if (myGun != null)
                 Destroy(myGun.WeaponSelected.weaponModel);
-            myGun = new WeaponResource(weaponResponse, weaponSettings, handPosition, sizeGuns, Ammos, CodeGun);         
+            myGun = GetComponent<WeaponResource>();
+            myGun.Initialize(weaponResponse, weaponSettings, handPosition, sizeGuns, Ammos, CodeGun);
             SetupTransformGun.AddListener(() => myGun.WeaponSelected.SaveTransform(myGun.GetSetting, sizeGuns[myGun.Index].Position,
-                   sizeGuns[myGun.Index].Rotation, sizeGuns[myGun.Index].Scale));            
+                   sizeGuns[myGun.Index].Rotation, sizeGuns[myGun.Index].Scale));                
         }
 
         private void Awake() => Ammos = new List<GameObject>(0);

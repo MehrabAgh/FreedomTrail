@@ -6,28 +6,37 @@ using UnityEngine;
 namespace Vino.Devs
 {
     public class MainEnemyAI : CharacterMain
-    {
+    {        
         private EnemyState mystate;
         private EnemyManageSystem Ems;
-    
+        public LookAtCharacter lac;
+        private float DistanceShoot , startReload,mainReload;        
         private void Start()
-        {
+        {            
             CreateEnemySystem();
             gun.CreateGun();
             GetComponent<LookAtCharacter>().target = null;
-            mystate = new EnemyState(ikComponent, gun, Anim, rigColliders, rigRigidbodies , myCar);
+            mystate = GetComponent<EnemyState>();            
+            mystate.SetInitialize(ikComponent, gun, Anim, rigColliders, rigRigidbodies, myCar); 
+           
             GetComponent<Collider>().enabled = true;
-            Invoke(nameof(SetTarget),2.5f);
+            SetTarget();
             gunRes = gun.GetGunResponse();
             parentAmmo = GameObject.FindGameObjectWithTag("AmmoCollecionEnemy").transform;
             AmmoPooling.instanse.objectToPool = gunRes.bullet;
             AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);
-            StartCoroutine(update(0.003f));
+            mainReload = gunRes.maxReload;
+            startReload = mainReload;
+            lac = GetComponent<LookAtCharacter>();            
         }
         #region Helper
         private void CreateEnemySystem()
         {
             Ems = new EnemyManageSystem();
+
+            if (gameObject.name == "P_ProBoss")
+                Ems.enemyType = EnemyManageSystem.EnemyType.boss;
+
             gun.CodeGun = Ems.SelectModeEnemy();
         }
         public void SetReload()
@@ -54,26 +63,58 @@ namespace Vino.Devs
             if(GameManager.instance.Player)
             GetComponent<LookAtCharacter>().target = GameManager.instance.Player.transform;
         }
-        #endregion
-        private IEnumerator update(float timer)
+        public void SetMove()
         {
-            while (true)
+            EnemyState.enemyState = EnemyState.enemystate.MOVE;
+            mystate.EventStates(EnemyState.enemyState);
+        }
+        public void SetEnd()
+        {
+            EnemyState.enemyState = EnemyState.enemystate.END;
+            mystate.EventStates(EnemyState.enemyState);
+        }
+        #endregion
+        private void FixedUpdate()
+        {            
+            if (GameManager.instance.CheckInLoopGame())
             {
-                yield return new WaitForSeconds(timer);
-                if (GameManager.instance.CheckInLoopGame())
-                {
-                    if (myhealth.GetHealth() < 1)
-                    {                        
-                        EnemyState.enemyState = EnemyState.enemystate.DEATH;
-                        mystate.EventStates(EnemyState.enemyState);
-                    }
+                if (myhealth.GetHealth() < 1)
+                {                    
+                    EnemyState.enemyState = EnemyState.enemystate.DEATH;
+                    mystate.EventStates(EnemyState.enemyState);
+                }
+                else if (GameManager.instance.Player.myhealth.GetHealth() <= 0) SetEnd();
+                else { 
+                lac.target = lac.target != null ? lac.target : GameManager.instance.Player.transform;
+                DistanceShoot = Vector3.Distance(transform.position, lac.target.transform.position);                
+                if(Ems.enemyType is EnemyManageSystem.EnemyType.boss ||
+                    Ems.enemyType is EnemyManageSystem.EnemyType.general && GameManager.instance._isEndLoopGame)
+                {                   
+                    if (DistanceShoot > 10f) SetMove();
                     else
                     {
-                        gun.ShootGun();
-                        SetAttack();                       
+                        if (mainReload > 0)
+                        {
+                            SetAttack();
+                            gun.ShootGun();
+                            mainReload -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            mainReload = startReload;
+                            SetReload();
+                        }
                     }
-                }
-            }
-        }
+                  
+                }              
+                else if(DistanceShoot < 14f && Ems.enemyType is EnemyManageSystem.EnemyType.general
+                    && GetComponentInParent<EnemyCar>() != null)
+                {
+                    gun.ShootGun();
+                    SetAttack();
+                }               
+            } 
+          }
+        }      
     }
 }

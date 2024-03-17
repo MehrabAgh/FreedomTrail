@@ -39,6 +39,7 @@ namespace Vino.Devs
             if (isPlayer)
             {
                 GetComponent<Animator>().enabled = true;
+                GetComponent<Animator>().SetBool("isAccess", true);                
                 GetComponent<AudioSource>().enabled = true;
             }
             //BrakeEffects();
@@ -99,13 +100,17 @@ namespace Vino.Devs
             }
             explosionVFX.SetActive(true);
             explosionVFX.GetComponent<ParticleSystem>().Play();
-            Destroy(gameObject, 5);
+            //  Destroy(gameObject, 5);
+            Invoke(nameof(DeActive), 2);
             target = transform;
             if (isPlayer) GameManager.instance.Player.SetIdle();
             speed = 0;
             hc = null;
         }
-      
+      private void DeActive()
+      {
+            gameObject.SetActive(false);
+      }
         public void BrakeEffects()
         {
             tireSFX.Play();

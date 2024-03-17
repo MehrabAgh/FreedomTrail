@@ -10,18 +10,16 @@ namespace Vino.Devs
         private Vector3 _mouseReference;
         private Vector3 _mouseOffset;
         private Vector3 _rotation;    
-        private bool _isRotating { get; set; }
-      
+        public bool _isRotating { get; set; }
+        public Transform Base;
         public void UpdateMove()
         {
             if (_isRotating)
             {
                 _mouseOffset = (Input.mousePosition - _mouseReference);
-                _rotation.y = -(_mouseOffset.x) * _sensitivity;
-
-                transform.eulerAngles += _rotation;
-
-                var angle = WrapAngle(transform.eulerAngles.y);
+                _rotation.y = -(_mouseOffset.x) * _sensitivity;                                 
+                Base.transform.eulerAngles += _rotation;
+                var angle = WrapAngle(transform.eulerAngles.y);                        
                // angle = Mathf.Clamp(angle, -90, 90);
 
                 transform.eulerAngles = new Vector3(0, angle, 0);

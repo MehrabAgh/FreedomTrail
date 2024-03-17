@@ -10,7 +10,7 @@ namespace Vino.Devs
         private Vector3 offset;
         public Transform target;
         private void LateUpdate()
-        {
+        {           
             LookAtTarget(target, bone);
         }
         public void LookAtTarget(Transform target, Transform bone)

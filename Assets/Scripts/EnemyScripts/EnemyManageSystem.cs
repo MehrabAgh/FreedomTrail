@@ -13,11 +13,26 @@ namespace Vino.Devs
             Hard
         }
         public EnemyLevelState enemyLevel;
-
+        public enum EnemyType
+        {
+            general,
+            boss
+        }
+        public EnemyType enemyType;
         public int SelectModeEnemy()
         {
-            SettingUpEnemy(30, 60, 90);
-            return ManagementSystem();
+            if (enemyType == EnemyType.general)
+            {
+                SettingUpEnemy(30, 60, 90);
+                return ManagementSystem();
+            }
+            else
+            {
+                var x = Random.Range(1, 3);
+                if ((x % 2) == 0)
+                    return 0;
+                else return Random.Range(2 , 3);
+            }
         }
 
         private void SettingUpEnemy(float maxEasy, float maxNormal, float maxHard)

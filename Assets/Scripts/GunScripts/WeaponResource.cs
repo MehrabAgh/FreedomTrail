@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Vino.Devs
 {
 
-    public class WeaponResource
+    public class WeaponResource : MonoBehaviour
     {
         public enum weapone { rifle, shotgun, machinegun, minigun , pistol}; // 2 : add name new gun to state guns
         // 3: add new gun setting to list in Main Gun Class
@@ -13,17 +13,17 @@ namespace Vino.Devs
         public IGun WeaponSelected;
         public int Index;
         public WeaponScriptable GetSetting;
-        public GunResponse GetResponse;
+        public GunResponse GetResponse;        
 
-        public WeaponResource(List<GunResponse> gunResponses, List<WeaponScriptable> weaponSettings,
-            Transform piv, List<ModelSizeGun> sizeList, List<GameObject> Ammos , int IndexWeapone)
+        public void Initialize(List<GunResponse> gunResponses, List<WeaponScriptable> weaponSettings,
+            Transform piv, List<ModelSizeGun> sizeList, List<GameObject> Ammos, int IndexWeapone)
         {
             curWeapone = (weapone)IndexWeapone;
             switch (curWeapone) // 4: add state new gun to this conditional
             {
                 case weapone.rifle:
                     Index = 0;
-                    Rifle rifle = new Rifle(gunResponses[0], weaponSettings[0], piv, sizeList[0].Position, sizeList[0].Rotation, sizeList[0].Scale , Ammos);
+                    Rifle rifle = new Rifle(gunResponses[0], weaponSettings[0], piv, sizeList[0].Position, sizeList[0].Rotation, sizeList[0].Scale, Ammos);
                     WeaponSelected = rifle;
                     GetSetting = rifle.GetSetting();
                     GetResponse = rifle.GetResponse();
@@ -58,15 +58,15 @@ namespace Vino.Devs
                     break;
                 default:
                     break;
-            }          
-        }       
+            }
+        }
     }
     // 1 : add class and attribute new gun
     public class SMG : MainGun, IGun
     {
         private WeaponScriptable scriptable;
         private GunResponse gunRes;
-        private List<GameObject> Ammos;
+        private new List<GameObject> Ammos;
         public GameObject weaponModel { get; set; }
         public SMG(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
         {
@@ -116,7 +116,7 @@ namespace Vino.Devs
     {
         private GunResponse gunRes;
         private WeaponScriptable scriptable;
-        private List<GameObject> Ammos;
+        private new List<GameObject> Ammos;
         public GameObject weaponModel { get; set; }
         public LMG(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale ,List<GameObject> ammos)
         {
@@ -166,7 +166,7 @@ namespace Vino.Devs
     {
         private GunResponse gunRes;
         private WeaponScriptable scriptable;
-        private List<GameObject> Ammos;
+        private new List<GameObject> Ammos;
         public GameObject weaponModel { get; set; }
 
         public Rifle(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
@@ -226,7 +226,7 @@ namespace Vino.Devs
         private WeaponScriptable scriptable;
         private GunResponse gunRes;
         public GameObject weaponModel { get; set; }
-        private List<GameObject> Ammos;
+        private new List<GameObject> Ammos;
         public Shotgun(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale ,List<GameObject> ammos)
         {
             Ammos = ammos;
@@ -287,7 +287,7 @@ namespace Vino.Devs
     {
         private WeaponScriptable scriptable;
         private GunResponse gunRes;
-        private List<GameObject> Ammos;
+        private new List<GameObject> Ammos;
         public GameObject weaponModel { get; set ; }
 
         public Pistol(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)

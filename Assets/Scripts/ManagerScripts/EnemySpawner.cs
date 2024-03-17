@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 namespace Vino.Devs
 {
     [RequireComponent(typeof(EnemyManager))]
@@ -8,13 +9,14 @@ namespace Vino.Devs
     {
         public static EnemySpawner instance;
         public int MaxEnemies = 3;
-        public float spawnRate = 5;
+        public float spawnRate = 2;
         [SerializeField]private List<Transform> spawnPoint;
+        [SerializeField] private List<Transform> spawnEndingPoint;
         private List<Transform> playerFollowTargets = new List<Transform>();
         public List<Transform> takenTargets = new List<Transform>();
 
         [SerializeField] private GameObject[] EnemyPrefabs;
-
+        [SerializeField] private GameObject EnemyCharPrefab;
         private void Awake() => instance = this;
 
         private void Start()
@@ -27,12 +29,22 @@ namespace Vino.Devs
                 playerFollowTargets.Add(holder.GetChild(i).transform);
             }
         }
+        
+        private void FixedUpdate()
+        {
+            if (GameManager.instance._isEndLoopGame)
+            {
+                StartCoroutine(SpawnEndLoop());
+            }
+        }
 
         private IEnumerator SpawnLoop()
         {
             while (true)
             {
-                yield return new WaitForSeconds(spawnRate);                
+                yield return new WaitForSeconds(spawnRate);
+                if (GameManager.instance._isEndLoopGame)
+                    break;
                 if (EnemyCar.EnemyCount < MaxEnemies  && GameManager.instance.OnRealGame)
                 {
                     Spawn();
@@ -42,15 +54,13 @@ namespace Vino.Devs
                 else yield return null;
             }
         }
-
         private void Spawn()
         {
             Car enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], spawnPoint[Random.Range(0,spawnPoint.Count)].position
                 , spawnPoint[Random.Range(0, spawnPoint.Count)].rotation).GetComponent<Car>();
+            GameManager.instance.SpawnedEnemyCars.Add(enemy.GetComponentInParent<EnemyCar>());
             enemy.target = RandTarget();
         }
-
-
         private Transform RandTarget()
         {
             int randIndex;
@@ -61,6 +71,29 @@ namespace Vino.Devs
 
             takenTargets.Add(playerFollowTargets[randIndex]);
             return playerFollowTargets[randIndex];
+        }
+        
+        public IEnumerator SpawnEndLoop()
+        {
+            foreach (var item in GameManager.instance.EnderEnemyCars)
+            {
+                yield return new WaitForSeconds(spawnRate);
+                if(item.gameObject != null)
+                    item.gameObject.SetActive(true);
+            }          
+        }
+
+        public void SpawnEnding()
+        {
+            var rand = Random.Range(1, 7);
+            for (int i = 0; i < rand; i++)
+            {
+                MainEnemyAI enemy = Instantiate(EnemyCharPrefab, spawnEndingPoint[Random.Range(0, spawnEndingPoint.Count)].position
+                          , spawnEndingPoint[Random.Range(0, spawnEndingPoint.Count)].rotation).GetComponent<MainEnemyAI>();
+                GameManager.instance.EnderEnemyCars.Add(enemy);
+                //enemy.lac.target = GameManager.instance.Player.transform;
+                enemy.gameObject.SetActive(false);
+            }           
         }
 
     }

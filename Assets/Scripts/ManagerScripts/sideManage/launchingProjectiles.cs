@@ -18,6 +18,11 @@ public class launchingProjectiles : MonoBehaviour
     {
         ins = this;
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            Launch();
+    }
     public void SetValueAttack()
     {
         rigid = ThisObject.GetComponent<Rigidbody>();

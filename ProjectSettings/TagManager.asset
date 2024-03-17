@@ -16,6 +16,7 @@ TagManager:
   - ScorePickup
   - EnemyCar
   - StartingPointEnemy
+  - CoverEnding
   layers:
   - Default
   - TransparentFX
