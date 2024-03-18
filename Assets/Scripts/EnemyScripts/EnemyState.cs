@@ -26,7 +26,8 @@ namespace Vino.Devs
         private Car GetCar;
         private bool _dieWork;
         public float speed;
-
+		private ParticleItem pi;
+		
         public void SetInitialize(FullBodyBipedIK ikComp,
             MainGun gun, Animator anim, Collider[] RigColliders,
             Rigidbody[] RigRigidbodies, Car myCar)
@@ -38,6 +39,7 @@ namespace Vino.Devs
             Anim = anim;
             ikComponent = ikComp;
             RagdollEvent.OnLive(RigColliders, RigRigidbodies);
+			pi = GetComponent<ParticleItem>();
         }
 
 
@@ -74,6 +76,8 @@ namespace Vino.Devs
                         if(GetCar != null)GetCar.Die();
                         else Destroy(gameObject, 5);
                         RagdollEvent.OnDeath(rigColliders, rigRigidbodies);
+						if(LevelManager.instance.levelMode == LevelManager.LevelMode.Boss)
+							ParticleManager.instanse.EnableEffect(pi.Death);
                         _dieWork = true;
                     }
                     break;

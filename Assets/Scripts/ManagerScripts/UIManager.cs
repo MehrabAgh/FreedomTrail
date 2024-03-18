@@ -23,14 +23,14 @@ namespace Vino.Devs
         public Button btn_NextPage, btn_BackPage , btn_EndOpenGift;
         private Vector3 pagePosition;
 
-        public NumberCounterUpdater tr_Coin , tr_Kill , tr_End;
+        public NumberCounterUpdater tr_Coin , tr_Kill , tr_End;		
 
         [SerializeField] private List<Button> BuyButtons;
         [SerializeField] private List<Transform> GroupBuyButton;
         #region Standard Events
         private void Awake() => instance = this;
         private void Start()
-        {
+        {			
             S_DistEnd.maxValue = GameManager.instance.GetDistanceToEnd();
             StartGame.onClick.AddListener(StartGameEvent);
             RestartGameOver.onClick.AddListener(RestartLevel);
@@ -59,12 +59,16 @@ namespace Vino.Devs
                 //
                 if (GameManager.instance.Player.GetState() == PlayerState.playerState.DEATH)
                 {
+                    //fx true child camera loss
+                    GameManager.instance.GetCamera.GetComponent<ParticleItem>().Death.gameObject.SetActive(true);
                     LosePanel.SetActive(true);
                     InGamePanel.SetActive(false);
                 }
                 else if (GameManager.instance.gameState == GameManager.GameState.EndGame)
-                {                   
-                    if(!WinPanel.activeSelf)
+                {
+                    //fx true child camera win
+                    GameManager.instance.GetCamera.GetComponent<ParticleItem>().Spawn.gameObject.SetActive(true);
+                    if (!WinPanel.activeSelf)
                         ScoreManager.instance.XpEnder(.25f);
                     WinPanel.SetActive(true);
                     InGamePanel.SetActive(false);
@@ -94,6 +98,8 @@ namespace Vino.Devs
             LevelManager.instance.NextLevel();
             ScoreManager.instance.SaveResource();
             ScoreManager.instance.XpCollectsEnd();
+            if((LevelManager.instance.GetLevel()-2) % 5 == 0)
+                LevelManager.instance.GetEnvironment.ChangeENV();
             SceneManager.LoadScene("SampleScene");
         }
         public void ChangeSettings(Text TextProp)

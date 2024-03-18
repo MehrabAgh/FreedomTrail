@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 5742765090181460125}
   - component: {fileID: 205927722738051693}
   - component: {fileID: 5099254528250756292}
+  - component: {fileID: 1733453129865031831}
   m_Layer: 0
   m_Name: EnemyCharacter
   m_TagString: Enemy
@@ -907,6 +908,7 @@ MonoBehaviour:
     currentAmmo: 0
     delay: 0
     nextTimetoFire: 0
+    ShootFX: {fileID: 0}
   parentAmmo: {fileID: 0}
   rigColliders: []
   myCar: {fileID: 0}
@@ -943,6 +945,7 @@ MonoBehaviour:
     currentAmmo: 0
     delay: 2
     nextTimetoFire: 2
+    ShootFX: {fileID: 0}
   - barrel: {fileID: 0}
     mainBarrel: {fileID: 5192526487746802618}
     bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
@@ -950,6 +953,7 @@ MonoBehaviour:
     currentAmmo: 0
     delay: 1
     nextTimetoFire: 1
+    ShootFX: {fileID: 0}
   - barrel: {fileID: 0}
     mainBarrel: {fileID: 5192526487746802618}
     bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
@@ -957,6 +961,7 @@ MonoBehaviour:
     currentAmmo: 0
     delay: 1
     nextTimetoFire: 1
+    ShootFX: {fileID: 0}
   - barrel: {fileID: 0}
     mainBarrel: {fileID: 5192526487746802618}
     bullet: {fileID: 3881412917815023731, guid: f201a64ce7477ae4cab5d9997db815f6, type: 3}
@@ -964,6 +969,7 @@ MonoBehaviour:
     currentAmmo: 0
     delay: 1
     nextTimetoFire: 1
+    ShootFX: {fileID: 0}
   handPosition: {fileID: 3621704465234031841}
   SetupTransformGun:
     m_PersistentCalls:
@@ -1031,6 +1037,7 @@ MonoBehaviour:
     currentAmmo: 0
     delay: 0
     nextTimetoFire: 0
+    ShootFX: {fileID: 0}
 --- !u!114 &205927722738051693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1057,6 +1064,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthView: {fileID: 0}
+--- !u!114 &1733453129865031831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082604814930618331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3ceabe184f5644887427156c5d2dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawn: {fileID: 0}
+  Death: {fileID: 0}
 --- !u!1 &1250917617981064781
 GameObject:
   m_ObjectHideFlags: 0

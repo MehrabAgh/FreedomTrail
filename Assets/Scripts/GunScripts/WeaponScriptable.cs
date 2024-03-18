@@ -18,6 +18,7 @@ namespace Vino.Devs
         public int maxReload, currentAmmo;
         public float delay;
         public float nextTimetoFire;
+        public ParticleSystem ShootFX;
     }
     [CreateAssetMenu(fileName = "Gun", menuName = "GunSystems/newGun", order = 1)]
     public class WeaponScriptable : ScriptableObject
@@ -37,7 +38,7 @@ namespace Vino.Devs
             projectile.transform.position = barrel.transform.position;  
             projectile.transform.rotation = barrel.transform.rotation;
             projectile.SetActive(true);           
-            projectile.GetComponent<Rigidbody>().velocity = barrel.forward * power;
+            projectile.GetComponent<Rigidbody>().velocity = barrel.forward * power;           
         }
 
         public void SetTransform(Vector3 pos, Vector3 rot, Vector3 scale, Transform model)

@@ -17,7 +17,7 @@ namespace Vino.Devs
         [HideInInspector] public UnityEvent SetupTransformGun;
         [SerializeField] private List<ModelSizeGun> sizeGuns;
         public List<GameObject> Ammos ;
-
+    
         public Transform HandPos
         {
             get { return handPosition; }
@@ -38,7 +38,7 @@ namespace Vino.Devs
         #region Helper     
         public void ShootGun()
         {            
-            myGun.WeaponSelected.Shoot();          
+            myGun.WeaponSelected.Shoot();            
         }
         public string GetAnimationClip()
         {

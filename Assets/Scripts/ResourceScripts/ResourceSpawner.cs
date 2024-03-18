@@ -13,7 +13,8 @@ public class ResourceSpawner : MonoBehaviour
     private float spawnRate ; // the time between each spawning 
     [SerializeField] private float posRandRadius = 3;
     public static ResourceSpawner instance;
-    private Transform playerVehicle;    
+    private Transform playerVehicle;
+    public ParticleSystem SpawnCoinFX;
     private void Awake()
     {
         instance = this;
@@ -27,7 +28,7 @@ public class ResourceSpawner : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.instance._isStartGame)
+        if (GameManager.instance._isStartGame && LevelManager.instance.levelMode == LevelManager.LevelMode.Normal)
         {
             if (spawnRate <= 0)
                 SpawnCoin();
@@ -40,10 +41,9 @@ public class ResourceSpawner : MonoBehaviour
         {            
             var radius = Random.Range(posRandRadius * 0.4f, posRandRadius);
             radius *= Random.Range(0, 2) * 2 - 1;
-
-            Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Length)],
-                playerVehicle.position + new Vector3(radius, 1.5f, radius),
-                Quaternion.identity);
+            var x = playerVehicle.position + new Vector3(radius, 1.5f, radius);            
+            var c = Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Length)],x,Quaternion.identity);
+            ParticleManager.instanse.EnableEffect(c.GetComponentInChildren<ParticleSystem>());            
 
             spawnRate = MainSpwnRate;
         }

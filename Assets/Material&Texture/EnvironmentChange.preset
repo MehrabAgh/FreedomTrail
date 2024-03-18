@@ -1,0 +1,475 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: EnvironmentChange
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 1a572515e84f7364397ad8359c1873f1, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.size
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Sky.r
+    value: 0.02745098
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Sky.g
+    value: 0.3254902
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Sky.b
+    value: 0.8117647
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Sky.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Ground.r
+    value: 0.5882353
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Ground.g
+    value: 0.8117647
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Ground.b
+    value: 0.8509804
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Ground.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_UnderGround.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_UnderGround.g
+    value: 0.5019608
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_UnderGround.b
+    value: 0.8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_UnderGround.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.data[0].r
+    value: 0.27058825
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.data[0].g
+    value: 0.3764706
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.data[0].b
+    value: 0.49019608
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.data[0].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.data[1].r
+    value: 0.41960785
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.data[1].g
+    value: 0.47843137
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.data[1].b
+    value: 0.5372549
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[0].C_Tower.Array.data[1].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Sky.r
+    value: 0.02745098
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Sky.g
+    value: 0.8117647
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Sky.b
+    value: 0.05490196
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Sky.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Ground.r
+    value: 0.5921569
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Ground.g
+    value: 0.8509804
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Ground.b
+    value: 0.5882353
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Ground.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_UnderGround.r
+    value: 0.07450981
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_UnderGround.g
+    value: 0.5294118
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_UnderGround.b
+    value: 0.05882353
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_UnderGround.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.data[0].r
+    value: 0.27058825
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.data[0].g
+    value: 0.49019608
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.data[0].b
+    value: 0.28627452
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.data[0].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.data[1].r
+    value: 0.41960785
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.data[1].g
+    value: 0.5372549
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.data[1].b
+    value: 0.42352942
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[1].C_Tower.Array.data[1].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Sky.r
+    value: 0.89411765
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Sky.g
+    value: 0.90588236
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Sky.b
+    value: 0.41568628
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Sky.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Ground.r
+    value: 0.8509804
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Ground.g
+    value: 0.84313726
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Ground.b
+    value: 0.5882353
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Ground.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_UnderGround.r
+    value: 0.5294118
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_UnderGround.g
+    value: 0.5294118
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_UnderGround.b
+    value: 0.05882353
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_UnderGround.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.data[0].r
+    value: 0.49019608
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.data[0].g
+    value: 0.48235294
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.data[0].b
+    value: 0.27058825
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.data[0].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.data[1].r
+    value: 0.5372549
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.data[1].g
+    value: 0.53333336
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.data[1].b
+    value: 0.41960785
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[2].C_Tower.Array.data[1].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Sky.r
+    value: 0.90588236
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Sky.g
+    value: 0.6392157
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Sky.b
+    value: 0.41568628
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Sky.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Ground.r
+    value: 0.8509804
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Ground.g
+    value: 0.7294118
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Ground.b
+    value: 0.5882353
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Ground.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_UnderGround.r
+    value: 0.77254903
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_UnderGround.g
+    value: 0.3764706
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_UnderGround.b
+    value: 0.05490196
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_UnderGround.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.data[0].r
+    value: 0.49019608
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.data[0].g
+    value: 0.3764706
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.data[0].b
+    value: 0.27058825
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.data[0].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.data[1].r
+    value: 0.5372549
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.data[1].g
+    value: 0.49411765
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.data[1].b
+    value: 0.41960785
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[3].C_Tower.Array.data[1].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Sky.r
+    value: 0.72156864
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Sky.g
+    value: 0.41568628
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Sky.b
+    value: 0.90588236
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Sky.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Ground.r
+    value: 0.8509804
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Ground.g
+    value: 0.5882353
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Ground.b
+    value: 0.7490196
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Ground.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_UnderGround.r
+    value: 0.64705884
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_UnderGround.g
+    value: 0.05490196
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_UnderGround.b
+    value: 0.77254903
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_UnderGround.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.data[0].r
+    value: 0.49019608
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.data[0].g
+    value: 0.27058825
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.data[0].b
+    value: 0.44313726
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.data[0].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.data[1].r
+    value: 0.5372549
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.data[1].g
+    value: 0.41960785
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.data[1].b
+    value: 0.5137255
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EnvironmentSet.Array.data[4].C_Tower.Array.data[1].a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: PivotENV
+    value: -1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: M_Ground
+    value: 
+    objectReference: {fileID: 2100000, guid: 81ce5d2bdd9c7c5489ab6cf3ce03bd7b, type: 2}
+  - target: {fileID: 0}
+    propertyPath: M_UnderGround
+    value: 
+    objectReference: {fileID: 2100000, guid: 85f70efd5dcc2f440be794dfaa5f032b, type: 2}
+  - target: {fileID: 0}
+    propertyPath: M_Tower.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: M_Tower.Array.data[0]
+    value: 
+    objectReference: {fileID: 2100000, guid: b5be42edb24ac7e409bd2d2fdc48635a, type: 2}
+  - target: {fileID: 0}
+    propertyPath: M_Tower.Array.data[1]
+    value: 
+    objectReference: {fileID: 2100000, guid: d4a842164f12e764787df5ddd743b885, type: 2}
+  m_ExcludedProperties: []

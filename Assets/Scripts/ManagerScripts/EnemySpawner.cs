@@ -56,8 +56,11 @@ namespace Vino.Devs
         }
         private void Spawn()
         {
-            Car enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], spawnPoint[Random.Range(0,spawnPoint.Count)].position
-                , spawnPoint[Random.Range(0, spawnPoint.Count)].rotation).GetComponent<Car>();
+            var pos = spawnPoint[Random.Range(0, spawnPoint.Count)];
+            //ParticleManager.instanse.Spawn(ParticleManager.instanse.Spawn_Enemy , pos , 3);
+            Car enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], pos.position
+                , pos.rotation).GetComponent<Car>();
+            ParticleManager.instanse.EnableEffect(enemy.GetComponent<ParticleItem>().Spawn);
             GameManager.instance.SpawnedEnemyCars.Add(enemy.GetComponentInParent<EnemyCar>());
             enemy.target = RandTarget();
         }

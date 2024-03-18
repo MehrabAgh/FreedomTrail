@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ParticleSystem   CharHitFx, ShootGun , ObjHitFx;    
+
+    public static ParticleManager instanse;    
+
+    private void Awake()
     {
-        
+        instanse = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnableEffect(ParticleSystem ps)
+    {        
+        ps.gameObject.SetActive(true);        
+    }
+
+    public void DisableEffect(ParticleSystem ps)
     {
-        
+        ps.gameObject.SetActive(false);
+    }
+
+    public void Spawn(ParticleSystem ps , Transform t , float delay)
+    {        
+        Destroy(Instantiate(ps, t.transform.position, t.transform.rotation), delay);
     }
 }

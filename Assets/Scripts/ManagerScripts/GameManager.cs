@@ -24,6 +24,7 @@ namespace Vino.Devs
         public CharacterResource CResource;
         [HideInInspector] public int indexLogin;
         public int MaxEnemySpawnEnd;
+        public Camera GetCamera;
         //
         public enum GameState
         {
@@ -69,11 +70,13 @@ namespace Vino.Devs
 
         private void Awake()
         {
+            GetCamera = Camera.main;
             instance = this;
             _isStartGame = false;
             _isEndGame = false;          
         }
-        private void Start(){
+        private void Start(){            
+
             var levmode = LevelManager.instance.levelMode;
 
             if (levmode == LevelManager.LevelMode.Normal)
@@ -106,8 +109,7 @@ namespace Vino.Devs
         private void Update() => StateAdmin();
 
         private void StateAdmin()
-        {
-            print(Player.myhealth.GetHealth());            
+        {                        
             switch (gameState)
             {
                 case GameState.IsMenu:
@@ -212,13 +214,16 @@ namespace Vino.Devs
         {
             if(KEY != null)KEY.gameObject.SetActive(true);
             if (!BOSS.gameObject.activeSelf)
-                BOSS.gameObject.SetActive(true);           
+            {
+                BOSS.gameObject.SetActive(true);
+                ParticleManager.instanse.EnableEffect(BOSS.GetComponentInChildren<ParticleSystem>());
+            }
             if (BOSS.myhealth.GetHealth() < 1)
                 IsGameOver = true;
             //
         }
         private void EndingGame()
-        {         
+        {                     
             gameState = GameState.EndGame;
             HeliCopter.GetComponent<AnimAIHelicopter>()
                 .animState = AnimAIHelicopter.HeliAnimState.EndClimber;

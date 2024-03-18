@@ -10,7 +10,7 @@ namespace Vino.Devs
         private EnemyState mystate;
         private EnemyManageSystem Ems;
         public LookAtCharacter lac;
-        private float DistanceShoot , startReload,mainReload;        
+        private float DistanceShoot , startReload,mainReload;		
         private void Start()
         {            
             CreateEnemySystem();
@@ -27,7 +27,7 @@ namespace Vino.Devs
             AmmoPooling.instanse.Spawning(parentAmmo, gun.Ammos);
             mainReload = gunRes.maxReload;
             startReload = mainReload;
-            lac = GetComponent<LookAtCharacter>();            
+            lac = GetComponent<LookAtCharacter>();   			
         }
         #region Helper
         private void CreateEnemySystem()

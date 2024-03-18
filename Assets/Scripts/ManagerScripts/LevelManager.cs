@@ -10,6 +10,7 @@ namespace Vino.Devs
         private int IndexLevel;        
         public enum LevelMode { Normal, Boss, Bonus }
         public LevelMode levelMode;
+        public EnvironmentChange GetEnvironment;
 
         private void Awake() { 
             instance = this;
@@ -18,6 +19,7 @@ namespace Vino.Devs
         private void Start()
         {          
             CheckLevelMode();
+            GetEnvironment.INIT();
             StateLevels();
         }
 
@@ -68,7 +70,7 @@ namespace Vino.Devs
             UIManager.instance.ChangeLevelText(IndexLevel.ToString());
             levelMode = LevelMode.Normal;
             if (IndexLevel > 1)
-            {
+            {                
                 if (((IndexLevel - 1) % 5) == 0)
                 {
                     UIManager.instance.ChangeLevelText("Bonus");

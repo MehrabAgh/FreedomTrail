@@ -10,6 +10,7 @@ namespace Vino.Devs
         private void Destroyed()
         {
             gameObject.SetActive(false);
+            //fx
         }
         private void OnEnable()
         {
@@ -24,46 +25,63 @@ namespace Vino.Devs
 
                 case "Player":
                     {
-                        if (transform.parent.CompareTag("AmmoCollecionEnemy"))
-                            other.GetComponent<HealthCharacter>().Damage(Damage);
+                        if (transform.parent.CompareTag("AmmoCollecionEnemy")){
+                            other.GetComponent<HealthCharacter>().Damage(Damage);                        
+							ParticleManager.instanse.Spawn(ParticleManager.instanse.CharHitFx, transform, .7f);							
+							Destroyed();
+						}
                         break;
                     }
                 case "PlayerCar":
                     {
-                        if (transform.parent.CompareTag("AmmoCollecionEnemy"))
-                            other.GetComponent<HealthCharacter>().Damage(Damage);
+                        if (transform.parent.CompareTag("AmmoCollecionEnemy")){
+                            other.GetComponent<HealthCharacter>().Damage(Damage);							
+							ParticleManager.instanse.Spawn(ParticleManager.instanse.ObjHitFx, transform, .7f);
+							Destroyed();
+						}                        
                         break;
                     }
                 case "EnemyCar":
                     {
-                        if (!transform.parent.CompareTag("AmmoCollecionEnemy"))
+                        if (!transform.parent.CompareTag("AmmoCollecionEnemy")){
                             other.GetComponent<HealthCharacter>().Damage(Damage);
+							ParticleManager.instanse.Spawn(ParticleManager.instanse.ObjHitFx, transform, .7f);
+							Destroyed();
+						}
                         break;
                     }
                 case "Enemy":
                     {
-                        if (!transform.parent.CompareTag("AmmoCollecionEnemy"))
-                            other.GetComponent<HealthCharacter>().Damage(Damage);
+                        if (!transform.parent.CompareTag("AmmoCollecionEnemy")){
+                            other.GetComponent<HealthCharacter>().Damage(Damage);							
+							ParticleManager.instanse.Spawn(ParticleManager.instanse.CharHitFx, transform, .7f);
+							Destroyed();
+						}
                         break;
                     }
                 case "Cover":
                     {
                         if (transform.parent.CompareTag("AmmoCollecionEnemy"))
-                        {
-                            Destroyed();
+                        {                            
                             other.GetComponent<HealthCharacter>().Damage(Damage);
+                            ParticleManager.instanse.Spawn(ParticleManager.instanse.ObjHitFx, transform, .7f);
+							Destroyed();
                         }
                         break;
                     }
                 case "CoverEnding":
-                    {
-                        Destroyed();
+                    {                        
+                        ParticleManager.instanse.Spawn(ParticleManager.instanse.ObjHitFx, transform, .7f);
+						Destroyed();
                         break;
                     }
                 case "ScorePickup":
                     {
-                        if (!transform.parent.CompareTag("AmmoCollecionEnemy"))
+                        if (!transform.parent.CompareTag("AmmoCollecionEnemy")){							
                             other.GetComponent<CoinPickup>().GetPicked();
+							ParticleManager.instanse.Spawn(ParticleManager.instanse.ObjHitFx, transform, .7f);
+							Destroyed();
+						}
                         break;
                     }
 

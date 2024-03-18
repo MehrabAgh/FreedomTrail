@@ -23,35 +23,40 @@ namespace Vino.Devs
             {
                 case weapone.rifle:
                     Index = 0;
-                    Rifle rifle = new Rifle(gunResponses[0], weaponSettings[0], piv, sizeList[0].Position, sizeList[0].Rotation, sizeList[0].Scale, Ammos);
+                    Rifle rifle = gameObject.AddComponent<Rifle>();
+                    rifle.Setup(gunResponses[0], weaponSettings[0], piv, sizeList[0].Position, sizeList[0].Rotation, sizeList[0].Scale, Ammos);
                     WeaponSelected = rifle;
                     GetSetting = rifle.GetSetting();
                     GetResponse = rifle.GetResponse();
                     break;
                 case weapone.shotgun:
                     Index = 1;
-                    IGun shotgun = new Shotgun(gunResponses[1], weaponSettings[1], piv, sizeList[1].Position, sizeList[1].Rotation, sizeList[1].Scale, Ammos);
+                    Shotgun shotgun = gameObject.AddComponent<Shotgun>();
+                    shotgun.Setup(gunResponses[1], weaponSettings[1], piv, sizeList[1].Position, sizeList[1].Rotation, sizeList[1].Scale, Ammos);
                     GetSetting = shotgun.GetSetting();
                     GetResponse = shotgun.GetResponse();
                     WeaponSelected = shotgun;
                     break;
                 case weapone.machinegun:
                     Index = 2;
-                    LMG lmg = new LMG(gunResponses[2], weaponSettings[2], piv, sizeList[2].Position, sizeList[2].Rotation, sizeList[2].Scale, Ammos);
+                    LMG lmg = gameObject.AddComponent<LMG>();
+                    lmg.Setup(gunResponses[2], weaponSettings[2], piv, sizeList[2].Position, sizeList[2].Rotation, sizeList[2].Scale, Ammos);
                     GetSetting = lmg.GetSetting();
                     GetResponse = lmg.GetResponse();
                     WeaponSelected = lmg;
                     break;
                 case weapone.minigun:
                     Index = 3;
-                    SMG smg = new SMG(gunResponses[3], weaponSettings[3], piv, sizeList[3].Position, sizeList[3].Rotation, sizeList[3].Scale, Ammos);
+                    SMG smg = gameObject.AddComponent<SMG>();
+                    smg.Setup(gunResponses[3], weaponSettings[3], piv, sizeList[3].Position, sizeList[3].Rotation, sizeList[3].Scale, Ammos);
                     GetSetting = smg.GetSetting();
                     GetResponse = smg.GetResponse();
                     WeaponSelected = smg;
                     break;
                 case weapone.pistol:
                     Index = 4;
-                    Pistol pis = new Pistol(gunResponses[4], weaponSettings[4], piv, sizeList[4].Position, sizeList[4].Rotation, sizeList[4].Scale, Ammos);
+                    Pistol pis = gameObject.AddComponent<Pistol>();
+                    pis.Setup(gunResponses[4], weaponSettings[4], piv, sizeList[4].Position, sizeList[4].Rotation, sizeList[4].Scale, Ammos);
                     GetSetting = pis.GetSetting();
                     GetResponse = pis.GetResponse();
                     WeaponSelected = pis;
@@ -67,8 +72,8 @@ namespace Vino.Devs
         private WeaponScriptable scriptable;
         private GunResponse gunRes;
         private new List<GameObject> Ammos;
-        public GameObject weaponModel { get; set; }
-        public SMG(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
+        public GameObject weaponModel { get; set; }     
+        public void Setup(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
         {
             Ammos = ammos;
             gunRes = gn;
@@ -76,6 +81,7 @@ namespace Vino.Devs
             weaponModel = Instantiate(wr.weaponeModels, handppivot.position, handppivot.rotation, handppivot);
             SaveTransform(wr, pos, rot, scale);
             gn.barrel = weaponModel.transform.GetChild(0);
+            gn.ShootFX = ParticleManager.instanse.ShootGun;
         }
         public WeaponScriptable GetSetting()
         {
@@ -100,11 +106,10 @@ namespace Vino.Devs
             {
                 gunRes.nextTimetoFire = gunRes.delay;
                 scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                ParticleManager.instanse.Spawn(gunRes.ShootFX, gunRes.mainBarrel, .7f);
                 gunRes.currentAmmo -= 1;
             }
         }
-
-
         public void SaveTransform(WeaponScriptable wr, Vector3 pos, Vector3 rot, Vector3 scale)
         {
             wr.SetTransform(pos, rot, scale, weaponModel.transform);
@@ -118,7 +123,7 @@ namespace Vino.Devs
         private WeaponScriptable scriptable;
         private new List<GameObject> Ammos;
         public GameObject weaponModel { get; set; }
-        public LMG(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale ,List<GameObject> ammos)
+        public void Setup(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
         {
             Ammos = ammos;
             gunRes = gn;
@@ -126,8 +131,8 @@ namespace Vino.Devs
             weaponModel = Instantiate(wr.weaponeModels, handppivot.position, handppivot.rotation, handppivot);
             gn.barrel = weaponModel.transform.GetChild(0);
             SaveTransform(wr, pos, rot, scale);
+            gn.ShootFX = ParticleManager.instanse.ShootGun;
         }
-
         public WeaponScriptable GetSetting()
         {
             return scriptable;
@@ -152,6 +157,7 @@ namespace Vino.Devs
             {
                 gunRes.nextTimetoFire = gunRes.delay;
                 scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                ParticleManager.instanse.Spawn(gunRes.ShootFX, gunRes.mainBarrel, .7f);
                 gunRes.currentAmmo -= 1;
             }
         }
@@ -168,8 +174,7 @@ namespace Vino.Devs
         private WeaponScriptable scriptable;
         private new List<GameObject> Ammos;
         public GameObject weaponModel { get; set; }
-
-        public Rifle(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
+        public void Setup(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
         {
             Ammos = ammos;
             gunRes = gn;
@@ -177,6 +182,7 @@ namespace Vino.Devs
             weaponModel = Instantiate(wr.weaponeModels, handppivot.position, handppivot.rotation, handppivot.transform.root.GetChild(0));
             gunRes.barrel = weaponModel.transform.GetChild(0);
             SaveTransform(wr, pos, rot, scale);
+            gn.ShootFX = ParticleManager.instanse.ShootGun;
         }
         public WeaponScriptable GetSetting()
         {
@@ -210,6 +216,7 @@ namespace Vino.Devs
                     gunRes.nextTimetoFire = 0.1f;
                 }
                 scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                ParticleManager.instanse.Spawn(gunRes.ShootFX, gunRes.mainBarrel, .7f);
                 gunRes.currentAmmo -= 1;
                 scriptable.burstshotCount++;
             }
@@ -226,8 +233,8 @@ namespace Vino.Devs
         private WeaponScriptable scriptable;
         private GunResponse gunRes;
         public GameObject weaponModel { get; set; }
-        private new List<GameObject> Ammos;
-        public Shotgun(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale ,List<GameObject> ammos)
+        private new List<GameObject> Ammos;   
+        public void Setup(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
         {
             Ammos = ammos;
             gunRes = gn;
@@ -235,6 +242,7 @@ namespace Vino.Devs
             weaponModel = Instantiate(wr.weaponeModels, handppivot.position, handppivot.rotation, handppivot);
             gn.barrel = weaponModel.transform.GetChild(0);
             SaveTransform(wr, pos, rot, scale);
+            gn.ShootFX = ParticleManager.instanse.ShootGun;
         }
         public WeaponScriptable GetSetting()
         {
@@ -273,6 +281,7 @@ namespace Vino.Devs
                     projectile.SetActive(true);
                     projectile.GetComponent<Rigidbody>().velocity = direction * scriptable.power;
                 }
+                ParticleManager.instanse.Spawn(gunRes.ShootFX, gunRes.mainBarrel, .7f);
                 gunRes.currentAmmo -= 1;
             }
         }
@@ -288,9 +297,9 @@ namespace Vino.Devs
         private WeaponScriptable scriptable;
         private GunResponse gunRes;
         private new List<GameObject> Ammos;
-        public GameObject weaponModel { get; set ; }
+        public GameObject weaponModel { get; set ; }        
 
-        public Pistol(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
+        public void Setup(GunResponse gn, WeaponScriptable wr, Transform handppivot, Vector3 pos, Vector3 rot, Vector3 scale, List<GameObject> ammos)
         {
             Ammos = ammos;
             gunRes = gn;
@@ -298,6 +307,7 @@ namespace Vino.Devs
             weaponModel = Instantiate(wr.weaponeModels, handppivot.position, handppivot.rotation, handppivot);
             SaveTransform(wr, pos, rot, scale);
             gn.barrel = weaponModel.transform.GetChild(0);
+            gunRes.ShootFX = ParticleManager.instanse.ShootGun;
         }
 
         public GunResponse GetResponse()
@@ -330,7 +340,8 @@ namespace Vino.Devs
             if (gunRes.nextTimetoFire <= 0)
             {
                 gunRes.nextTimetoFire = gunRes.delay;
-                scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);
+                scriptable.DefaultShoot(gunRes.mainBarrel, Ammos);                                
+                ParticleManager.instanse.Spawn(gunRes.ShootFX, gunRes.mainBarrel, 2f);                
                 gunRes.currentAmmo -= 1;
             }
         }
