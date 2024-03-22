@@ -54634,7 +54634,7 @@ MonoBehaviour:
     Thetype: 0
     ValueCoin: 20
     ValueCharacter: {fileID: 0}
-  - IMG: {fileID: 21300000, guid: 20984cac87473b742a79f707e40791cc, type: 3}
+  - IMG: {fileID: -332910107, guid: 20984cac87473b742a79f707e40791cc, type: 3}
     Thetype: 1
     ValueCoin: 0
     ValueCharacter: {fileID: 1116087379120819669}
@@ -54692,36 +54692,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnvironmentSet:
-  - C_Sky: {r: 0.02745098, g: 0.3254902, b: 0.8117647, a: 1}
-    C_Ground: {r: 0.5882353, g: 0.8117647, b: 0.8509804, a: 1}
+  - C_Ground: {r: 0.69411767, g: 0.76862746, b: 0.8117647, a: 1}
     C_UnderGround: {r: 0, g: 0.5019608, b: 0.8, a: 1}
     C_Tower:
     - {r: 0.27058825, g: 0.3764706, b: 0.49019608, a: 1}
     - {r: 0.41960785, g: 0.47843137, b: 0.5372549, a: 1}
     _isChecked: 0
-  - C_Sky: {r: 0.02745098, g: 0.8117647, b: 0.05490196, a: 1}
-    C_Ground: {r: 0.5921569, g: 0.8509804, b: 0.5882353, a: 1}
+  - C_Ground: {r: 0.69725496, g: 0.8117647, b: 0.69411767, a: 1}
     C_UnderGround: {r: 0.07450981, g: 0.5294118, b: 0.05882353, a: 1}
     C_Tower:
     - {r: 0.27058825, g: 0.49019608, b: 0.28627452, a: 1}
     - {r: 0.41960785, g: 0.5372549, b: 0.42352942, a: 1}
     _isChecked: 0
-  - C_Sky: {r: 0.89411765, g: 0.90588236, b: 0.41568628, a: 1}
-    C_Ground: {r: 0.8509804, g: 0.84313726, b: 0.5882353, a: 1}
+  - C_Ground: {r: 0.80341315, g: 0.8117647, b: 0.69411767, a: 1}
     C_UnderGround: {r: 0.5294118, g: 0.5294118, b: 0.05882353, a: 1}
     C_Tower:
     - {r: 0.49019608, g: 0.48235294, b: 0.27058825, a: 1}
     - {r: 0.5372549, g: 0.53333336, b: 0.41960785, a: 1}
     _isChecked: 0
-  - C_Sky: {r: 0.90588236, g: 0.6392157, b: 0.41568628, a: 1}
-    C_Ground: {r: 0.8509804, g: 0.7294118, b: 0.5882353, a: 1}
+  - C_Ground: {r: 0.8117647, g: 0.7543289, b: 0.69411767, a: 1}
     C_UnderGround: {r: 0.77254903, g: 0.3764706, b: 0.05490196, a: 1}
     C_Tower:
     - {r: 0.49019608, g: 0.3764706, b: 0.27058825, a: 1}
     - {r: 0.5372549, g: 0.49411765, b: 0.41960785, a: 1}
     _isChecked: 0
-  - C_Sky: {r: 0.72156864, g: 0.41568628, b: 0.90588236, a: 1}
-    C_Ground: {r: 0.8509804, g: 0.5882353, b: 0.7490196, a: 1}
+  - C_Ground: {r: 0.8117647, g: 0.69411767, b: 0.80408347, a: 1}
     C_UnderGround: {r: 0.64705884, g: 0.05490196, b: 0.77254903, a: 1}
     C_Tower:
     - {r: 0.49019608, g: 0.27058825, b: 0.44313726, a: 1}
@@ -125055,7 +125050,7 @@ Camera:
   m_GameObject: {fileID: 8233431576221975646}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.7179475, g: 0.41568628, b: 0.90588236, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2

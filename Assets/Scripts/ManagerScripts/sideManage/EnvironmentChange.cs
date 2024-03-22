@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.LookDev;
 using Vino.Devs;
-using static UnityEditor.Progress;
 
 [Serializable]
 public struct ENV
 {  
-    public Color C_Sky , C_Ground , C_UnderGround;
+    public Color  C_Ground , C_UnderGround;
     public List<Color> C_Tower;
     public bool _isChecked;
     public void CheckOff() => _isChecked = false;
@@ -45,13 +44,9 @@ public class EnvironmentChange : MonoBehaviour
     }
     private void Changing()
     {
-        for (int i = 0; i < M_Tower.Count; i++)
-        {
-            M_Tower[i].color = EnvironmentSet[PivotENV].C_Tower[i];
-        }
-        GameManager.instance.GetCamera.backgroundColor = EnvironmentSet[PivotENV].C_Sky;
+        for (int i = 0; i < M_Tower.Count; i++) M_Tower[i].color = EnvironmentSet[PivotENV].C_Tower[i];
         M_UnderGround.color = EnvironmentSet[PivotENV].C_UnderGround;
-        M_Ground.color = EnvironmentSet[PivotENV].C_UnderGround;
+        M_Ground.color = EnvironmentSet[PivotENV].C_Ground;
     }
 
     private int StateCheck()
